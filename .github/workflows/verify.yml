@@ -1,0 +1,51 @@
+name: Validate Economic Lab research model
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Clone exactly published independent research model
+        shell: bash
+        run: |
+          set -euo pipefail
+          git -c credential.helper= clone --depth 1 --branch v1.0 \
+            https://github.com/fhoces/opa-ai-macro-econ-scenarios.git "$RUNNER_TEMP/reproduction"
+          test "$(git -C "$RUNNER_TEMP/reproduction" rev-parse HEAD)" = \
+            d4703b6ae0d19dca08fbde11a25c218fa4c7b7a6
+      - name: Verify lab and model tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PYTHONPATH="$RUNNER_TEMP/reproduction:$GITHUB_WORKSPACE"
+          python -m unittest discover -s tests -v
+      - name: Run fixed 2030 scenarios in a credential-free child
+        shell: bash
+        run: |
+          set -euo pipefail
+          python ops/mac/economic_lab_verify/verify.py > "$RUNNER_TEMP/economic-receipt.json"
+          python - "$RUNNER_TEMP/economic-receipt.json" <<'PY'
+          import json, sys
+          p = json.load(open(sys.argv[1], encoding="utf-8"))
+          assert p["verified"] is True
+          assert p["country"] == "USA"
+          assert p["conditional_scenarios_not_forecasts"] is True
+          assert p["source_commit"] == "d4703b6ae0d19dca08fbde11a25c218fa4c7b7a6"
+          assert set(p["scenarios"]) == {"modest", "substantial", "extreme"}
+          for name, x in p["scenarios"].items():
+              print(name, x)
+          PY
