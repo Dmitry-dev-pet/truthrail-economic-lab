@@ -72,3 +72,31 @@ predict Portugal's wages or jobs. Anthropic Economic Index MCP measures observed
 Claude task usage separately; it does not calibrate this macroeconomic model.
 
 No GitHub-hosted CI is included, to avoid paid Actions minutes.
+
+
+## No-Docker Mac verification (prepared, not activated)
+
+The dedicated Mac runner has a Docker CLI but no independently verified,
+runner-owned Docker Engine. As a safer first experiment, this repository also
+provides a **fixed, no-Docker mathematical verification Action** at
+`ops/mac/economic_lab_verify/action.yml` plus the read-only package preflight
+`ops/mac/action.yml`. The package:
+
+- clones one public mathematical reproduction at tag `v1.0`, verifies the
+  exact commit before import, and executes in a temporary credential-free
+  Python subprocess;
+- computes the **modest, substantial and extreme** USA scenarios and checks
+  their GDP outcomes against the authors' published Table 3, within a declared
+  numerical tolerance;
+- returns a bounded JSON receipt with GDP, labor share and unemployment;
+- installs nothing on the Mac, does not start a server, does not touch
+  Docker or user credentials, and cleans up temporary files.
+
+This is **not deployed merely because the Action exists**. It must be bound
+to an approved immutable GitHub SHA in the reviewed `mac-access` control
+plane, admitted by owner-only gate and reported through existing GitHub
+operations. The separate interactive local Docker API and UI remain
+unverified until an isolated, authorized engine is available.
+
+The published table's consistency check is numerical reproducibility, not
+evidence that the future will follow any of these conditional scenarios.

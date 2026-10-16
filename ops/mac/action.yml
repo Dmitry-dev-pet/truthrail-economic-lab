@@ -1,0 +1,31 @@
+name: Economic Lab immutable package metadata preflight
+description: Offline structural inspection. Does not clone source or run a model.
+outputs:
+  ready:
+    description: Fixed Action files are structurally present.
+    value: ${{ steps.inspect.outputs.ready }}
+runs:
+  using: composite
+  steps:
+    - id: inspect
+      name: Parse package metadata without execution
+      shell: bash
+      env:
+        ACTION_ROOT: ${{ github.action_path }}
+      run: |
+        set -euo pipefail
+        test -f "$ACTION_ROOT/economic_lab_verify/action.yml"
+        test -f "$ACTION_ROOT/economic_lab_verify/verify.py"
+        python3 - "$ACTION_ROOT/economic_lab_verify/verify.py" <<'PY'
+        import ast, pathlib, sys
+        tree = ast.parse(pathlib.Path(sys.argv[1]).read_text(encoding="utf-8"))
+        constants = {
+            target.id: stmt.value.value
+            for stmt in tree.body
+            if isinstance(stmt, ast.Assign) and isinstance(stmt.value, ast.Constant)
+            for target in stmt.targets if isinstance(target, ast.Name)
+        }
+        assert constants["UPSTREAM_TAG"] == "v1.0"
+        assert constants["UPSTREAM_SHA"] == "d4703b6ae0d19dca08fbde11a25c218fa4c7b7a6"
+        PY
+        echo "ready=true" >> "$GITHUB_OUTPUT"
