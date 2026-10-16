@@ -53,6 +53,17 @@ otherwise it remains flat. Unmodified preset runs preserve their original trajec
 
 Responses contain `summary_2030`, `table3_2030`, monthly `path`, and full model-input provenance.
 
+## License and attribution
+
+This repository's original application wrapper, API, UI, tests and documentation
+are licensed under [MIT](LICENSE). The independently implemented mathematical
+model is fetched separately from the
+[fhoces/opa-ai-macro-econ-scenarios](https://github.com/fhoces/opa-ai-macro-econ-scenarios)
+repository, under its own MIT license. See [NOTICE.md](NOTICE.md) for attribution
+and the distinction between the independent implementation and the Anthropic
+Institute research paper. The license here does not assert ownership of the
+paper, its model, third-party datasets or other upstream materials.
+
 ## Scientific limitation
 
 This is a United States economic model. Its seven scenario dials are
