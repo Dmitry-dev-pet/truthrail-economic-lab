@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Truthrail · Economic Lab</title>
+<style>
+:root{font-family:system-ui,-apple-system,sans-serif;color:#172333;background:#f4f6fa}
+*{box-sizing:border-box}body{margin:0}header{background:#152f4d;color:white;padding:24px 5vw}
+h1{margin:.2em 0;font-size:clamp(1.5rem,3vw,2.4rem)}header p{opacity:.84;max-width:75ch}
+main{max-width:1280px;margin:auto;padding:24px;display:grid;grid-template-columns:minmax(280px,350px) 1fr;gap:20px}
+article{background:white;border-radius:15px;padding:20px;border:1px solid #e0e5ec;box-shadow:0 3px 16px #1326420c}
+h2{font-size:1.2rem;margin-top:0}label{display:block;margin:14px 0 6px;font-size:.89rem}
+select,button,input[type=number]{font:inherit}select{width:100%;padding:9px;border:1px solid #b9c6d4;border-radius:8px}
+.slider-head{display:flex;justify-content:space-between;gap:12px}input[type=range]{width:100%;accent-color:#145d91}
+button{background:#135c93;border:0;border-radius:9px;color:white;padding:11px 17px;cursor:pointer;width:100%;margin-top:12px}
+button:disabled{opacity:.5;cursor:wait}.hint{font-size:.83rem;opacity:.65}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(135px,1fr));gap:10px}
+.metric{background:#eff5f9;border-radius:10px;padding:15px}.metric strong{font-size:1.55rem;display:block;font-variant-numeric:tabular-nums}
+.metric span{font-size:.84rem}svg{width:100%;height:auto;overflow:visible}
+a{color:#136cba}header a{color:#dbebff}#error{color:#ae1f25}
+@media(max-width:800px){main{grid-template-columns:1fr;padding:12px}}
+</style>
+</head>
+<body>
+<header><h1>Truthrail · Economic Lab</h1>
+<p>Независимое воспроизведение экономических сценариев Anthropic. Модель США до 2030 года — не прогноз и не оценка рынка труда Португалии.</p>
+<a href="/explorer/">Детальный интерактивный Explorer (4374 комбинации) →</a></header>
+<main>
+<article><h2>Параметры сценария</h2>
+<label for="scenario">Исходный сценарий</label>
+<select id="scenario"><option value="modest">Умеренный</option><option value="substantial" selected>Существенный</option><option value="extreme">Экстремальный</option></select>
+<div id="sliders"></div>
+<button id="run">Пересчитать</button><button id="save" type="button" style="background:#54697d">Сохранить JSON</button>
+<p class="hint">Все семь основных параметров — допущения исследователя. Результаты всегда условные.</p>
+<div id="error" role="alert"></div></article>
+<div><article><h2>Результаты для США — 2030</h2><div id="metrics" class="grid"></div></article>
+<article style="margin-top:20px"><h2>Динамика 2024–2030</h2>
+<div><select id="chartMetric" aria-label="Показатель графика">
+<option value="gdp_gain_pct">ВВП относительно сценария без ИИ, %</option>
+<option value="unemployment_total_pct">Общая безработица, %</option>
+<option value="unemployment_sensitive_pct">Безработица в затронутых профессиях, %</option>
+<option value="labor_share_pct">Доля труда в доходах, %</option>
+<option value="wage_gain_pct">Средняя зарплата относительно сценария без ИИ, %</option>
+</select></div><svg id="chart" viewBox="0 0 690 240" role="img" aria-label="Динамика выбранного показателя"></svg></article>
+<article style="margin-top:20px"><h2>Происхождение модели</h2><p>Математическое ядро: независимая MIT-реализация Fernando Hoces de la Guardia, зафиксированная на git-теге v1.0.</p><p><a href="https://github.com/fhoces/opa-ai-macro-econ-scenarios">Исходный код модели</a> · <a href="https://www.anthropic.com/institute/econ-scenarios">Исследование Anthropic</a>.</p><p class="hint">Anthropic Economic Index MCP — отдельный источник наблюдаемого использования Claude, он не подаёт данные в эту модель.</p></article></div>
+</main>
+<script>
+"use strict";
+const names={
+m_2030:"Доля задач, затронутых ИИ к 2030",d_2030:"Распространённость ИИ",
+a_2030:"Выигрыш производительности (логарифм)",psi:"Доля автоматизации",
+rho:"Возврат задач человеку",mu:"Переход работников между профессиями",
+theta_H:"Скорость создания вакансий"};
+let catalog=null, last=null;
+const el=id=>document.getElementById(id);
+function controls(){
+const p=catalog.presets[el("scenario").value];
+el("sliders").innerHTML="";
+Object.keys(names).forEach(key=>{
+const bound=catalog.bounds[key], v=p[key];
+const label=document.createElement("label");
+const head=document.createElement("span"); head.className="slider-head";
+const t=document.createElement("span"); t.textContent=names[key];
+const out=document.createElement("strong"); out.id="value_"+key;out.textContent=v.toFixed(3);
+head.append(t,out); label.append(head);
+const input=document.createElement("input");input.type="range";input.id=key;
+input.min=bound.min;input.max=bound.max;input.step=0.001;input.value=v;
+input.addEventListener("input",()=>out.textContent=Number(input.value).toFixed(3));
+label.append(input);el("sliders").append(label);
+});
+}
+function draw(){
+if(!last)return;
+const key=el("chartMetric").value,p=last.path;
+const vals=p.map(o=>o[key]),minimum=Math.min(...vals),maximum=Math.max(...vals);
+const low=minimum===maximum?minimum-1:minimum, high=minimum===maximum?maximum+1:maximum;
+const x=i=>45+600*i/(p.length-1), y=v=>205-170*(v-low)/(high-low);
+const svg=el("chart"); while(svg.firstChild)svg.removeChild(svg.firstChild);
+const ns="http://www.w3.org/2000/svg";
+function shape(tag,attrs,label){const n=document.createElementNS(ns,tag);
+Object.entries(attrs).forEach(([k,v])=>n.setAttribute(k,v));
+if(label!==undefined)n.textContent=label;svg.append(n);}
+for(let i=0;i<=4;i++){let v=low+(high-low)*i/4;
+shape("line",{x1:45,y1:y(v),x2:645,y2:y(v),stroke:"#dce4ec"});
+shape("text",{x:38,y:y(v)+4,"text-anchor":"end","font-size":11,fill:"#576879"},v.toFixed(1));}
+shape("path",{d:p.map((v,i)=>(i?"L":"M")+x(i)+" "+y(v[key])).join(" "),fill:"none",stroke:"#11629c","stroke-width":2.7});
+["2024","2026","2028","2030"].forEach((t,i)=>shape("text",{x:45+i*200,y:228,"font-size":12,fill:"#576879","text-anchor":"middle"},t));
+}
+function render(result){
+last=result; const summary=result.summary_2030;
+const titles={gdp_gain_pct:"ВВП к сценарию без ИИ",labor_share_pct:"Доля труда в доходах",
+unemployment_total_pct:"Безработица всего",unemployment_sensitive_pct:"Безработица в затронутых профессиях",
+wage_gain_pct:"Средняя зарплата к сценарию без ИИ"};
+el("metrics").innerHTML="";
+for(const [k,title] of Object.entries(titles)){
+const tile=document.createElement("div");tile.className="metric";
+const big=document.createElement("strong");big.textContent=summary[k].toFixed(2)+"%";
+const name=document.createElement("span");name.textContent=title;tile.append(big,name);el("metrics").append(tile);}
+draw();
+}
+async function run(){
+el("error").textContent="";el("run").disabled=true;
+try{
+const params={};Object.keys(names).forEach(k=>params[k]=Number(el(k).value));
+const res=await fetch("/api/run",{method:"POST",headers:{"Content-Type":"application/json"},
+body:JSON.stringify({scenario:el("scenario").value,parameters:params})});
+const json=await res.json();if(!res.ok)throw new Error(json.error||"Ошибка вычисления");render(json);
+}catch(e){el("error").textContent=e.message;}finally{el("run").disabled=false;}
+}
+el("scenario").addEventListener("change",()=>{controls();run();});
+el("run").addEventListener("click",run);
+el("chartMetric").addEventListener("change",draw);
+el("save").addEventListener("click",()=>{if(!last)return;
+const blob=new Blob([JSON.stringify(last,null,2)],{type:"application/json"});
+const url=URL.createObjectURL(blob),a=document.createElement("a");
+a.href=url;a.download="economic-scenario-"+el("scenario").value+".json";a.click();URL.revokeObjectURL(url);});
+fetch("/api/presets").then(r=>{if(!r.ok)throw Error("API недоступен");return r.json();})
+.then(data=>{catalog=data;controls();run();}).catch(e=>el("error").textContent=e.message);
+</script></body></html>
