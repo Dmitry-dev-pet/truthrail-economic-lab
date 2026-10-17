@@ -33,7 +33,7 @@
         "candidate_sources": [
           "AMECO_WAGE_SHARE"
         ],
-        "mapping_note": "Labor income share; derive using comparable factor-income accounting incl. self-employed, not compensation/GDP unadjusted.",
+        "mapping_note": "Official AMECO Spring 2026 Portugal 2024 ALCD2=64.59205% (gross factor cost) and ALCD0=56.14314% (market-price GDP), reconstructed with domestic national-accounts employment and equal-compensation self-employed imputation. See ameco_income_accounting_2024.json. Neither observation is assigned: align valuation/taxes, gross/net capital income and domestic/resident population closure first.",
         "portugal_model_value": null
       },
       {
@@ -432,10 +432,13 @@
       "description": "Subsequent context year only"
     },
     "AMECO_WAGE_SHARE": {
-      "url": "https://webgate.ec.europa.eu/ecfin/redisstat/databrowser/product/view/ameco_chapter07-06",
+      "url": "https://economy-finance.ec.europa.eu/economic-research-and-databases/economic-databases/ameco-database/download-annual-data-set-macro-economic-database-ameco_en",
       "organization": "European Commission DG ECFIN AMECO",
       "reference_year": 2024,
-      "description": "Adjusted wage share, ensure same valuation and self-employment treatment as model labor share; national value not retrieved"
+      "description": "Official 2024 adjusted wage-share values retrieved and verified from separate EC CSV/TXT archives: ALCD2 64.59205%, ALCD0 56.14314%. Accounting evidence, not an adopted model parameter.",
+      "snapshot_file": "ameco_income_accounting_2024.json",
+      "publication_vintage": "Spring 2026; download page updated 2026-06-03",
+      "safe_to_assign_to_model": false
     },
     "AMECO_CAPITAL": {
       "url": "https://economy-finance.ec.europa.eu/economic-research-and-databases/economic-databases/ameco-database/download-annual-data-set-macro-economic-database-ameco_en",
@@ -616,7 +619,7 @@
   ],
   "calibration_gates": [
     "Eurostat LFSA_EGAI2D provides 2024 full-employed 2-digit employment counts for 43 ISCO subgroups; 17 mapped mixed, with 26 intrinsically mixed ISCO4 code correspondences. Official 3/4-digit public API guesses returned 404 (not proof of general absence). Brighter Future/QP occupational records include finer professions but cover employer-only workers; require documented CPP↔ISCO codes, reference year, matched workforce denominator and coverage weighting before using as national C/N counts.",
-    "Align 2024 Portuguese factor-income/labor-share and labor-force denominators with model base-year definitions, and develop scientifically justified weights for 17 mixed 2-digit groups: 5 (686.7 thousand 2024 employed) become code-level separable with 4-digit counts; 12 (1,676.9 thousand) contain one or more 4-digit C/N ambiguous units and need further occupational or judgment-based methodology.",
+    "Align 2024 Portuguese factor-income/labor-share and labor-force denominators with model base-year definitions, and develop scientifically justified weights for 17 mixed 2-digit groups: 5 (686.7 thousand 2024 employed) become code-level separable with 4-digit counts; 12 (1,676.9 thousand) contain one or more 4-digit C/N ambiguous units and need further occupational or judgment-based methodology. AMECO 2024 labor-share numerical retrieval and income identities are complete; adopt a reviewed valuation/self-employment/population convention before setting s_L0.",
     "Eurostat annual E/U/I worker-state transitions do not identify C↔N moves. Brighter Future's QP-linked matched-worker study observes 15.5% aggregated occupational switching from 2020 to 2022 among workers observed in BOTH periods, not monthly or C/N-specific. Need access to occupation-by-origin/destination transition counts plus job finding, separations, vacancy fill; estimate effective mu_bar structurally, not from a raw switch percentage.",
     "Review small-open-economy capital-supply closure, investment inflows and migration; keep U.S. structural elasticities labeled as assumptions.",
     "Keep all seven AI scenario dials as explicit alternative assumptions; national firm-level AI adoption is contextual only.",

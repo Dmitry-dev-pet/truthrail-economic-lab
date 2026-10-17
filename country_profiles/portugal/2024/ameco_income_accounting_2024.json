@@ -1,0 +1,237 @@
+{
+  "schema_version": 1,
+  "country_code": "PT",
+  "reference_year": 2024,
+  "retrieved_at": "2026-10-17T15:27:17.474440+00:00",
+  "status": "OFFICIAL_ACCOUNTING_EVIDENCE_NOT_MODEL_CALIBRATION",
+  "runnable": false,
+  "publisher": "European Commission, Directorate-General for Economic and Financial Affairs (DG ECFIN)",
+  "publication_vintage": "Spring 2026, download page updated 2026-06-03",
+  "source_page": "https://economy-finance.ec.europa.eu/economic-research-and-databases/economic-databases/ameco-database/download-annual-data-set-macro-economic-database-ameco_en",
+  "source_downloads": {
+    "official_csv": {
+      "url": "https://economy-finance.ec.europa.eu/document/download/fd885a67-e390-46fb-a6d0-bbc67d946ebf_en",
+      "size_bytes": 6181987,
+      "sha256": "b460629037dfc994d805b3f236c80feb6c49bc86b3cde3f3cfc32027a08c3005",
+      "members": {
+        "AMECO1.CSV": {
+          "sha256": "5919eaf3b8242b98dd028b631c5917daad5a1f46865cba1305809bb5e3f73a97",
+          "size_bytes": 494186,
+          "decoding": "cp1252",
+          "delimiter": ","
+        },
+        "AMECO6.CSV": {
+          "sha256": "f840295f132bc5a68df4b120b35928b3adbf98332c0909c89c9f01b2eac60ae9",
+          "size_bytes": 2323271,
+          "decoding": "cp1252",
+          "delimiter": ","
+        },
+        "AMECO7.CSV": {
+          "sha256": "617bffe449e37ca167ec686aeb66a175f93b4c32d070c17fc1b4efa9048d1296",
+          "size_bytes": 1419426,
+          "decoding": "cp1252",
+          "delimiter": ","
+        }
+      }
+    },
+    "official_txt": {
+      "url": "https://ec.europa.eu/economy_finance/db_indicators/ameco/documents/ameco7.zip",
+      "size_bytes": 454617,
+      "sha256": "a8bb87e2bb9f3a7ba84ab28f71cc898bfc7eb55a3fd7f501586b17d4bc4b3d49",
+      "members": {
+        "AMECO7.TXT": {
+          "sha256": "cce02e19069490b8227b82ee6b473dd62cd04e2931aa635141f605063002d7a9",
+          "size_bytes": 2204334,
+          "decoding": "cp1252",
+          "delimiter": ";"
+        }
+      }
+    }
+  },
+  "series": {
+    "ALCD0": {
+      "series_code": "PRT.1.0.0.0.ALCD0",
+      "title": "Adjusted wage share: total economy: as percentage of GDP at current prices (Compensation per employee as percentage of GDP at market prices per person employed.)",
+      "unit_as_published": "Percentage of GDP",
+      "csv_member": "AMECO7.CSV",
+      "value_2024": "56.14314",
+      "txt_value_2024": "56.14314"
+    },
+    "ALCD2": {
+      "series_code": "PRT.1.0.0.0.ALCD2",
+      "title": "Adjusted wage share: total economy: as percentage of GDP at current factor cost (Compensation per employee as percentage of GDP at factor cost per person employed.)",
+      "unit_as_published": "Percentage of GDP at factor cost",
+      "csv_member": "AMECO7.CSV",
+      "value_2024": "64.59205",
+      "txt_value_2024": "64.59205"
+    },
+    "UWCD": {
+      "series_code": "PRT.1.0.0.0.UWCD",
+      "title": "Compensation of employees: total economy",
+      "unit_as_published": "Mrd EURO-PTE",
+      "csv_member": "AMECO7.CSV",
+      "value_2024": "137.96691",
+      "txt_value_2024": "137.96691"
+    },
+    "UTVT": {
+      "series_code": "PRT.1.0.0.0.UTVT",
+      "title": "Taxes linked to imports and production: total economy",
+      "unit_as_published": "Mrd EURO-PTE",
+      "csv_member": "AMECO7.CSV",
+      "value_2024": "41.89526",
+      "txt_value_2024": "41.89526"
+    },
+    "UYVT": {
+      "series_code": "PRT.1.0.0.0.UYVT",
+      "title": "Subsidies: total economy",
+      "unit_as_published": "Mrd EURO-PTE",
+      "csv_member": "AMECO7.CSV",
+      "value_2024": "3.99028",
+      "txt_value_2024": "3.99028"
+    },
+    "UTVN": {
+      "series_code": "PRT.1.0.0.0.UTVN",
+      "title": "Taxes linked to imports and production minus subsidies: total economy",
+      "unit_as_published": "Mrd EURO-PTE",
+      "csv_member": "AMECO7.CSV",
+      "value_2024": "37.90498",
+      "txt_value_2024": "37.90498"
+    },
+    "UOGD": {
+      "series_code": "PRT.1.0.0.0.UOGD",
+      "title": "Gross operating surplus: total economy",
+      "unit_as_published": "Mrd EURO-PTE",
+      "csv_member": "AMECO7.CSV",
+      "value_2024": "113.91242",
+      "txt_value_2024": "113.91242"
+    },
+    "UQGD": {
+      "series_code": "PRT.1.0.0.0.UQGD",
+      "title": "Gross operating surplus: total economy :- Adjusted for imputed compensation of self-employed",
+      "unit_as_published": "Mrd EURO-PTE",
+      "csv_member": "AMECO7.CSV",
+      "value_2024": "89.18531",
+      "txt_value_2024": "89.18531"
+    },
+    "HWCDW": {
+      "series_code": "PRT.1.0.0.0.HWCDW",
+      "title": "Nominal compensation per employee: total economy",
+      "unit_as_published": "1000 EURO-PTE",
+      "csv_member": "AMECO7.CSV",
+      "value_2024": "30.84066",
+      "txt_value_2024": "30.84066"
+    },
+    "UVGD": {
+      "series_code": "PRT.1.0.0.0.UVGD",
+      "title": "Gross domestic product at current prices",
+      "unit_as_published": "Mrd EURO-PTE",
+      "csv_member": "AMECO6.CSV",
+      "value_2024": "289.78432"
+    },
+    "UYGD": {
+      "series_code": "PRT.1.0.0.0.UYGD",
+      "title": "Gross domestic product at current factor cost",
+      "unit_as_published": "Mrd EURO-PTE",
+      "csv_member": "AMECO6.CSV",
+      "value_2024": "251.87934"
+    },
+    "NETD": {
+      "series_code": "PRT.1.0.0.0.NETD",
+      "title": "Employment, persons: all domestic industries (National accounts)",
+      "unit_as_published": "1000 persons",
+      "csv_member": "AMECO1.CSV",
+      "value_2024": "5275.31"
+    },
+    "NWTD": {
+      "series_code": "PRT.1.0.0.0.NWTD",
+      "title": "Employees, persons: all domestic industries (National accounts)",
+      "unit_as_published": "1000 persons",
+      "csv_member": "AMECO1.CSV",
+      "value_2024": "4473.54"
+    },
+    "NSTD": {
+      "series_code": "PRT.1.0.0.0.NSTD",
+      "title": "Number of self-employed: total economy (National accounts)",
+      "unit_as_published": "1000 persons",
+      "csv_member": "AMECO1.CSV",
+      "value_2024": "801.77"
+    },
+    "NETN": {
+      "series_code": "PRT.1.0.0.0.NETN",
+      "title": "Employment, persons: total economy (National accounts)",
+      "unit_as_published": "1000 persons",
+      "csv_member": "AMECO1.CSV",
+      "value_2024": "5309.07"
+    },
+    "NELN": {
+      "series_code": "PRT.1.0.0.0.NELN",
+      "title": "Employment (national) from LFS, persons: total economy",
+      "unit_as_published": "1000 persons",
+      "csv_member": "AMECO1.CSV",
+      "value_2024": "5112.3"
+    }
+  },
+  "cross_format_verification": {
+    "scope": "Two separately downloaded formats from the SAME publisher and vintage; not independent empirical evidence.",
+    "series": [
+      "ALCD0",
+      "ALCD2",
+      "UWCD",
+      "UTVT",
+      "UYVT",
+      "UTVN",
+      "UOGD",
+      "UQGD",
+      "HWCDW"
+    ],
+    "first_year": 1960,
+    "last_year": 2027,
+    "compared_cells": 612,
+    "unequal_cells": 0,
+    "method": "Exact trimmed source-field equality, including missing-value tokens, before numerical conversion."
+  },
+  "accounting_reconstruction": {
+    "monetary_unit_2024": "billion EUR (the source legacy unit label is Mrd EURO-PTE)",
+    "employment_unit": "thousand persons, domestic national accounts for NETD, NWTD and NSTD",
+    "labor_income_adjustment": "UWCD * NETD / NWTD",
+    "imputed_self_employed_labor_income": "UWCD * NSTD / NWTD",
+    "adjustment_assumption": "Impute the same average compensation per head to self-employed as to employees; this is an accounting proxy, not observed self-employed labor earnings.",
+    "adjusted_labor_income_billion_eur_approx": 162.69402307615445,
+    "imputed_self_employed_income_billion_eur_approx": 24.727113076154453,
+    "factor_cost_gdp_identity": "UYGD = UVGD - UTVN = UWCD + UOGD, within published rounding",
+    "adjusted_factor_income_identity": "UYGD = adjusted_labor_income + UQGD, within published rounding",
+    "market_price_adjusted_share_percent": "56.14314",
+    "factor_cost_adjusted_share_percent": "64.59205",
+    "valuation_difference_percentage_points": "8.44891",
+    "share_tolerance_percentage_points": "0.00001",
+    "accounting_tolerance_billion_eur": "0.00002",
+    "tolerance_reason": "Source rows are rounded to five decimal places; reconstruction is not expected to be bit-exact."
+  },
+  "population_reconciliation": {
+    "domestic_national_accounts_employment_thousands": "5275.31",
+    "national_accounts_national_employment_thousands": "5309.07",
+    "national_lfs_employment_thousands": "5112.3",
+    "decision": "Use domestic national-accounts employment consistently for this income-accounting identity. Do not replace NETD with national NETN or LFS NELN, or infer labor-market parameters from these aggregates.",
+    "remaining_gate": "Document the bridge from this domestic production-income account to the resident labor-force and occupation universes before joint model calibration."
+  },
+  "model_mapping": {
+    "candidate_for": "Fixed.s_L0",
+    "model_value": null,
+    "safe_to_assign_to_model": false,
+    "source_model_us_value": "0.60",
+    "source_model_commit": "d4703b6ae0d19dca08fbde11a25c218fa4c7b7a6",
+    "paper_url": "https://www-cdn.anthropic.com/files/4zrzovbb/website/cf58f84d46a4a76bf5a5b039ac695fba6b80041c.pdf",
+    "paper_locations": [
+      "Equation (5), printed page 9",
+      "Table 1 panel A, printed page 23"
+    ],
+    "interpretation": "Equation (5) exhausts modeled output between labor and capital. ALCD2 is a candidate for a gross factor-income closure; ALCD0 retains net production/import taxes in the GDP denominator. Choosing factor cost is an explicit modeling convention, not a uniquely identified empirical calibration.",
+    "remaining_gates": [
+      "Review valuation and tax treatment for every baseline income/output quantity, including the GDP denominator in research intensity.",
+      "Retain gross versus net capital-income consistency with depreciation and gross rental rates.",
+      "Review the equal-compensation imputation for self-employed and the domestic versus resident population bridge.",
+      "Do not treat the complementary adjusted gross operating surplus as household wealth, disposable income or a net investment return.",
+      "Keep all other Portugal calibration and structural gates open; a single accounting identity does not authorize country execution."
+    ]
+  }
+}

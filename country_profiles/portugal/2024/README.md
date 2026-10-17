@@ -40,7 +40,7 @@ nationally calibrated forecast.**
 |---|---|---|
 | Baseline jobless share `U_bar` | INE annual 2024 labor force statistics | **Candidate:** 6.4% unemployment, but must reconcile model's baseline search-pool concept, age universe and 2024 definition |
 | Employment in AI-sensitive `C` group `cog_share` | Eurostat EU-LFS ISCO-08 by occupation (`lfsa_egais`) | **Blocked on crosswalk:** ISCO group shares are not directly the model's C/N split; exposure to generative AI also is a different measure |
-| Labor income share `s_L0` | European Commission AMECO `ameco_chapter07-06` adjusted wage share | **Source identified, value not yet adopted:** validate treatment of self-employment, product taxes, denominator and capital share before assigning |
+| Labor income share `s_L0` | European Commission AMECO adjusted wage share | **Numeric evidence retrieved:** 2024 `ALCD2` 64.59205% at factor cost and `ALCD0` 56.14314% at market prices; identities verified, valuation/population convention not yet adopted |
 | Labor-force trend `n` | INE / Eurostat multi-year LFS | **Estimate required:** labor-force growth rather than one-year growth of *employment* |
 | R&D share and trend `iota_R0`, `g_iota` | National R&D accounts, INE/Eurostat, AMECO as available | **Definition check:** GERD in GDP is not automatically identical to the model's innovation-input concept |
 | Job quits and group separations `q_bar_ann`, `q_resp_share`, `q_rel_C`, `q_rel_N` | Restricted longitudinal EU-LFS / national administrative microdata | **Serious blocker:** E↔U↔I status transitions alone do not measure quits to another employer or C↔N specific separations |
@@ -473,6 +473,65 @@ input assigned.**
 
 Status remains **AUDIT ONLY** / `runnable:false`.
 
+## Official 2024 income-accounting evidence
+
+The [AMECO income-accounting snapshot](ameco_income_accounting_2024.json)
+now preserves **actual numeric source rows**, units and archive/member
+SHA-256 hashes from the European Commission's
+[Spring 2026 download, updated 3 June 2026](https://economy-finance.ec.europa.eu/economic-research-and-databases/economic-databases/ameco-database/download-annual-data-set-macro-economic-database-ameco_en).
+The observation year is **2024**, not 2026. Nine Portugal chapter-7 series
+were compared across separately downloaded official CSV and TXT archives:
+all **612 fields for 1960–2027 match exactly**. These are two formats of
+the same publisher's release, not independent empirical measurements.
+
+| Portugal 2024 source observation | Value | Meaning |
+|---|---:|---|
+| `ALCD2` | 64.59205% | Adjusted wage share of gross domestic product at factor cost |
+| `ALCD0` | 56.14314% | Adjusted wage share of GDP at market prices |
+| `UWCD` | €137.96691 bn | Compensation of employees |
+| `UVGD` | €289.78432 bn | GDP at market prices |
+| `UTVN` | €37.90498 bn | Taxes on production/imports minus subsidies |
+| `UYGD` | €251.87934 bn | Gross domestic product at factor cost |
+| `NETD` / `NWTD` | 5,275.31k / 4,473.54k | Domestic national-accounts employed persons / employees |
+
+The adjusted labor-income numerator is reconstructed as
+`UWCD × NETD / NWTD = €162.694023 bn`. This **imputes average employee
+compensation to self-employed persons**, adding approximately
+€24.727113 bn; it is not a direct measurement of their labor earnings.
+Dividing that adjusted numerator by `UYGD` reproduces `ALCD2`;
+dividing it by `UVGD` reproduces `ALCD0`, within **0.00001 percentage
+points** of published values. Independently, adjusted gross operating
+surplus `UQGD = €89.18531 bn` plus adjusted labor income reconciles
+with factor-cost GDP within the declared rounding tolerance.
+
+The **8.44891 percentage-point difference** between the shares is a
+valuation difference, not an uncertainty interval or different AI scenario.
+`UYGD = UVGD − UTVN`: the factor-cost denominator excludes net taxes
+on production/imports. Both measures make the self-employment adjustment.
+The unadjusted compensation/GDP ratio is a third object and must not
+replace either adjusted share.
+
+The [paper's Equation (5), printed page 9](https://www-cdn.anthropic.com/files/4zrzovbb/website/cf58f84d46a4a76bf5a5b039ac695fba6b80041c.pdf)
+exhausts modeled output between labor and capital. **Our interpretation**
+is that `ALCD2` offers a candidate for a *gross factor-income* closure;
+this is a proposed accounting convention for review, not a uniquely
+identified Portuguese `s_L0`. The paper's Table 1 calls its U.S. 0.60
+a conventional value, rather than specifying an AMECO-equivalent series.
+
+Before assignment, review tax valuation across *all* model quantities,
+gross versus net capital income/depreciation, and the self-employment
+imputation. Domestic national-accounts employment **5,275.31k** differs
+from national-accounts national employment **5,309.07k** and resident
+LFS employment **5,112.3k**. Use each source's matched denominator;
+mixing the LFS count into this compensation adjustment breaks the identity.
+The domestic-production/resident-labor-force bridge remains a calibration
+gate. Research expenditure shares also need a consistent GDP valuation.
+
+**Completed:** official series retrieval and accounting reconciliation.
+**Still open:** the modeled accounting/population convention and all other
+national calibration gates. `s_L0` and every other Portuguese model
+value remain `null`; no PT scenario has been calculated.
+
 ## Field coverage and calibration status
 
 | Bucket | Input count | Meaning |
@@ -503,7 +562,8 @@ See every field and reason in [`calibration_audit.json`](calibration_audit.json)
 - [AMECO adjusted wage share `ameco_chapter07-06`](https://webgate.ec.europa.eu/ecfin/redisstat/databrowser/explore/all/AMECO?display=card&lang=en&sort=category),
   [AMECO capital and income tables](https://economy-finance.ec.europa.eu/economic-research-and-databases/economic-databases/ameco-database/download-annual-data-set-macro-economic-database-ameco_en).
 
-All of these are **source candidates**; their published series have different
+These remain **calibration source candidates**; the AMECO numeric observations
+above have now been retrieved, while published series still have different
 year, population, accounting, sampling and coverage conventions.
 No automated table-to-model ingestion exists yet.
 
@@ -512,8 +572,10 @@ No automated table-to-model ingestion exists yet.
 1. Reproduce a 2024 labor-force baseline from INE and map the
    associated unemployment/population denominator (2025 data only as
    an external plausibility check).
-2. Download the 2024 AMECO adjusted wage-share **numeric series**,
-   documenting self-employment and income-accounting definitions.
+2. **Retrieved and reconciled:** 2024 AMECO wage-share numeric series,
+   both official formats and national-accounts components. Review and
+   adopt a common output/tax valuation, self-employment imputation and
+   domestic-versus-resident population convention before assigning `s_L0`.
 3. Preserve the established 1,125/1,125 concordance between
    two independently GitHub-hosted BLS-branded XLS/CSV copies.
    Check **the exact current official BLS host file bytes**
