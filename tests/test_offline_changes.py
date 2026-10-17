@@ -35,7 +35,21 @@ class OfflineChangesTests(unittest.TestCase):
         self.assertEqual([x["status"] for x in result["files"]], ["modified", "added"])
         self.assertEqual(result["files"][0]["sha256"],
                          hashlib.sha256(b"a = 2\n").hexdigest())
+        self.assertEqual(result["files"][0]["baseline_sha256"],
+                         hashlib.sha256(b"a = 1\n").hexdigest())
+        self.assertIsNone(result["files"][1]["baseline_sha256"])
         self.assertEqual(result["files"][1]["content"], "new\n")
+
+    def test_baseline_hash_covers_exact_utf8_bytes(self):
+        original = "café\n"
+        edited = "cafe\n"
+        self.write(self.original, "notes.txt", original)
+        self.write(self.edited, "notes.txt", edited)
+        record = self.export("notes.txt")["files"][0]
+        self.assertEqual(record["baseline_sha256"],
+                         hashlib.sha256(original.encode("utf-8")).hexdigest())
+        self.assertEqual(record["sha256"],
+                         hashlib.sha256(edited.encode("utf-8")).hexdigest())
 
     def test_unchanged_files_cannot_make_empty_manifest(self):
         self.write(self.original, "a.py", "same")
