@@ -739,9 +739,19 @@
   ],
   "portugal_2024_weight_data": {
     "source": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/lfsa_egais?geo=PT&time=2024&unit=THS_PER&age=Y_GE15&sex=T&wstatus=EMP",
-    "resolution": "one-digit only",
-    "all_employed_two_digit_counts": null,
-    "reason": "Portugal 2024 public Eurostat occupation series does not expose required two-digit employed counts.",
+    "resolution": "Two-digit all-employed Eurostat LFSA_EGAI2D counts now verified for Portugal 2024, 15+; disaggregated C/N within ambiguous 2-digit groups remains unavailable",
+    "all_employed_two_digit_counts": {
+      "source": "Eurostat LFSA_EGAI2D",
+      "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/lfsa_egai2d?geo=PT&time=2024&unit=THS_PER&sex=T&age=Y_GE15",
+      "count_file": "country_profiles/portugal/2024/isco_two_digit_employment_2024.json",
+      "weighted_audit_file": "country_profiles/portugal/2024/soc_isco_employment_weighted_review_2024.json",
+      "verified_all_employed_total_thousand": 5112.3,
+      "source_updated": "2026-09-10T23:00:00+0200",
+      "two_digit_groups": 43,
+      "group_with_suppressed_or_missing_data": "OC63",
+      "weighted_classification_status": "PROVISIONAL_UNVERIFIED_MAPPING_NOT_PORTUGAL_MODEL_PARAMETER"
+    },
+    "reason": "Two-digit national all-employed counts found in Eurostat LFSA_EGAI2D. However source SOC mapping is not verified against official BLS XLS; many groups mix C and N, so 3/4-digit occupation counts and weighting are still required.",
     "alternative": {
       "publication": "Quadros de Pessoal 2024 — DGCP/GEP",
       "url": "https://www.dgcp.mtsss.gov.pt/documents/10182/10928/qp2024pub.xlsx/02732373-1bae-4348-93af-74bb1bf7c8ec",
@@ -755,7 +765,8 @@
     "ISCO 31-34 and ISCO 52 contain mixed SOC target-class associations.",
     "Two mirror rows have three-digit source ISCO codes and require verification against official binary.",
     "Some 4-digit units are mapped to both C and N; classify them as ambiguous rather than assigning proportional weights by link count.",
-    "Two-digit population weights for all Portuguese employment in 2024 are still missing; employer administrative tables cover a different universe.",
-    "The country model stays not calibrated and not runnable."
+    "Two-digit national all-employed weights are now available from official Eurostat LFSA_EGAI2D; still cannot identify C/N inside the mixed groups without 3/4-digit or alternate population-matched data and verified official SOC mapping.",
+    "The country model stays not calibrated and not runnable.",
+    "An official two-digit employment count is NOT enough to weight mixed four-digit SOC/ISCO correspondence and cannot be used to generate a final C/N employment share."
   ]
 }
