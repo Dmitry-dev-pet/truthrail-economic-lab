@@ -1,0 +1,761 @@
+{
+  "schema_version": 1,
+  "country_code": "PT",
+  "reference_year": 2024,
+  "status": "CLASSIFICATION_ONLY_NOT_EMPLOYMENT_ESTIMATE",
+  "runnable": false,
+  "created_on": "2026-10-17",
+  "target_partition": {
+    "model": "fhoces/opa-ai-macro-econ-scenarios",
+    "commit": "d4703b6ae0d19dca08fbde11a25c218fa4c7b7a6",
+    "c_SOC_major_groups": [
+      "11",
+      "13",
+      "15",
+      "17",
+      "19",
+      "21",
+      "23",
+      "25",
+      "27",
+      "29",
+      "41",
+      "43"
+    ],
+    "note": "C/N follows the original U.S. SOC occupation grouping; not a measured probability of AI exposure."
+  },
+  "sources": {
+    "official": {
+      "publisher": "U.S. Bureau of Labor Statistics",
+      "listing": "https://www.bls.gov/soc/soccrosswalks.htm",
+      "file_url": "https://www.bls.gov/soc/ISCO_SOC_Crosswalk.xls",
+      "format": "legacy XLS",
+      "verification": "OFFICIAL_FILE_LINK_CONFIRMED; BINARY_NOT_PARSED_OR_COMPARED",
+      "note": "Do not equate derived CSV with byte-verified authoritative official crosswalk."
+    },
+    "mirror": {
+      "publisher": "danielruss/codingsystems",
+      "url": "https://github.com/danielruss/codingsystems/blob/main/isco2008_soc2010.csv",
+      "sha_git_blob": "f6a72a3519f9cd53104b2b89dedc562d8b31bcb9",
+      "verification": "UNVERIFIED_THIRD_PARTY_CSV",
+      "note": "CSV supplied by independent repository; source-to-official correspondence not independently proved."
+    }
+  },
+  "extraction": {
+    "csv_relationship_rows": 1125,
+    "parse_failures": [],
+    "non_four_digit_ISCO_rows": [
+      {
+        "line": 74,
+        "isco": "211",
+        "title": "Physical and earth science professionals",
+        "soc": "19-2099"
+      },
+      {
+        "line": 374,
+        "isco": "315",
+        "title": "Ship and aircraft controllers and technicians",
+        "soc": "53-2022"
+      }
+    ],
+    "distinct_ISCO_codes": 438,
+    "distinct_four_digit_ISCO_codes": 436,
+    "isco_submajors": 43,
+    "isco_units_with_both_target_classes": 26,
+    "note": "Many-to-many code links are unweighted; one match does NOT equal one employed person."
+  },
+  "submajor_mapping": [
+    {
+      "isco08_submajor": "01",
+      "determination": "all_mapped_N",
+      "mapped_isco_unit_codes": 1,
+      "units_only_C": 0,
+      "units_only_N": 1,
+      "units_C_and_N": 0,
+      "soc_links_unweighted": 8,
+      "soc_major_C": [],
+      "soc_major_N": [
+        "55"
+      ]
+    },
+    {
+      "isco08_submajor": "02",
+      "determination": "all_mapped_N",
+      "mapped_isco_unit_codes": 1,
+      "units_only_C": 0,
+      "units_only_N": 1,
+      "units_C_and_N": 0,
+      "soc_links_unweighted": 3,
+      "soc_major_C": [],
+      "soc_major_N": [
+        "55"
+      ]
+    },
+    {
+      "isco08_submajor": "03",
+      "determination": "all_mapped_N",
+      "mapped_isco_unit_codes": 1,
+      "units_only_C": 0,
+      "units_only_N": 1,
+      "units_C_and_N": 0,
+      "soc_links_unweighted": 9,
+      "soc_major_C": [],
+      "soc_major_N": [
+        "55"
+      ]
+    },
+    {
+      "isco08_submajor": "11",
+      "determination": "all_mapped_C",
+      "mapped_isco_unit_codes": 5,
+      "units_only_C": 5,
+      "units_only_N": 0,
+      "units_C_and_N": 0,
+      "soc_links_unweighted": 11,
+      "soc_major_C": [
+        "11"
+      ],
+      "soc_major_N": []
+    },
+    {
+      "isco08_submajor": "12",
+      "determination": "all_mapped_C",
+      "mapped_isco_unit_codes": 7,
+      "units_only_C": 7,
+      "units_only_N": 0,
+      "units_C_and_N": 0,
+      "soc_links_unweighted": 17,
+      "soc_major_C": [
+        "11"
+      ],
+      "soc_major_N": []
+    },
+    {
+      "isco08_submajor": "13",
+      "determination": "all_mapped_C",
+      "mapped_isco_unit_codes": 14,
+      "units_only_C": 14,
+      "units_only_N": 0,
+      "units_C_and_N": 0,
+      "soc_links_unweighted": 18,
+      "soc_major_C": [
+        "11"
+      ],
+      "soc_major_N": []
+    },
+    {
+      "isco08_submajor": "14",
+      "determination": "all_mapped_C",
+      "mapped_isco_unit_codes": 5,
+      "units_only_C": 5,
+      "units_only_N": 0,
+      "units_C_and_N": 0,
+      "soc_links_unweighted": 6,
+      "soc_major_C": [
+        "11"
+      ],
+      "soc_major_N": []
+    },
+    {
+      "isco08_submajor": "21",
+      "determination": "all_mapped_C",
+      "mapped_isco_unit_codes": 25,
+      "units_only_C": 25,
+      "units_only_N": 0,
+      "units_C_and_N": 0,
+      "soc_links_unweighted": 59,
+      "soc_major_C": [
+        "15",
+        "17",
+        "19",
+        "25",
+        "27"
+      ],
+      "soc_major_N": []
+    },
+    {
+      "isco08_submajor": "22",
+      "determination": "all_mapped_C",
+      "mapped_isco_unit_codes": 15,
+      "units_only_C": 15,
+      "units_only_N": 0,
+      "units_C_and_N": 0,
+      "soc_links_unweighted": 37,
+      "soc_major_C": [
+        "21",
+        "29"
+      ],
+      "soc_major_N": []
+    },
+    {
+      "isco08_submajor": "23",
+      "determination": "all_mapped_C",
+      "mapped_isco_unit_codes": 12,
+      "units_only_C": 12,
+      "units_only_N": 0,
+      "units_C_and_N": 0,
+      "soc_links_unweighted": 61,
+      "soc_major_C": [
+        "13",
+        "21",
+        "25"
+      ],
+      "soc_major_N": []
+    },
+    {
+      "isco08_submajor": "24",
+      "determination": "all_mapped_C",
+      "mapped_isco_unit_codes": 11,
+      "units_only_C": 11,
+      "units_only_N": 0,
+      "units_C_and_N": 0,
+      "soc_links_unweighted": 24,
+      "soc_major_C": [
+        "13",
+        "21",
+        "27",
+        "41"
+      ],
+      "soc_major_N": []
+    },
+    {
+      "isco08_submajor": "25",
+      "determination": "all_mapped_C",
+      "mapped_isco_unit_codes": 9,
+      "units_only_C": 9,
+      "units_only_N": 0,
+      "units_C_and_N": 0,
+      "soc_links_unweighted": 12,
+      "soc_major_C": [
+        "15"
+      ],
+      "soc_major_N": []
+    },
+    {
+      "isco08_submajor": "26",
+      "determination": "all_mapped_C",
+      "mapped_isco_unit_codes": 21,
+      "units_only_C": 21,
+      "units_only_N": 0,
+      "units_C_and_N": 0,
+      "soc_links_unweighted": 52,
+      "soc_major_C": [
+        "19",
+        "21",
+        "23",
+        "25",
+        "27"
+      ],
+      "soc_major_N": []
+    },
+    {
+      "isco08_submajor": "31",
+      "determination": "mixed_or_ambiguous",
+      "mapped_isco_unit_codes": 27,
+      "units_only_C": 11,
+      "units_only_N": 14,
+      "units_C_and_N": 2,
+      "soc_links_unweighted": 66,
+      "soc_major_C": [
+        "17",
+        "19",
+        "27"
+      ],
+      "soc_major_N": [
+        "33",
+        "47",
+        "51",
+        "53"
+      ]
+    },
+    {
+      "isco08_submajor": "32",
+      "determination": "mixed_or_ambiguous",
+      "mapped_isco_unit_codes": 17,
+      "units_only_C": 10,
+      "units_only_N": 0,
+      "units_C_and_N": 7,
+      "soc_links_unweighted": 42,
+      "soc_major_C": [
+        "21",
+        "29"
+      ],
+      "soc_major_N": [
+        "31",
+        "45",
+        "51",
+        "53"
+      ]
+    },
+    {
+      "isco08_submajor": "33",
+      "determination": "mixed_or_ambiguous",
+      "mapped_isco_unit_codes": 24,
+      "units_only_C": 20,
+      "units_only_N": 2,
+      "units_C_and_N": 2,
+      "soc_links_unweighted": 59,
+      "soc_major_C": [
+        "11",
+        "13",
+        "15",
+        "19",
+        "23",
+        "41",
+        "43"
+      ],
+      "soc_major_N": [
+        "31",
+        "33",
+        "45"
+      ]
+    },
+    {
+      "isco08_submajor": "34",
+      "determination": "mixed_or_ambiguous",
+      "mapped_isco_unit_codes": 11,
+      "units_only_C": 7,
+      "units_only_N": 1,
+      "units_C_and_N": 3,
+      "soc_links_unweighted": 32,
+      "soc_major_C": [
+        "21",
+        "23",
+        "25",
+        "27",
+        "29"
+      ],
+      "soc_major_N": [
+        "33",
+        "35",
+        "39"
+      ]
+    },
+    {
+      "isco08_submajor": "35",
+      "determination": "all_mapped_C",
+      "mapped_isco_unit_codes": 6,
+      "units_only_C": 6,
+      "units_only_N": 0,
+      "units_C_and_N": 0,
+      "soc_links_unweighted": 12,
+      "soc_major_C": [
+        "15",
+        "17",
+        "27",
+        "43"
+      ],
+      "soc_major_N": []
+    },
+    {
+      "isco08_submajor": "41",
+      "determination": "all_mapped_C",
+      "mapped_isco_unit_codes": 4,
+      "units_only_C": 4,
+      "units_only_N": 0,
+      "units_C_and_N": 0,
+      "soc_links_unweighted": 5,
+      "soc_major_C": [
+        "43"
+      ],
+      "soc_major_N": []
+    },
+    {
+      "isco08_submajor": "42",
+      "determination": "mixed_or_ambiguous",
+      "mapped_isco_unit_codes": 12,
+      "units_only_C": 10,
+      "units_only_N": 0,
+      "units_C_and_N": 2,
+      "soc_links_unweighted": 28,
+      "soc_major_C": [
+        "13",
+        "41",
+        "43"
+      ],
+      "soc_major_N": [
+        "39"
+      ]
+    },
+    {
+      "isco08_submajor": "43",
+      "determination": "all_mapped_C",
+      "mapped_isco_unit_codes": 6,
+      "units_only_C": 6,
+      "units_only_N": 0,
+      "units_C_and_N": 0,
+      "soc_links_unweighted": 14,
+      "soc_major_C": [
+        "43"
+      ],
+      "soc_major_N": []
+    },
+    {
+      "isco08_submajor": "44",
+      "determination": "mixed_or_ambiguous",
+      "mapped_isco_unit_codes": 7,
+      "units_only_C": 6,
+      "units_only_N": 1,
+      "units_C_and_N": 0,
+      "soc_links_unweighted": 17,
+      "soc_major_C": [
+        "25",
+        "43"
+      ],
+      "soc_major_N": [
+        "39"
+      ]
+    },
+    {
+      "isco08_submajor": "51",
+      "determination": "mixed_or_ambiguous",
+      "mapped_isco_unit_codes": 17,
+      "units_only_C": 2,
+      "units_only_N": 15,
+      "units_C_and_N": 0,
+      "soc_links_unweighted": 47,
+      "soc_major_C": [
+        "25",
+        "27"
+      ],
+      "soc_major_N": [
+        "31",
+        "35",
+        "37",
+        "39",
+        "53"
+      ]
+    },
+    {
+      "isco08_submajor": "52",
+      "determination": "mixed_or_ambiguous",
+      "mapped_isco_unit_codes": 13,
+      "units_only_C": 10,
+      "units_only_N": 2,
+      "units_C_and_N": 1,
+      "soc_links_unweighted": 20,
+      "soc_major_C": [
+        "11",
+        "41"
+      ],
+      "soc_major_N": [
+        "35",
+        "53"
+      ]
+    },
+    {
+      "isco08_submajor": "53",
+      "determination": "mixed_or_ambiguous",
+      "mapped_isco_unit_codes": 5,
+      "units_only_C": 1,
+      "units_only_N": 4,
+      "units_C_and_N": 0,
+      "soc_links_unweighted": 16,
+      "soc_major_C": [
+        "25"
+      ],
+      "soc_major_N": [
+        "31",
+        "39"
+      ]
+    },
+    {
+      "isco08_submajor": "54",
+      "determination": "mixed_or_ambiguous",
+      "mapped_isco_unit_codes": 5,
+      "units_only_C": 0,
+      "units_only_N": 4,
+      "units_C_and_N": 1,
+      "soc_links_unweighted": 19,
+      "soc_major_C": [
+        "43"
+      ],
+      "soc_major_N": [
+        "33"
+      ]
+    },
+    {
+      "isco08_submajor": "61",
+      "determination": "all_mapped_N",
+      "mapped_isco_unit_codes": 9,
+      "units_only_C": 0,
+      "units_only_N": 9,
+      "units_C_and_N": 0,
+      "soc_links_unweighted": 20,
+      "soc_major_C": [],
+      "soc_major_N": [
+        "37",
+        "45"
+      ]
+    },
+    {
+      "isco08_submajor": "62",
+      "determination": "all_mapped_N",
+      "mapped_isco_unit_codes": 5,
+      "units_only_C": 0,
+      "units_only_N": 5,
+      "units_C_and_N": 0,
+      "soc_links_unweighted": 14,
+      "soc_major_C": [],
+      "soc_major_N": [
+        "45"
+      ]
+    },
+    {
+      "isco08_submajor": "63",
+      "determination": "all_mapped_N",
+      "mapped_isco_unit_codes": 4,
+      "units_only_C": 0,
+      "units_only_N": 4,
+      "units_C_and_N": 0,
+      "soc_links_unweighted": 6,
+      "soc_major_C": [],
+      "soc_major_N": [
+        "45"
+      ]
+    },
+    {
+      "isco08_submajor": "71",
+      "determination": "mixed_or_ambiguous",
+      "mapped_isco_unit_codes": 16,
+      "units_only_C": 1,
+      "units_only_N": 15,
+      "units_C_and_N": 0,
+      "soc_links_unweighted": 34,
+      "soc_major_C": [
+        "11"
+      ],
+      "soc_major_N": [
+        "37",
+        "47",
+        "49",
+        "51"
+      ]
+    },
+    {
+      "isco08_submajor": "72",
+      "determination": "all_mapped_N",
+      "mapped_isco_unit_codes": 13,
+      "units_only_C": 0,
+      "units_only_N": 13,
+      "units_C_and_N": 0,
+      "soc_links_unweighted": 56,
+      "soc_major_C": [],
+      "soc_major_N": [
+        "47",
+        "49",
+        "51"
+      ]
+    },
+    {
+      "isco08_submajor": "73",
+      "determination": "mixed_or_ambiguous",
+      "mapped_isco_unit_codes": 12,
+      "units_only_C": 1,
+      "units_only_N": 8,
+      "units_C_and_N": 3,
+      "soc_links_unweighted": 23,
+      "soc_major_C": [
+        "27",
+        "43"
+      ],
+      "soc_major_N": [
+        "49",
+        "51"
+      ]
+    },
+    {
+      "isco08_submajor": "74",
+      "determination": "all_mapped_N",
+      "mapped_isco_unit_codes": 5,
+      "units_only_C": 0,
+      "units_only_N": 5,
+      "units_C_and_N": 0,
+      "soc_links_unweighted": 31,
+      "soc_major_C": [],
+      "soc_major_N": [
+        "47",
+        "49"
+      ]
+    },
+    {
+      "isco08_submajor": "75",
+      "determination": "mixed_or_ambiguous",
+      "mapped_isco_unit_codes": 20,
+      "units_only_C": 0,
+      "units_only_N": 19,
+      "units_C_and_N": 1,
+      "soc_links_unweighted": 40,
+      "soc_major_C": [
+        "27"
+      ],
+      "soc_major_N": [
+        "37",
+        "45",
+        "47",
+        "49",
+        "51"
+      ]
+    },
+    {
+      "isco08_submajor": "81",
+      "determination": "all_mapped_N",
+      "mapped_isco_unit_codes": 26,
+      "units_only_C": 0,
+      "units_only_N": 26,
+      "units_C_and_N": 0,
+      "soc_links_unweighted": 81,
+      "soc_major_C": [],
+      "soc_major_N": [
+        "47",
+        "51",
+        "53"
+      ]
+    },
+    {
+      "isco08_submajor": "82",
+      "determination": "all_mapped_N",
+      "mapped_isco_unit_codes": 3,
+      "units_only_C": 0,
+      "units_only_N": 3,
+      "units_C_and_N": 0,
+      "soc_links_unweighted": 9,
+      "soc_major_C": [],
+      "soc_major_N": [
+        "51"
+      ]
+    },
+    {
+      "isco08_submajor": "83",
+      "determination": "mixed_or_ambiguous",
+      "mapped_isco_unit_codes": 11,
+      "units_only_C": 0,
+      "units_only_N": 10,
+      "units_C_and_N": 1,
+      "soc_links_unweighted": 40,
+      "soc_major_C": [
+        "43"
+      ],
+      "soc_major_N": [
+        "39",
+        "45",
+        "47",
+        "53"
+      ]
+    },
+    {
+      "isco08_submajor": "91",
+      "determination": "all_mapped_N",
+      "mapped_isco_unit_codes": 6,
+      "units_only_C": 0,
+      "units_only_N": 6,
+      "units_C_and_N": 0,
+      "soc_links_unweighted": 9,
+      "soc_major_C": [],
+      "soc_major_N": [
+        "37",
+        "47",
+        "51",
+        "53"
+      ]
+    },
+    {
+      "isco08_submajor": "92",
+      "determination": "all_mapped_N",
+      "mapped_isco_unit_codes": 6,
+      "units_only_C": 0,
+      "units_only_N": 6,
+      "units_C_and_N": 0,
+      "soc_links_unweighted": 14,
+      "soc_major_C": [],
+      "soc_major_N": [
+        "37",
+        "45"
+      ]
+    },
+    {
+      "isco08_submajor": "93",
+      "determination": "mixed_or_ambiguous",
+      "mapped_isco_unit_codes": 9,
+      "units_only_C": 1,
+      "units_only_N": 7,
+      "units_C_and_N": 1,
+      "soc_links_unweighted": 28,
+      "soc_major_C": [
+        "43"
+      ],
+      "soc_major_N": [
+        "47",
+        "51",
+        "53"
+      ]
+    },
+    {
+      "isco08_submajor": "94",
+      "determination": "all_mapped_N",
+      "mapped_isco_unit_codes": 2,
+      "units_only_C": 0,
+      "units_only_N": 2,
+      "units_C_and_N": 0,
+      "soc_links_unweighted": 6,
+      "soc_major_C": [],
+      "soc_major_N": [
+        "35"
+      ]
+    },
+    {
+      "isco08_submajor": "95",
+      "determination": "mixed_or_ambiguous",
+      "mapped_isco_unit_codes": 2,
+      "units_only_C": 1,
+      "units_only_N": 1,
+      "units_C_and_N": 0,
+      "soc_links_unweighted": 2,
+      "soc_major_C": [
+        "41"
+      ],
+      "soc_major_N": [
+        "39"
+      ]
+    },
+    {
+      "isco08_submajor": "96",
+      "determination": "mixed_or_ambiguous",
+      "mapped_isco_unit_codes": 8,
+      "units_only_C": 0,
+      "units_only_N": 6,
+      "units_C_and_N": 2,
+      "soc_links_unweighted": 18,
+      "soc_major_C": [
+        "43"
+      ],
+      "soc_major_N": [
+        "37",
+        "39",
+        "49",
+        "53"
+      ]
+    }
+  ],
+  "portugal_2024_weight_data": {
+    "source": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/lfsa_egais?geo=PT&time=2024&unit=THS_PER&age=Y_GE15&sex=T&wstatus=EMP",
+    "resolution": "one-digit only",
+    "all_employed_two_digit_counts": null,
+    "reason": "Portugal 2024 public Eurostat occupation series does not expose required two-digit employed counts.",
+    "alternative": {
+      "publication": "Quadros de Pessoal 2024 — DGCP/GEP",
+      "url": "https://www.dgcp.mtsss.gov.pt/documents/10182/10928/qp2024pub.xlsx/02732373-1bae-4348-93af-74bb1bf7c8ec",
+      "status": "PUBLISHED_LINK_IDENTIFIED_BUT_FILE_NOT_RETRIEVED",
+      "coverage": "Employer-reported employees; not entire national employed population",
+      "rule": "Never mix Quadros de Pessoal subgroup shares with Eurostat total employment without verified coverage weights and matching definitions."
+    }
+  },
+  "limitations": [
+    "No new Portuguese Fixed.cog_share value can be inferred from unweighted SOC↔ISCO links.",
+    "ISCO 31-34 and ISCO 52 contain mixed SOC target-class associations.",
+    "Two mirror rows have three-digit source ISCO codes and require verification against official binary.",
+    "Some 4-digit units are mapped to both C and N; classify them as ambiguous rather than assigning proportional weights by link count.",
+    "Two-digit population weights for all Portuguese employment in 2024 are still missing; employer administrative tables cover a different universe.",
+    "The country model stays not calibrated and not runnable."
+  ]
+}
