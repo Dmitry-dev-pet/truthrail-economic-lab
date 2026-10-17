@@ -15,6 +15,8 @@ A small reproducible **US economic research sandbox**. It is not a US employment
 - Compose binds only to 127.0.0.1:8765, with no authentication. Never expose it publicly or add a tunnel without a separate review.
 - No LLM/GPU/OpenCode/AGY calls or scheduled token-using jobs are needed. The existing public-repository GitHub-hosted workflow may run pinned, no-secret numerical checks on PRs and main; it does not target the Mac, authorize project deployment or use model-provider credentials. Private Mac execution remains solely under reviewed mac-access admission.
 - Use reviewed existing Truthrail routes; do not add a new MCP simply to call localhost.
+- The public hosted `[econ] experiment` issue route accepts only owner-opened exact-title issues, bounded JSON numeric axes (maximum 25 cells), and never executes issue text as commands. Computation runs in a separate `contents:read` job; only the isolated `issues:write` report job can comment, using a bounded short-retention artifact. It never reaches the Mac or local API.
+- Issue bodies and posted results on this public repository are public; do not include private/user data.
 - No execution or deployment should be claimed without observed evidence from the target runtime.
 
 ## Development
