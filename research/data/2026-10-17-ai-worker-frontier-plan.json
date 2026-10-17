@@ -1,0 +1,16 @@
+{
+  "study": "one-model-us-ai-gdp-labor-share-unemployment-feasibility",
+  "research_date": "2026-10-17",
+  "model_source_sha": "d4703b6ae0d19dca08fbde11a25c218fa4c7b7a6",
+  "lab_source_sha": "e020a4573bd8ad4ede933d05435b92869ca0ee2d",
+  "path": "substantial",
+  "geography": "USA",
+  "year": 2030,
+  "reference": "No-AI counterfactual, not default substantial preset",
+  "criteria": {"gdp_gain_pct_min": 5.0, "labor_share_pct_min": 60.0, "unemployment_total_pct_max": 3.8},
+  "scan_axes": {"psi": [0.25, 0.5, 0.75, 0.9], "rho": [0.0, 0.25, 0.5, 0.75, 1.0], "mu": [0.04, 0.08, 0.17, 0.34], "theta_H": [0.1, 0.25, 0.5]},
+  "validation": {"method": "preselected off-grid uniform numerical diagnostic only; no empirical validation", "seed": 20261017, "draws": 64, "bounds": {"psi": [0.25, 0.9], "rho": [0.0, 1.0], "mu": [0.04, 0.34], "theta_H": [0.1, 0.5]}},
+  "fixed_parameters": "Original Fixed() without overrides",
+  "budget_max_model_runs": 306,
+  "interpretation": "Search in a conditional U.S. simulation, not an empirical prediction or an estimation of feasible real-world policies"
+}
