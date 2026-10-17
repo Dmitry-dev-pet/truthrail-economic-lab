@@ -123,7 +123,8 @@
         "us_reference": "0.035",
         "calibration_status": "national_statistic_candidate",
         "candidate_sources": [
-          "US_REPRODUCTION"
+          "US_REPRODUCTION",
+          "PT_RND_GERD_2024"
         ],
         "mapping_note": "Research share of GDP in the paper's ideas block; national R&D expenditure requires a strict concept and denominator check.",
         "portugal_model_value": null
@@ -457,6 +458,12 @@
       "organization": "Fernando Hoces de la Guardia independent reimplementation",
       "reference_year": 2024,
       "description": "Exact immutable U.S. model reference and parameter types"
+    },
+    "PT_RND_GERD_2024": {
+      "url": "https://www.pordata.pt/en/europe/expenditure+in+research+and+development+activities+(r+d)+as+a+percentage+of+gdp+by+sector+of+performance-1674",
+      "organization": "PORDATA compiling Eurostat and INE R&D data",
+      "reference_year": 2024,
+      "description": "2024 gross domestic R&D expenditure about 1.72% of GDP (marked provisional). A distinct proxy, not directly the model's ideas-sector iota_R0."
     }
   },
   "verified_context_observations": [
@@ -514,6 +521,17 @@
       "candidate_for": null,
       "safe_to_assign_to_model": false,
       "note": "2025 business adoption among covered enterprises, not labor/task-level diffusion m or d."
+    },
+    {
+      "id": "PT_RD_GERD_2024",
+      "label": "Gross domestic expenditure on R&D / GDP (provisional)",
+      "year": 2024,
+      "value": 0.0172,
+      "unit": "share of GDP",
+      "source_key": "PT_RND_GERD_2024",
+      "candidate_for": "Fixed.iota_R0",
+      "safe_to_assign_to_model": false,
+      "note": "GERD is total domestic research expenditure, not necessarily the model's ideas-input share; conceptual mapping and years must be checked before use."
     }
   ],
   "calibration_gates": [
