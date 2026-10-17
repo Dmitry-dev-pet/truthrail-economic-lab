@@ -30,15 +30,25 @@
       "listing": "https://www.bls.gov/soc/soccrosswalks.htm",
       "file_url": "https://www.bls.gov/soc/ISCO_SOC_Crosswalk.xls",
       "format": "legacy XLS",
-      "verification": "OFFICIAL_FILE_LINK_CONFIRMED; BINARY_NOT_PARSED_OR_COMPARED",
-      "note": "Do not equate derived CSV with byte-verified authoritative official crosswalk."
+      "verification": "OFFICIAL_BLS_URL_CONFIRMED; DIRECT_BLS_HOST_BINARY_NOT_PARSED_OR_COMPARED; INDEPENDENT_BLS_BRANDED_WORKBOOK_COPY_PARSED",
+      "note": "A separate GitHub-hosted BLS-branded 433,152-byte XLS was decoded (OLE2/BIFF8); this is NOT a byte-level verification of the current workbook from the official BLS server."
     },
     "mirror": {
       "publisher": "danielruss/codingsystems",
       "url": "https://github.com/danielruss/codingsystems/blob/main/isco2008_soc2010.csv",
       "sha_git_blob": "f6a72a3519f9cd53104b2b89dedc562d8b31bcb9",
-      "verification": "UNVERIFIED_THIRD_PARTY_CSV",
-      "note": "CSV supplied by independent repository; source-to-official correspondence not independently proved."
+      "verification": "EXACT_1125_PAIR_AND_TITLE_MATCH_WITH_SEPARATELY_HOSTED_BLS_BRANDED_XLS; DIRECT_ORIGINAL_BLS_HOST_UNVERIFIED",
+      "note": "Every code pair and both occupation titles match a BLS-branded XLS in a separate GitHub research repository. Original BLS web-hosted binary could not be compared directly."
+    },
+    "independent_binary_comparison": {
+      "file": "country_profiles/portugal/2024/independent_xls_vs_csv_verification_2024.json",
+      "original_BLS_byte_level_verified": false,
+      "independent_workbook_copy_parsed": true,
+      "matched_code_pairs": 1125,
+      "matched_isco_titles": 1125,
+      "matched_soc_titles": 1125,
+      "independently_hosted_binary_git_blob": "6d8f2d6777ed2462376bcb91bf5492a3350520da",
+      "method": "SST + LABELSST parsing of the Excel 97-2003 BIFF8 workbook"
     }
   },
   "extraction": {
@@ -49,13 +59,15 @@
         "line": 74,
         "isco": "211",
         "title": "Physical and earth science professionals",
-        "soc": "19-2099"
+        "soc": "19-2099",
+        "note": "This exact 3-digit code appears identically in independently hosted BLS-branded XLS and separate CSV; not a CSV transcription error. Review mapping granularity."
       },
       {
         "line": 374,
         "isco": "315",
         "title": "Ship and aircraft controllers and technicians",
-        "soc": "53-2022"
+        "soc": "53-2022",
+        "note": "This exact 3-digit code appears identically in independently hosted BLS-branded XLS and separate CSV; not a CSV transcription error. Review mapping granularity."
       }
     ],
     "distinct_ISCO_codes": 438,
@@ -763,10 +775,12 @@
   "limitations": [
     "No new Portuguese Fixed.cog_share value can be inferred from unweighted SOC↔ISCO links.",
     "ISCO 31-34 and ISCO 52 contain mixed SOC target-class associations.",
-    "Two mirror rows have three-digit source ISCO codes and require verification against official binary.",
+    "The two source 3-digit ISCO codes 211 and 315 are identically present in independently hosted BLS-branded Excel and CSV; they require a mapping-granularity decision, not a CSV typo correction.",
     "Some 4-digit units are mapped to both C and N; classify them as ambiguous rather than assigning proportional weights by link count.",
     "Two-digit national all-employed weights are now available from official Eurostat LFSA_EGAI2D; still cannot identify C/N inside the mixed groups without 3/4-digit or alternate population-matched data and verified official SOC mapping.",
     "The country model stays not calibrated and not runnable.",
-    "An official two-digit employment count is NOT enough to weight mixed four-digit SOC/ISCO correspondence and cannot be used to generate a final C/N employment share."
+    "An official two-digit employment count is NOT enough to weight mixed four-digit SOC/ISCO correspondence and cannot be used to generate a final C/N employment share.",
+    "Cross-source Excel-vs-CSV agreement is established for 1,125 code and title relations, but the official BLS-hosted binary itself has NOT been directly checked.",
+    "Among 17 mixed 2-digit groups, five groups (686.7k observed workers) have C-only and N-only distinct 4-digit units, while 12 groups (1,676.9k workers) include at least one 4-digit unit linking to both C and N; 4-digit counts alone would not fully resolve that ambiguity."
   ]
 }
