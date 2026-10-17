@@ -90,8 +90,8 @@ response and **+12.493 pp** GDP-gain response.
 **Each row is one numeric parameter contrast**, not a new
 three-scenario forecast. Entries are changes in **percentage
 points**, with baseline values and explicit low/high endpoints
-shown. The original issue receipts carry unrounded values; this
-report displays three decimals of outcome changes.
+shown. The original issue receipts also round outcome changes
+to three decimals; the simulation internally used higher precision.
 
 ### Умеренный (modest)
 
