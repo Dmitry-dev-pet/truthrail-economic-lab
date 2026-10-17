@@ -40,6 +40,8 @@ Do not substitute a new public proxy or tunnel for this localhost-only service.
 - GET /api/presets
 - POST /api/run
 - POST /api/experiment (bounded two-axis comparison; local API only)
+- GET /api/hypotheses (predeclared proposal catalogue; local API only)
+- POST /api/research (one bounded hypothesis-guided study; local API only)
 
 Examples of JSON bodies:
 
@@ -111,6 +113,55 @@ This route is a GitHub-backed chat workaround, **not** a low-latency direct
 MCP connection to the Mac and not a replacement for the separate local web
 interface. The existing `mac-access` fixed verification remains unchanged.
 
+### Let Alfred propose and test hypotheses
+
+An owner-created issue with the existing exact title `[econ] experiment` may
+now contain **one bounded research request** in place of explicit numerical
+axes:
+
+```json
+{"research":"auto"}
+```
+
+This invokes a documented, deterministic research planner that evaluates
+**candidate questions before running any model** and then computes only its
+highest-priority, predeclared test:
+
+1. `new_tasks_vs_automation` — reinstatement of new human tasks (`rho`)
+   versus the automation share (`psi`).
+2. `new_tasks_vs_mobility` — new tasks versus workers' ease of switching
+   occupations (`mu`).
+3. `automation_vs_mobility` — re-examination of a previously explored
+   relationship.
+
+Alfred may instead select any one listed candidate in the issue body, e.g.
+`{"research":"new_tasks_vs_mobility","scenario":"substantial"}`. The plan
+captures each testable directional prediction, an alternative, the numerical
+threshold, the exact tested parameter values, source commit, fixed priority
+rubric and SHA-256 fingerprint **before** any model execution. The model
+evaluates 1 preset baseline plus **9 sampled combinations**; the report
+shows every cell and whether each prediction holds at all three controlled
+levels, is opposite, or is mixed/inconclusive.
+
+This is **hypothesis selection from a transparent, curated catalogue**,
+not open-ended autonomous scientific discovery: no extra model calls, new
+hypotheses, provider tokens, recurring agent loop or unreviewed task
+execution. Novel ideas outside the catalogue should be discussed and added
+in reviewed source changes first. Candidate scores express a research
+priority, never the probability that a hypothesis is true.
+
+`GET /api/hypotheses` returns the catalogue; `POST /api/research` runs a
+single bounded research request once the **separately authorized local**
+web service is actually deployed. Both are source features, not evidence
+that the Docker API is running on Mac.
+
+`rho` has a different role from `mu`: it measures new labor tasks per
+automated task; `mu` describes ease of moving to a different occupation.
+We study their conditional effects **inside the U.S. model**, not whether
+real-world policies, surveys or workers will behave accordingly. Outputs
+are model sensitivity results, not empirical validation or statistical
+tests.
+
 ## License and attribution
 
 This repository's original application wrapper, API, UI, tests and documentation
@@ -132,7 +183,7 @@ Claude task usage separately; it does not calibrate this macroeconomic model.
 Public-repository GitHub Actions CI validates the pinned mathematical model and local code; this is distinct from the owner-reviewed Mac execution route and uses no LLM tokens.
 
 
-## No-Docker Mac verification (prepared, not activated)
+## Verified one-shot Mac reproduction (not local API deployment)
 
 The dedicated Mac runner has a Docker CLI but no independently verified,
 runner-owned Docker Engine. As a safer first experiment, this repository also
@@ -150,11 +201,15 @@ provides a **fixed, no-Docker mathematical verification Action** at
 - installs nothing on the Mac, does not start a server, does not touch
   Docker or user credentials, and cleans up temporary files.
 
-This is **not deployed merely because the Action exists**. It must be bound
-to an approved immutable GitHub SHA in the reviewed `mac-access` control
-plane, admitted by owner-only gate and reported through existing GitHub
-operations. The separate interactive local Docker API and UI remain
-unverified until an isolated, authorized engine is available.
+The original exact fixed three-scenario Action **ran and passed** on the
+non-admin Mac M4 via reviewed `mac-access` issue
+[#234](https://github.com/Dmitry-dev-pet/mac-access/issues/234) and
+[Actions run #38983405178](https://github.com/Dmitry-dev-pet/mac-access/actions/runs/38983405178).
+Its binding remains pinned to the old immutable Action version; adding the
+research planner does not expand that Mac authorization. The interactive
+Docker API/UI remains **unverified and not deployed** until the dedicated
+runner has an isolated, authorized engine. The owner-only GitHub issue
+research workflow runs on hosted Linux, not on the Mac.
 
 The published table's consistency check is numerical reproducibility, not
 evidence that the future will follow any of these conditional scenarios.
