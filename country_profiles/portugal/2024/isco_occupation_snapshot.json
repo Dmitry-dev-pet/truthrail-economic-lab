@@ -1,0 +1,136 @@
+{
+  "schema_version": 1,
+  "country_code": "PT",
+  "year": 2024,
+  "calibration_status": "source_observation_not_model_parameter",
+  "runnable": false,
+  "source": {
+    "publisher": "Eurostat",
+    "dataset": "lfsa_egais",
+    "endpoint": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/lfsa_egais?geo=PT&time=2024&unit=THS_PER&age=Y_GE15&sex=T&wstatus=EMP",
+    "updated": "2026-09-10T23:00:00+0200",
+    "unit": "thousand persons",
+    "sex": "T",
+    "age": "Y_GE15",
+    "wstatus": "EMP",
+    "geo": "PT",
+    "time": "2024",
+    "category_axis": "isco08",
+    "source_status": {}
+  },
+  "category_counts": {
+    "TOTAL": {
+      "label": "Total",
+      "thousands": 5112.3
+    },
+    "OC1": {
+      "label": "Managers",
+      "thousands": 309.8
+    },
+    "OC2": {
+      "label": "Professionals",
+      "thousands": 1178.3
+    },
+    "OC3": {
+      "label": "Technicians and associate professionals",
+      "thousands": 590.8
+    },
+    "OC4": {
+      "label": "Clerical support workers",
+      "thousands": 478
+    },
+    "OC5": {
+      "label": "Service and sales workers",
+      "thousands": 928.3
+    },
+    "OC6": {
+      "label": "Skilled agricultural, forestry and fishery workers",
+      "thousands": 115.8
+    },
+    "OC7": {
+      "label": "Craft and related trades workers",
+      "thousands": 656.2
+    },
+    "OC8": {
+      "label": "Plant and machine operators and assemblers",
+      "thousands": 403.8
+    },
+    "OC9": {
+      "label": "Elementary occupations",
+      "thousands": 429.1
+    },
+    "OC0": {
+      "label": "Armed forces occupations",
+      "thousands": 22.3
+    },
+    "NRP": {
+      "label": "No response",
+      "thousands": null
+    }
+  },
+  "coarse_subsets": [
+    {
+      "id": "high_specificity_proxy",
+      "codes": [
+        "OC1",
+        "OC2",
+        "OC4"
+      ],
+      "notes": "Managers + professionals + clerical support. Conservative *heuristic subset*, not proven exact SOC coverage or calibrated cognitive share.",
+      "thousands": 1966.1,
+      "share_of_total": 0.384582
+    },
+    {
+      "id": "whole_group_3_included",
+      "codes": [
+        "OC1",
+        "OC2",
+        "OC3",
+        "OC4"
+      ],
+      "notes": "Adds all technicians and associate professionals: over-inclusive for some mappings, under-inclusive for sales occupations.",
+      "thousands": 2556.9,
+      "share_of_total": 0.500147
+    },
+    {
+      "id": "whole_group_5_included",
+      "codes": [
+        "OC1",
+        "OC2",
+        "OC3",
+        "OC4",
+        "OC5"
+      ],
+      "notes": "Adds all service AND sales jobs even though U.S. SOC 41 includes sales but not all personal/protective services; illustrative high-coverage envelope, not formal upper bound.",
+      "thousands": 3485.2,
+      "share_of_total": 0.681728
+    }
+  ],
+  "us_model_definition": {
+    "soc2010_major_groups": [
+      "11",
+      "13",
+      "15",
+      "17",
+      "19",
+      "21",
+      "23",
+      "25",
+      "27",
+      "29",
+      "41",
+      "43"
+    ],
+    "note": "Management/professional/sales/office; original paper used CPS SOC categories and not ISCO major groups.",
+    "source": "https://econ-ark.github.io/econ-scenarios/reproduction-appendix/",
+    "crosswalk_source": "https://www.bls.gov/soc/ISCO_SOC_Crosswalk_process.pdf"
+  },
+  "methodological_gaps": [
+    "One-digit Eurostat ISCO group OC5 merges sales (SOC 41) with non-cognitive services; cannot resolve C without sub-major groups.",
+    "ISCO OC3 mixes technical and associate-professional groups; not all detailed occupations can be assumed to match U.S. SOC 11-29.",
+    "One-to-many SOC↔ISCO codes require a reviewed occupational concordance, preferably with 3/4-digit microdata and weights.",
+    "These three proportions are illustrative classification sensitivity exercises, not formal statistical intervals or observed shares of occupations exposed to AI.",
+    "Unemployed occupational origin and C↔N cross-group flows are not in this employed-person snapshot; no information on model mobility mu.",
+    "Portugal calibration_audit.json cog_share remains null and runnable remains false."
+  ]
+}
