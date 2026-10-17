@@ -1,0 +1,621 @@
+{
+  "schema_version": 1,
+  "country_code": "PT",
+  "year": 2024,
+  "status": "INDEPENDENT_XLS_COPY_CROSSCHECK_NOT_DIRECT_BLS_HOST_VERIFICATION",
+  "runnable": false,
+  "created": "2026-10-17",
+  "original_host_reference": {
+    "site": "https://www.bls.gov/soc/soccrosswalks.htm",
+    "official_file": "https://www.bls.gov/soc/ISCO_SOC_Crosswalk.xls",
+    "direct_byte_comparison_performed": false
+  },
+  "sources": {
+    "workbook_copy": {
+      "repository": "Cici6101/low-carbon-transition-and-labor-market",
+      "file": "isco_soc_crosswalk.xls",
+      "blob_sha": "6d8f2d6777ed2462376bcb91bf5492a3350520da",
+      "bytes": 433152,
+      "format": "OLE2 BIFF8 XLS",
+      "sheets": [
+        "ISCO-08 to 2010 SOC",
+        "2010 SOC to ISCO-08",
+        "match"
+      ],
+      "xls_header": [
+        "Bureau of Labor Statistics",
+        "On behalf of the Standard Occupational Classification Policy Committee (SOCPC)",
+        "August 2012 (Updated June 2015)"
+      ],
+      "relationship_rows": 1125,
+      "source_is_independently_hosted_copy": true
+    },
+    "csv_copy": {
+      "repository": "danielruss/codingsystems",
+      "file": "isco2008_soc2010.csv",
+      "blob_sha": "f6a72a3519f9cd53104b2b89dedc562d8b31bcb9",
+      "relationship_rows": 1125,
+      "source_is_independently_hosted_copy": true
+    }
+  },
+  "validation": {
+    "method": "Pure JavaScript parsing of the GitHub-hosted OLE2/BIFF8 workbook's BIFF8 SST and 0x00FD LABELSST records, direct comparison with separately hosted parsed CSV (trimmed code/title whitespace).",
+    "code_pair_matches": 1125,
+    "code_pair_mismatches": 0,
+    "isco_titles_equal": 1125,
+    "soc_titles_equal": 1125,
+    "unmatched_csv_pairs": 0,
+    "unmatched_xls_pairs": 0,
+    "unique_mapping_pairs": 1125,
+    "distinct_ISCO_codes": 438,
+    "code_units_C_only": 221,
+    "code_units_N_only": 191,
+    "code_units_both": 26,
+    "unusual_3digit_ISCO_codes": [
+      {
+        "code": "211",
+        "title": "Physical and earth science professionals",
+        "soc": "19-2099",
+        "excel_workbook_row": 80,
+        "csv_line": 74,
+        "note": "Appears identically in both copies; not a CSV transformation error. Must resolve semantics of parent-level mapping rather than padding to four digits."
+      },
+      {
+        "code": "315",
+        "title": "Ship and aircraft controllers and technicians",
+        "soc": "53-2022",
+        "excel_workbook_row": 380,
+        "csv_line": 374,
+        "note": "Appears identically in both copies; not a CSV transformation error. Must resolve parent-level mapping semantics."
+      }
+    ],
+    "no_employment_weights_obtained_from_source": true
+  },
+  "ambiguous_four_digit_ISCO_units": [
+    {
+      "isco08": "3112",
+      "isco08_title": "Civil engineering technicians",
+      "C_major_groups": [
+        "17"
+      ],
+      "N_major_groups": [
+        "33",
+        "47"
+      ],
+      "C_link_count": 2,
+      "N_link_count": 3,
+      "note": "Crosswalk-link count is NOT an employment proportion; assignment requires occupational counts/verification."
+    },
+    {
+      "isco08": "3119",
+      "isco08_title": "Physical and engineering science technicians not elsewhere classified",
+      "C_major_groups": [
+        "17",
+        "19"
+      ],
+      "N_major_groups": [
+        "33",
+        "53"
+      ],
+      "C_link_count": 6,
+      "N_link_count": 4,
+      "note": "Crosswalk-link count is NOT an employment proportion; assignment requires occupational counts/verification."
+    },
+    {
+      "isco08": "3214",
+      "isco08_title": "Medical and dental prosthetic technicians",
+      "C_major_groups": [
+        "29"
+      ],
+      "N_major_groups": [
+        "51"
+      ],
+      "C_link_count": 2,
+      "N_link_count": 2,
+      "note": "Crosswalk-link count is NOT an employment proportion; assignment requires occupational counts/verification."
+    },
+    {
+      "isco08": "3240",
+      "isco08_title": "Veterinary technicians and assistants",
+      "C_major_groups": [
+        "29"
+      ],
+      "N_major_groups": [
+        "31"
+      ],
+      "C_link_count": 1,
+      "N_link_count": 1,
+      "note": "Crosswalk-link count is NOT an employment proportion; assignment requires occupational counts/verification."
+    },
+    {
+      "isco08": "3251",
+      "isco08_title": "Dental assistants and therapists",
+      "C_major_groups": [
+        "29"
+      ],
+      "N_major_groups": [
+        "31"
+      ],
+      "C_link_count": 1,
+      "N_link_count": 1,
+      "note": "Crosswalk-link count is NOT an employment proportion; assignment requires occupational counts/verification."
+    },
+    {
+      "isco08": "3255",
+      "isco08_title": "Physiotherapy technicians and assistants",
+      "C_major_groups": [
+        "29"
+      ],
+      "N_major_groups": [
+        "31"
+      ],
+      "C_link_count": 1,
+      "N_link_count": 2,
+      "note": "Crosswalk-link count is NOT an employment proportion; assignment requires occupational counts/verification."
+    },
+    {
+      "isco08": "3256",
+      "isco08_title": "Medical assistants",
+      "C_major_groups": [
+        "29"
+      ],
+      "N_major_groups": [
+        "31"
+      ],
+      "C_link_count": 1,
+      "N_link_count": 1,
+      "note": "Crosswalk-link count is NOT an employment proportion; assignment requires occupational counts/verification."
+    },
+    {
+      "isco08": "3257",
+      "isco08_title": "Environmental and occupational health inspectors and associates",
+      "C_major_groups": [
+        "29"
+      ],
+      "N_major_groups": [
+        "45",
+        "53"
+      ],
+      "C_link_count": 1,
+      "N_link_count": 3,
+      "note": "Crosswalk-link count is NOT an employment proportion; assignment requires occupational counts/verification."
+    },
+    {
+      "isco08": "3259",
+      "isco08_title": "Health associate professionals not elsewhere classified",
+      "C_major_groups": [
+        "29"
+      ],
+      "N_major_groups": [
+        "31"
+      ],
+      "C_link_count": 8,
+      "N_link_count": 2,
+      "note": "Crosswalk-link count is NOT an employment proportion; assignment requires occupational counts/verification."
+    },
+    {
+      "isco08": "3344",
+      "isco08_title": "Medical secretaries",
+      "C_major_groups": [
+        "43"
+      ],
+      "N_major_groups": [
+        "31"
+      ],
+      "C_link_count": 1,
+      "N_link_count": 1,
+      "note": "Crosswalk-link count is NOT an employment proportion; assignment requires occupational counts/verification."
+    },
+    {
+      "isco08": "3351",
+      "isco08_title": "Customs and border inspectors",
+      "C_major_groups": [
+        "13"
+      ],
+      "N_major_groups": [
+        "33"
+      ],
+      "C_link_count": 1,
+      "N_link_count": 2,
+      "note": "Crosswalk-link count is NOT an employment proportion; assignment requires occupational counts/verification."
+    },
+    {
+      "isco08": "3411",
+      "isco08_title": "Legal and related associate professionals",
+      "C_major_groups": [
+        "23"
+      ],
+      "N_major_groups": [
+        "33"
+      ],
+      "C_link_count": 4,
+      "N_link_count": 3,
+      "note": "Crosswalk-link count is NOT an employment proportion; assignment requires occupational counts/verification."
+    },
+    {
+      "isco08": "3423",
+      "isco08_title": "Fitness and recreation instructors and program leaders",
+      "C_major_groups": [
+        "25",
+        "29"
+      ],
+      "N_major_groups": [
+        "39"
+      ],
+      "C_link_count": 2,
+      "N_link_count": 2,
+      "note": "Crosswalk-link count is NOT an employment proportion; assignment requires occupational counts/verification."
+    },
+    {
+      "isco08": "3435",
+      "isco08_title": "Other artistic and cultural associate professionals",
+      "C_major_groups": [
+        "27"
+      ],
+      "N_major_groups": [
+        "39"
+      ],
+      "C_link_count": 4,
+      "N_link_count": 2,
+      "note": "Crosswalk-link count is NOT an employment proportion; assignment requires occupational counts/verification."
+    },
+    {
+      "isco08": "4212",
+      "isco08_title": "Bookmakers, croupiers and related gaming workers",
+      "C_major_groups": [
+        "43"
+      ],
+      "N_major_groups": [
+        "39"
+      ],
+      "C_link_count": 1,
+      "N_link_count": 5,
+      "note": "Crosswalk-link count is NOT an employment proportion; assignment requires occupational counts/verification."
+    },
+    {
+      "isco08": "4224",
+      "isco08_title": "Hotel receptionists",
+      "C_major_groups": [
+        "43"
+      ],
+      "N_major_groups": [
+        "39"
+      ],
+      "C_link_count": 1,
+      "N_link_count": 1,
+      "note": "Crosswalk-link count is NOT an employment proportion; assignment requires occupational counts/verification."
+    },
+    {
+      "isco08": "5212",
+      "isco08_title": "Street food salespersons",
+      "C_major_groups": [
+        "41"
+      ],
+      "N_major_groups": [
+        "35"
+      ],
+      "C_link_count": 1,
+      "N_link_count": 1,
+      "note": "Crosswalk-link count is NOT an employment proportion; assignment requires occupational counts/verification."
+    },
+    {
+      "isco08": "5419",
+      "isco08_title": "Protective services workers not elsewhere classified",
+      "C_major_groups": [
+        "43"
+      ],
+      "N_major_groups": [
+        "33"
+      ],
+      "C_link_count": 1,
+      "N_link_count": 7,
+      "note": "Crosswalk-link count is NOT an employment proportion; assignment requires occupational counts/verification."
+    },
+    {
+      "isco08": "7314",
+      "isco08_title": "Potters and related workers",
+      "C_major_groups": [
+        "27"
+      ],
+      "N_major_groups": [
+        "51"
+      ],
+      "C_link_count": 1,
+      "N_link_count": 1,
+      "note": "Crosswalk-link count is NOT an employment proportion; assignment requires occupational counts/verification."
+    },
+    {
+      "isco08": "7317",
+      "isco08_title": "Handicraft workers in wood, basketry and related materials",
+      "C_major_groups": [
+        "27"
+      ],
+      "N_major_groups": [
+        "51"
+      ],
+      "C_link_count": 1,
+      "N_link_count": 1,
+      "note": "Crosswalk-link count is NOT an employment proportion; assignment requires occupational counts/verification."
+    },
+    {
+      "isco08": "7321",
+      "isco08_title": "Pre-press technicians",
+      "C_major_groups": [
+        "43"
+      ],
+      "N_major_groups": [
+        "51"
+      ],
+      "C_link_count": 1,
+      "N_link_count": 1,
+      "note": "Crosswalk-link count is NOT an employment proportion; assignment requires occupational counts/verification."
+    },
+    {
+      "isco08": "7549",
+      "isco08_title": "Craft and related workers not elsewhere classified",
+      "C_major_groups": [
+        "27"
+      ],
+      "N_major_groups": [
+        "51"
+      ],
+      "C_link_count": 1,
+      "N_link_count": 1,
+      "note": "Crosswalk-link count is NOT an employment proportion; assignment requires occupational counts/verification."
+    },
+    {
+      "isco08": "8321",
+      "isco08_title": "Motorcycle drivers",
+      "C_major_groups": [
+        "43"
+      ],
+      "N_major_groups": [
+        "53"
+      ],
+      "C_link_count": 1,
+      "N_link_count": 2,
+      "note": "Crosswalk-link count is NOT an employment proportion; assignment requires occupational counts/verification."
+    },
+    {
+      "isco08": "9331",
+      "isco08_title": "Hand and pedal vehicle drivers",
+      "C_major_groups": [
+        "43"
+      ],
+      "N_major_groups": [
+        "53"
+      ],
+      "C_link_count": 1,
+      "N_link_count": 2,
+      "note": "Crosswalk-link count is NOT an employment proportion; assignment requires occupational counts/verification."
+    },
+    {
+      "isco08": "9621",
+      "isco08_title": "Messengers, package deliverers and luggage porters",
+      "C_major_groups": [
+        "43"
+      ],
+      "N_major_groups": [
+        "39"
+      ],
+      "C_link_count": 1,
+      "N_link_count": 1,
+      "note": "Crosswalk-link count is NOT an employment proportion; assignment requires occupational counts/verification."
+    },
+    {
+      "isco08": "9623",
+      "isco08_title": "Meter readers and vending-machine collectors",
+      "C_major_groups": [
+        "43"
+      ],
+      "N_major_groups": [
+        "49"
+      ],
+      "C_link_count": 1,
+      "N_link_count": 1,
+      "note": "Crosswalk-link count is NOT an employment proportion; assignment requires occupational counts/verification."
+    }
+  ],
+  "mixed_submajors_prioritized_by_official_2024_employment": [
+    {
+      "isco2": "OC52",
+      "occupation": "Sales workers",
+      "employment_thousands": 374.3,
+      "quarterly_flags": null,
+      "mixed_four_digit_codes": [
+        "5212"
+      ],
+      "mixed_four_digit_count": 1,
+      "coverage_note": "Employment counted at ISCO2; cannot attribute all persons to individual ambiguous ISCO4 units."
+    },
+    {
+      "isco2": "OC33",
+      "occupation": "Business and administration associate professionals",
+      "employment_thousands": 279.6,
+      "quarterly_flags": null,
+      "mixed_four_digit_codes": [
+        "3344",
+        "3351"
+      ],
+      "mixed_four_digit_count": 2,
+      "coverage_note": "Employment counted at ISCO2; cannot attribute all persons to individual ambiguous ISCO4 units."
+    },
+    {
+      "isco2": "OC53",
+      "occupation": "Personal care workers",
+      "employment_thousands": 235.7,
+      "quarterly_flags": null,
+      "mixed_four_digit_codes": [],
+      "mixed_four_digit_count": 0,
+      "coverage_note": "Employment counted at ISCO2; cannot attribute all persons to individual ambiguous ISCO4 units."
+    },
+    {
+      "isco2": "OC71",
+      "occupation": "Building and related trades workers, excluding electricians",
+      "employment_thousands": 218.6,
+      "quarterly_flags": null,
+      "mixed_four_digit_codes": [],
+      "mixed_four_digit_count": 0,
+      "coverage_note": "Employment counted at ISCO2; cannot attribute all persons to individual ambiguous ISCO4 units."
+    },
+    {
+      "isco2": "OC83",
+      "occupation": "Drivers and mobile plant operators",
+      "employment_thousands": 212.1,
+      "quarterly_flags": null,
+      "mixed_four_digit_codes": [
+        "8321"
+      ],
+      "mixed_four_digit_count": 1,
+      "coverage_note": "Employment counted at ISCO2; cannot attribute all persons to individual ambiguous ISCO4 units."
+    },
+    {
+      "isco2": "OC51",
+      "occupation": "Personal service workers",
+      "employment_thousands": 212,
+      "quarterly_flags": null,
+      "mixed_four_digit_codes": [],
+      "mixed_four_digit_count": 0,
+      "coverage_note": "Employment counted at ISCO2; cannot attribute all persons to individual ambiguous ISCO4 units."
+    },
+    {
+      "isco2": "OC75",
+      "occupation": "Food processing, wood working, garment and other craft and related trades workers",
+      "employment_thousands": 156.9,
+      "quarterly_flags": null,
+      "mixed_four_digit_codes": [
+        "7549"
+      ],
+      "mixed_four_digit_count": 1,
+      "coverage_note": "Employment counted at ISCO2; cannot attribute all persons to individual ambiguous ISCO4 units."
+    },
+    {
+      "isco2": "OC31",
+      "occupation": "Science and engineering associate professionals",
+      "employment_thousands": 125,
+      "quarterly_flags": null,
+      "mixed_four_digit_codes": [
+        "3112",
+        "3119"
+      ],
+      "mixed_four_digit_count": 2,
+      "coverage_note": "Employment counted at ISCO2; cannot attribute all persons to individual ambiguous ISCO4 units."
+    },
+    {
+      "isco2": "OC42",
+      "occupation": "Customer services clerks",
+      "employment_thousands": 109.8,
+      "quarterly_flags": null,
+      "mixed_four_digit_codes": [
+        "4212",
+        "4224"
+      ],
+      "mixed_four_digit_count": 2,
+      "coverage_note": "Employment counted at ISCO2; cannot attribute all persons to individual ambiguous ISCO4 units."
+    },
+    {
+      "isco2": "OC54",
+      "occupation": "Protective services workers",
+      "employment_thousands": 106.4,
+      "quarterly_flags": null,
+      "mixed_four_digit_codes": [
+        "5419"
+      ],
+      "mixed_four_digit_count": 1,
+      "coverage_note": "Employment counted at ISCO2; cannot attribute all persons to individual ambiguous ISCO4 units."
+    },
+    {
+      "isco2": "OC93",
+      "occupation": "Labourers in mining, construction, manufacturing and transport",
+      "employment_thousands": 88.4,
+      "quarterly_flags": null,
+      "mixed_four_digit_codes": [
+        "9331"
+      ],
+      "mixed_four_digit_count": 1,
+      "coverage_note": "Employment counted at ISCO2; cannot attribute all persons to individual ambiguous ISCO4 units."
+    },
+    {
+      "isco2": "OC34",
+      "occupation": "Legal, social, cultural and related associate professionals",
+      "employment_thousands": 67.9,
+      "quarterly_flags": null,
+      "mixed_four_digit_codes": [
+        "3411",
+        "3423",
+        "3435"
+      ],
+      "mixed_four_digit_count": 3,
+      "coverage_note": "Employment counted at ISCO2; cannot attribute all persons to individual ambiguous ISCO4 units."
+    },
+    {
+      "isco2": "OC32",
+      "occupation": "Health associate professionals",
+      "employment_thousands": 67.3,
+      "quarterly_flags": null,
+      "mixed_four_digit_codes": [
+        "3214",
+        "3240",
+        "3251",
+        "3255",
+        "3256",
+        "3257",
+        "3259"
+      ],
+      "mixed_four_digit_count": 7,
+      "coverage_note": "Employment counted at ISCO2; cannot attribute all persons to individual ambiguous ISCO4 units."
+    },
+    {
+      "isco2": "OC96",
+      "occupation": "Refuse workers and other elementary workers",
+      "employment_thousands": 61.4,
+      "quarterly_flags": null,
+      "mixed_four_digit_codes": [
+        "9621",
+        "9623"
+      ],
+      "mixed_four_digit_count": 2,
+      "coverage_note": "Employment counted at ISCO2; cannot attribute all persons to individual ambiguous ISCO4 units."
+    },
+    {
+      "isco2": "OC73",
+      "occupation": "Handicraft and printing workers",
+      "employment_thousands": 27.8,
+      "quarterly_flags": null,
+      "mixed_four_digit_codes": [
+        "7314",
+        "7317",
+        "7321"
+      ],
+      "mixed_four_digit_count": 3,
+      "coverage_note": "Employment counted at ISCO2; cannot attribute all persons to individual ambiguous ISCO4 units."
+    },
+    {
+      "isco2": "OC44",
+      "occupation": "Other clerical support workers",
+      "employment_thousands": 14.3,
+      "quarterly_flags": null,
+      "mixed_four_digit_codes": [],
+      "mixed_four_digit_count": 0,
+      "coverage_note": "Employment counted at ISCO2; cannot attribute all persons to individual ambiguous ISCO4 units."
+    },
+    {
+      "isco2": "OC95",
+      "occupation": "Street and related sales and service workers",
+      "employment_thousands": 6.1,
+      "quarterly_flags": "u",
+      "mixed_four_digit_codes": [],
+      "mixed_four_digit_count": 0,
+      "coverage_note": "Employment counted at ISCO2; cannot attribute all persons to individual ambiguous ISCO4 units."
+    }
+  ],
+  "data_restrictions": [
+    "A separately GitHub-hosted BLS-branded workbook copy and a CSV mirror agree pairwise; this does not establish byte-level equality with current BLS-hosted XLS.",
+    "Some ISO-08 codes occur at three-digit level in both copies: no automatic zero-padding or deletion.",
+    "Pairwise agreement validates transcription consistency, not one-to-many employment weights, SOC-C membership validity across national populations, or conceptual comparability.",
+    "Mixed 2-digit groups cover about 46.44% of provisional 2024 Portuguese civilian employment under this verified-copies but not original-host-verified crosswalk.",
+    "26 four-digit codes themselves have conflicting C/N associations; even all four-digit Portuguese counts would not determine how to divide those units without further methodology.",
+    "No employed-person counts at ISCO3/ISCO4 for Portugal national all-employed universe were obtained; QP 2024 employer-only tables cannot simply fill that missing share.",
+    "Country profile Fixed.cog_share must stay null and runnable must remain false."
+  ]
+}
