@@ -39,6 +39,7 @@ Do not substitute a new public proxy or tunnel for this localhost-only service.
 - GET /api/health
 - GET /api/presets
 - POST /api/run
+- POST /api/experiment (bounded two-axis comparison; local API only)
 
 Examples of JSON bodies:
 
@@ -52,6 +53,38 @@ when target gain exceeds the preset's mid-2026 anchor the gain grows linearly,
 otherwise it remains flat. Unmodified preset runs preserve their original trajectories.
 
 Responses contain `summary_2030`, `table3_2030`, monthly `path`, and full model-input provenance.
+
+### Compare assumptions systematically
+
+The existing single-scenario `/api/run` remains unchanged. The new
+`/api/experiment` accepts **exactly two** scenario parameters with 2–5
+distinct values each (maximum 25 cells). Each calculation starts from the
+same named preset and permitted fixed/baseline overrides. The result includes
+the unmodified baseline, 2030 metrics for every cell, percentage-point
+differences versus that baseline, all assumptions and the pinned source SHA.
+
+Example request (localhost only):
+
+```json
+{
+  "scenario": "substantial",
+  "axes": {"psi": [0.25, 0.5, 0.75], "mu": [0.03, 0.06, 0.12]}
+}
+```
+
+Here `psi` is the model's automation-share assumption and `mu` controls
+worker movement across occupations. **Neither axis directly models the
+creation of entirely new types of tasks.** Do not describe changes in `mu`
+as new-task creation. The supplied numbers are illustrative assumptions,
+not estimated future values or measurements from the Anthropic Economic Index.
+
+The same fixed 3×3 demonstration is available as the zero-argument
+`python -m lab.experiment` command in a prepared local Python environment
+with the pinned upstream model installed. This demo does not deploy a
+service or grant Mac execution rights. The new API and demo are source-level
+changes until separately tested/deployed on the target Mac; the existing
+`[mac] economic-lab-verify` command is unchanged and still runs only its
+original three published scenarios.
 
 ## License and attribution
 
@@ -71,7 +104,7 @@ assumptions rather than measurements of AI progress. Do **not** use it to
 predict Portugal's wages or jobs. Anthropic Economic Index MCP measures observed
 Claude task usage separately; it does not calibrate this macroeconomic model.
 
-No GitHub-hosted CI is included, to avoid paid Actions minutes.
+Public-repository GitHub Actions CI validates the pinned mathematical model and local code; this is distinct from the owner-reviewed Mac execution route and uses no LLM tokens.
 
 
 ## No-Docker Mac verification (prepared, not activated)
