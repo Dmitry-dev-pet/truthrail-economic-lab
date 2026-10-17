@@ -28,7 +28,8 @@ A small reproducible **US economic research sandbox**. It is not a US employment
 
 ## Country transfer readiness
 
-- `country_profiles/portugal/2024/` is **AUDIT ONLY**, not a Portugal model or route. The original `aiscen` equations and U.S. `Fixed()` / `Scenario()` defaults are unchanged.
+- `country_profiles/portugal/2024/` is **AUDIT ONLY**, not a Portugal model or route.
+- The `soc2010_isco08_crosswalk_audit.json` summary is **classification-only** and comes from a third-party CSV **not yet compared byte-for-byte with the official BLS XLS**. Its many-to-many SOC↔ISCO links are **not** job counts or employment weights. Even identified unambiguous code groups cannot set `cog_share` without matched coverage for the 2024 Portuguese employed-person population. Never mix employer-only `Quadros de Pessoal` counts with the national Eurostat/INE denominator without a separately verified coverage adjustment. The original `aiscen` equations and U.S. `Fixed()` / `Scenario()` defaults are unchanged.
 - Before PT calculations, reconcile definitions for national accounts labor share, ISCO occupational C/N split, baseline search pool, hires/quits, job-finding and cross-group worker mobility; evaluate euro-area capital flows and migration as possible structural departures.
 - Never use INE annual unemployment, enterprise AI uptake, GERD expenditure, or Eurostat vacancy-stock ratios as automatic equivalents of `U_bar`, `d_anchor`, `iota_R0`, or `fill_bar`. Every dataset/estimate needs units, reference dates, transformations and evidence, and all essential unsourced inputs must fail closed.
 - Do not add `country="PT"` to existing numerical entry points, or label U.S. or mixed-input outputs as Portugal. Review an explicit country-selection contract and independent validation before authorizing any national scenario calculation.

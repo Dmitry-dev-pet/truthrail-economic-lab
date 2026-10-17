@@ -238,6 +238,15 @@ have been prepared. All **37 default-bearing model parameters** are
 inventoried with candidate sources and conceptual gaps, and no national
 parameter value is authorized for use in a model run.
 
+The occupational mapping's [SOC 2010 → ISCO-08 code-level audit](country_profiles/portugal/2024/soc2010_isco08_crosswalk_audit.json)
+has identified 13 entirely-C, 13 entirely-N and 17 mixed
+two-digit ISCO sub-major **code groups** in a third-party CSV.
+These are **not population shares** and the original BLS XLS still needs
+independent verification. Detailed 2024 employer employment data may
+be available via GEP `Quadros de Pessoal`, but do not confuse that
+restricted reporting population with Portugal's total employed
+population. Therefore `cog_share` is still unset.
+
 The profile is explicitly `audit_only_not_calibrated` / `runnable:false`.
 It **does not** simulate or forecast Portugal. Published Portuguese
 unemployment, occupation, R&D and AI-adoption data are separate,
