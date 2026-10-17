@@ -80,6 +80,40 @@ class OwnerIssueReportTests(unittest.TestCase):
         self.assertIn("| 0.500 | 0.000 |", message)
         self.assertIn("Not a forecast", message)
 
+    def test_sensitivity_issue_returns_bounded_directions_and_rankings(self):
+        from lab.sensitivity import METRICS
+        base = {key: 1.0 for key in METRICS}
+        changes = {key: 0.25 for key in METRICS}
+        result = {
+            "research": {
+                "plan": {"scenario": "substantial", "range_fraction": 0.10},
+                "plan_sha256": "b" * 64,
+            },
+            "metadata": {"source_commit": "pinned", "model_evaluations": 19},
+            "baseline_2030": base,
+            "measurements": [{
+                "parameter": "rho", "group": "scenario", "baseline_value": 0.25,
+                "low": 0.20, "high": 0.30,
+                "high_minus_low_pp": changes,
+            }],
+            "rankings": {key: [{
+                "parameter": "rho", "signed_change_pp": 0.25,
+                "absolute_change_pp": 0.25,
+            }] for key in METRICS},
+            "limitations": ["No empirical calibration."],
+        }
+        with patch("lab.issue_runner.run_sensitivity", return_value=result) as fn:
+            with patch("lab.issue_runner.run_research") as other:
+                output = report_from_issue_body(
+                    '{"analysis":"sensitivity","scenario":"substantial"}'
+                )
+        fn.assert_called_once_with({"analysis": "sensitivity", "scenario": "substantial"})
+        other.assert_not_called()
+        self.assertIn("19", output)
+        self.assertIn("Pre-computation plan SHA-256", output)
+        self.assertIn("rho", output)
+        self.assertIn("No empirical calibration", output)
+
     def test_rejects_bad_json_without_running_model(self):
         with patch("lab.issue_runner.run_experiment") as fn:
             for raw in ("", "not-json", "a"*(MAX_ISSUE_BYTES+1)):
