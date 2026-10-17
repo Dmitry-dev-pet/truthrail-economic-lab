@@ -47,9 +47,10 @@
           "BLS_SOC_ISCO_2010",
           "ISCO_SOC_MIRROR_2010",
           "PT_GEP_QUADROS_PESSOAL_2024",
-          "EUROSTAT_PT_ISCO2_2024"
+          "EUROSTAT_PT_ISCO2_2024",
+          "INDEPENDENT_BLS_BRANDED_2010_SOC_ISCO_XLS_COPY"
         ],
-        "mapping_note": "Model share of AI-sensitive C employment; Eurostat ISCO occupational major groups do not directly identify the paper's C group. Eurostat 2024 one-digit ISCO sample supports only illustrative group subsets (38.46/50.01/68.17 percent), not a calibrated parameter; confirm fine-grained SOC-to-ISCO concordance and ISCO 3/5 mixed roles. Classification-only crosswalk audit: 43 two-digit ISCO submajor groups with 13 exclusively C, 13 exclusively N and 17 mixed by unweighted CSV relations. Third-party CSV not verified against BLS original binary; need population weights and official crosswalk verification before PT assignment. Official Eurostat LFSA_EGAI2D now supplies 2024 national 2-digit ISCO employment weights, but 17 of the 43 provisional mapped submajor codes mix C/N; the official BLS binary remains unparsed and detailed within-group weights are lacking. The provisional 37.19% C-only vs 46.44% mixed code groups are not formal bounds or adopted parameter values.",
+        "mapping_note": "Model share of AI-sensitive C employment; Eurostat ISCO occupational major groups do not directly identify the paper's C group. Eurostat 2024 one-digit ISCO sample supports only illustrative group subsets (38.46/50.01/68.17 percent), not a calibrated parameter; confirm fine-grained SOC-to-ISCO concordance and ISCO 3/5 mixed roles. Classification-only crosswalk audit: 43 two-digit ISCO submajor groups with 13 exclusively C, 13 exclusively N and 17 mixed by unweighted CSV relations. Third-party CSV not verified against BLS original binary; need population weights and official crosswalk verification before PT assignment. Official Eurostat LFSA_EGAI2D now supplies 2024 national 2-digit ISCO employment weights, but 17 of the 43 provisional mapped submajor codes mix C/N; the official BLS binary remains unparsed and detailed within-group weights are lacking. The provisional 37.19% C-only vs 46.44% mixed code groups are not formal bounds or adopted parameter values. Independently hosted BLS-branded XLS and CSV agree on all 1125 mapping pairs and titles; original BLS-hosted binary not checked. 26 ISCO unit codes link simultaneously to C and N; fully weighted national C/N membership still unidentified.",
         "portugal_model_value": null
       },
       {
@@ -513,6 +514,12 @@
       "organization": "Eurostat",
       "reference_year": 2024,
       "description": "Verified Portugal 2024 all-employed counts by 2-digit ISCO-08 occupation, 15+ all sexes (Eurostat LFSA_EGAI2D). Reconciles 5,112.3k total; flagged low-reliability units and one missing OC63. Classification to U.S. SOC model C/N remains unverified."
+    },
+    "INDEPENDENT_BLS_BRANDED_2010_SOC_ISCO_XLS_COPY": {
+      "url": "https://github.com/Cici6101/low-carbon-transition-and-labor-market/blob/main/isco_soc_crosswalk.xls",
+      "organization": "Independent research repository carrying BLS-branded XLS copy; not direct official BLS URL",
+      "reference_year": 2015,
+      "description": "433,152-byte Excel 97-2003 workbook, Git blob SHA 6d8f2d6777ed2462376bcb91bf5492a3350520da; original-order sheet contains 1125 ISCO↔SOC pair/title mappings exactly matching independently hosted CSV, including 3-digit ISCO codes 211 and 315. Direct original BLS server bytes not verified."
     }
   },
   "verified_context_observations": [
@@ -584,8 +591,8 @@
     }
   ],
   "calibration_gates": [
-    "Official 2024 Portugal all-employed two-digit ISCO weights now verified from LFSA_EGAI2D (43 groups, 5,112.3 thousand total). Independently parse and verify official BLS SOC 2010–ISCO08 XLS against third-party mirror, resolve anomalous codes, and obtain 3/4-digit matched-population weights for the numerous mixed groups; avoid using employer-only Quadros de Pessoal as national counts unadjusted.",
-    "Align 2024 Portuguese labor income share and search-pool/labor-force denominators to base-year model accounting; construct a credible occupational C/N split from detailed employment weights with explicit ambiguous mapping treatment and population age/civilian reconciliation.",
+    "An independently hosted 433,152-byte BLS-branded 2010 SOC↔ISCO08 XLS copy has been decoded and agrees exactly on all 1,125 code/title pairs with a separate GitHub CSV; two 3-digit codes (211,315) appear in both. Still verify bytes from the official BLS host and obtain 2024 Portugal ISCO3/ISCO4 all-employed national weights, especially for 26 four-digit units mapping to both C and N.",
+    "Align 2024 Portuguese factor-income/labor-share and labor-force denominators with model base-year definitions, and develop scientifically justified weights for 17 mixed 2-digit groups: 5 (686.7 thousand 2024 employed) become code-level separable with 4-digit counts; 12 (1,676.9 thousand) contain one or more 4-digit C/N ambiguous units and need further occupational or judgment-based methodology.",
     "Estimate monthly group-specific finding/separation, vacancy fill and C↔N mobility using appropriate linked national records. Eurostat 2024 annual E/U/I transitions are observed (U→E 42.2%; E→U 2.4%) but cannot estimate mu_bar directly.",
     "Review small-open-economy capital-supply closure, investment inflows and migration; keep U.S. structural elasticities labeled as assumptions.",
     "Keep all seven AI scenario dials as explicit alternative assumptions; national firm-level AI adoption is contextual only.",
