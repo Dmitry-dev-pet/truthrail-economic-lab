@@ -218,37 +218,88 @@ ISCO **53** (personal care) is mainly N but contains exceptions.
 These are conditional statements about *this unverified code list*,
 not authoritative conversion probabilities.
 
-### Availability of finer Portuguese occupation counts
+### Official all-employed employment counts at two-digit ISCO resolution
 
-The 2024 [Eurostat `lfsa_egais` dataset](isco_occupation_snapshot.json)
-has employment counts by **one-digit** major groups and therefore
-cannot weight a two-digit crosswalk.
+**This was the key missing dataset.** Eurostat
+[`lfsa_egai2d`](https://dgs-p.eige.europa.eu/data/view?code=ta_wrklab_lab_employ_gen__lfsa_egai2d)
+publishes [official two-digit ISCO employment data for Portugal 2024](https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/lfsa_egai2d?geo=PT&time=2024&unit=THS_PER&sex=T&age=Y_GE15),
+`geo=PT`, `time=2024`, `age=Y_GE15`, `sex=T`,
+`unit=THS_PER`; the source was updated **10 September 2026**.
 
-A more detailed, contemporaneous official source exists:
-[DGCP/GEP `Quadros de Pessoal 2024`](https://www.dgcp.mtsss.gov.pt/sinteses-/-publicacoes?p_r_p_564233524_categoryId=11339&p_r_p_564233524_resetCur=true),
-published December 2025.
-The agency's [2024 Excel publication](https://www.dgcp.mtsss.gov.pt/documents/10182/10928/qp2024pub.xlsx/02732373-1bae-4348-93af-74bb1bf7c8ec)
-is linked publicly, but its numerical workbook **could not be retrieved
-and verified in this research execution**. Further, *Quadros de
-Pessoal* surveys employer-reported employees / establishments,
-**not all residents employed, including self-employed and
-occupations outside that reporting universe**.
-Its detailed counts cannot simply be substituted as weights over
-Eurostat's 5,112.3 thousand employed people.
+The data are archived with exact source dimensions and reliability
+flags in [`isco_two_digit_employment_2024.json`](isco_two_digit_employment_2024.json).
+All **43 ISCO-08 two-digit sub-major groups** are present in the response,
+with one sub-major value (`OC63`) **missing** and **not imputed**.
+The 2024 total is **5,112.3 thousand employed people**, reconciling with
+the independently retrieved 1-digit Eurostat and INE series.
+Independent major/minor subtotals differ by at most **0.1 thousand**
+as expected for rounded survey figures. Eurostat marks several
+small cells as `u` (low reliability), notably some armed-forces
+units and `OC95`.
 
-Other potential sources:
-[2024 Portuguese employment survey published by INE](https://www.ine.pt/xurl/indx/0012153/PT)
-exposes **major** CPP-2010 groups in its standard public series,
-while the [Eurostat scientific EU-LFS microdata](https://ec.europa.eu/eurostat/web/microdata/european-union-labour-force-survey)
-provide more detailed occupation codes subject to research-data
-authorization and confidentiality conditions.
+This dataset **does** cover the same all-employed statistical
+universe as the one-digit Eurostat totals. Therefore the missing
+two-digit population weighting is now resolved without needing to
+substitute employer-only statistics from `Quadros de Pessoal`.
 
-**Decision:** source crosswalk structure exists and mixed occupational
-groups are now identified more precisely, but **2024 national all-employed
-two-/three-digit weights remain unverified**. The original official
-BLS crosswalk must also be checked before any code mapping is accepted.
-Thus `Fixed.cog_share` in Portugal remains **null** and the national
-profile remains `runnable:false`.
+Examples of Portuguese **2024 employment counts**, not model
+group classifications:
+
+| ISCO two-digit code | Workers, thousands | Provisional 2010-SOC mapping issue |
+|---|---:|---|
+| 31 Science and engineering associate professionals | 125.0 | Mixed C/N links |
+| 33 Business and administration associate professionals | 279.6 | Mixed C/N links |
+| 35 ICT technicians | 51.0 | C-only links in provisional mapping |
+| 52 Sales workers | 374.3 | Mixed C/N links |
+| 53 Personal care workers | 235.7 | Mixed C/N links |
+
+### Weighted classification ambiguity — still not a national calibration
+
+The [new occupation-weighted review](soc_isco_employment_weighted_review_2024.json)
+combines **official Eurostat worker counts** with a
+**third-party, unverified CSV representation** of the BLS
+SOC↔ISCO mapping. It does *not* validate that CSV against the
+[official BLS XLS file](https://www.bls.gov/soc/ISCO_SOC_Crosswalk.xls)
+and does not produce a Portuguese model `Fixed.cog_share`.
+
+| Conditional grouping of 2-digit codes under the unverified mirror | Workers, thousands | % of provisional civilian employment |
+|---|---:|---:|
+| Codes whose links all go to C | 1,892.8 | 37.19% |
+| Codes with both C and N links (ambiguous) | 2,363.6 | 46.44% |
+| Codes whose links all go to N, excluding military | 833.4 | 16.37% |
+
+The provisional civilian denominator is **5,090.0 thousand**
+(the all-employed total minus 22.3 thousand military workers).
+The reported percentages have survey rounding residuals and a
+suppressed `OC63` cell. Most importantly, almost **half of
+employment lies in mixed 2-digit occupations**; even a complete
+two-digit national table does not identify how workers are
+distributed among C and N *within* those groups.
+
+**These are conditional classification coverage categories, not
+employment shares reliably assigned to C/N, not statistical
+confidence bounds, and certainly not the share of jobs exposed
+to automation.** A finer-grained 3-/4-digit employed-person
+distribution and verified official crosswalk are still needed
+to constrain the within-group allocations.
+
+The December 2025
+[DGCP/GEP `Quadros de Pessoal 2024` publication](https://www.dgcp.mtsss.gov.pt/sinteses-/-publicacoes?p_r_p_564233524_categoryId=11339&p_r_p_564233524_resetCur=true)
+includes [2024 Excel tables](https://www.dgcp.mtsss.gov.pt/documents/10182/10928/qp2024pub.xlsx/02732373-1bae-4348-93af-74bb1bf7c8ec),
+but its worker universe is **employer-reported employees**, not
+all people employed (including self-employed and workers outside
+covered establishments). The workbook contents and coverage
+weights were not extracted/validated here; those counts must
+not silently be combined with the all-employed LFS denominator.
+
+Scientific EU-LFS microdata offer more detailed ISCO codes but
+require research access and may not permit individual longitudinal
+linkage. Those restrictions remain relevant for later steps,
+especially estimating **inter-occupation worker mobility**.
+
+**Readiness remains unchanged:** `cog_share=null`, all 37 Portuguese
+model input values remain unset, and `runnable:false`.
+No Portuguese scenario calculation was performed.
 
 ## Field coverage and calibration status
 
@@ -291,13 +342,15 @@ No automated table-to-model ingestion exists yet.
    an external plausibility check).
 2. Download the 2024 AMECO adjusted wage-share **numeric series**,
    documenting self-employment and income-accounting definitions.
-3. Verify the official BLS binary `ISCO_SOC_Crosswalk.xls`
-   against the existing third-party 43-submajor code-level audit,
-   resolving the 2 malformed/short ISCO entries, then obtain a
-   *matched-universe* two-/three-digit 2024 employed-person
-   distribution for Portugal. Employer-only GEP counts are not the
-   full Eurostat/INE LFS population; quantify coverage and
-   uncertainty before weighting C/N, especially within ISCO 3 and 5.
+3. Use the verified 2024 national *two-digit* employed-person
+   weights from `lfsa_egai2d` and independently verify the original
+   BLS binary `ISCO_SOC_Crosswalk.xls` against the unverified
+   CSV mirror. Then seek finer 3-/4-digit Portuguese employment
+   counts for the numerous mixed 2-digit groups (about 46.44%
+   of provisional civilian employment); resolve the 2 short
+   mirror codes, missing OC63 and low-reliability flags.
+   Never import employer-only QP weights without checking
+   coverage and denominators.
 4. Keep the official 2024 nine-status annual E/U/I flows as
    **context**. Identify permissioned, linkable 2024 INE/national
    datasets for occupational C↔N transitions and group-specific
