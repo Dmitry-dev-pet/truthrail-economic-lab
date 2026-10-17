@@ -156,6 +156,13 @@ class Handler(SimpleHTTPRequestHandler):
                 return self.send_json(HTTPStatus.OK, presets())
             except Exception:
                 return self.send_json(HTTPStatus.INTERNAL_SERVER_ERROR, {"error":"Model unavailable"})
+        if path == "/api/hypotheses":
+            from .research import proposals
+            return self.send_json(HTTPStatus.OK, {
+                "candidates": proposals(),
+                "selection_rule": "Rank by fixed mechanism novelty, worker relevance and controlled contrast, before model execution",
+                "note": "Hypotheses about conditional US model behavior; no empirical claims",
+            })
         if path in ("/", "/index.html"):
             data = HOME.read_bytes()
             self.send_response(HTTPStatus.OK)
@@ -174,14 +181,17 @@ class Handler(SimpleHTTPRequestHandler):
         return super().do_GET()
     def do_POST(self):
         path = urlsplit(self.path).path
-        if path not in ("/api/run", "/api/experiment"):
+        if path not in ("/api/run", "/api/experiment", "/api/research"):
             return self.send_json(HTTPStatus.NOT_FOUND, {"error":"Unknown endpoint"})
         try:
             length = int(self.headers.get("Content-Length", "0"))
             if length < 1 or length > 16384:
                 raise ValueError("Invalid request length")
             payload = json.loads(self.rfile.read(length))
-            if path == "/api/experiment":
+            if path == "/api/research":
+                from .research import run_research
+                result = run_research(payload)
+            elif path == "/api/experiment":
                 from .experiment import run_experiment
                 result = run_experiment(payload)
             else:

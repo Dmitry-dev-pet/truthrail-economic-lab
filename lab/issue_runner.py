@@ -9,6 +9,7 @@ import json
 import os
 
 from .experiment import run_experiment
+from .research import run_research
 
 MAX_ISSUE_BYTES = 4096
 METRICS = (
@@ -58,6 +59,79 @@ def format_report(result):
     return "\n".join(lines)
 
 
+
+def format_research_report(result):
+    """Explain questions, predeclared directional tests, and ALL sampled cells."""
+    envelope = result["research"]
+    plan = envelope["plan"]
+    selected = plan["selected"]
+    experiment = result["experiment"]
+    axes = list(experiment["assumptions"]["axes"])
+    baseline = experiment["baseline"]["summary_2030"]
+    meta = experiment["metadata"]
+    lines = [
+        "### Economic Lab · hypothesis-guided model experiment (USA, 2030)",
+        "",
+        "**Research question:** " + selected["question"],
+        "",
+        "**Model hypothesis (written before computation):** " + selected["hypothesis"],
+        "",
+        "**Alternative:** " + selected["alternative"],
+        "",
+        "**Scientific interpretation:** " + selected["scientific_note"],
+        "",
+        "**Selection:** " + plan["selection_reason"],
+        "",
+        "**Candidate priorities (not probabilities or confidence):** " +
+        ", ".join(c["id"] + "=" + str(c["score"]) for c in envelope["candidate_ranking"]),
+        "",
+        "**Plan fingerprint (SHA-256):** " + envelope["plan_sha256"],
+        "",
+        "**Preset:** " + plan["scenario"] +
+        " · **model evaluations:** " + str(meta["model_runs"]) +
+        " · **upstream commit:** " + meta["source_commit"],
+        "",
+        "**Predictions fixed before inspecting outputs:**",
+    ]
+    for p in selected["predictions"]:
+        lines.append("- If " + p["axis"] + " increases, " +
+                     p["metric"] + " should " + p["direction"] +
+                     " at every held level of the other axis.")
+    lines.extend([
+        "",
+        "**Directional checks within this grid:**",
+    ])
+    for test in result["tests"]:
+        details = "; ".join(
+            c["held_axis"] + "=" + f'{c["held_value"]:.3f}' +
+            ": high minus low = " + f'{c["observed_delta_pp"]:+.3f}' + " pp"
+            for c in test["controlled_comparisons"]
+        )
+        lines.append(
+            "- " + test["axis"] + " → " + test["metric"] + ": **" +
+            test["outcome"] + "** (min absolute directional effect: " +
+            str(test["threshold_pp"]) + " pp). " + details
+        )
+    lines.extend([
+        "",
+        "**Original preset baseline:** " + ", ".join(
+            label + ": " + f"{baseline[key]:.3f}%" for key, label in METRICS
+        ),
+        "",
+        "| " + " | ".join(axes) + " | " + " | ".join(label + " (%)" for _, label in METRICS) + " |",
+        "|---:|---:|" + "---:|" * len(METRICS),
+    ])
+    for cell in experiment["cells"]:
+        coordinates = cell["coordinates"]
+        metrics = cell["summary_2030"]
+        lines.append("| " + " | ".join(f"{coordinates[axis]:.3f}" for axis in axes) +
+                     " | " + " | ".join(f"{metrics[key]:.3f}" for key, _ in METRICS) + " |")
+    lines.extend(["", "**Limitations:**"])
+    lines.extend("- " + note for note in result["limitations"])
+    lines.append("No Mac, Docker, LLM provider, or new MCP route was used.")
+    return "\n".join(lines)
+
+
 def report_from_issue_body(text):
     if not isinstance(text, str) or not 0 < len(text.encode("utf-8")) <= MAX_ISSUE_BYTES:
         raise ValueError("Issue body must contain at most 4096 bytes of JSON")
@@ -65,6 +139,8 @@ def report_from_issue_body(text):
         request = json.loads(text)
     except json.JSONDecodeError:
         raise ValueError("Issue body is not JSON") from None
+    if isinstance(request, dict) and "research" in request:
+        return format_research_report(run_research(request))
     return format_report(run_experiment(request))
 
 
