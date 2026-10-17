@@ -1,0 +1,171 @@
+{
+  "schema_version": 1,
+  "country_code": "PT",
+  "study_date": "2026-10-17",
+  "target_year": 2024,
+  "status": "PUBLIC_SOURCE_DISCOVERY_NOT_CALIBRATION",
+  "runnable": false,
+  "purpose": "Find occupation counts finer than ISCO-08 two digits and longitudinal C/N mobility without mixing incompatible populations or years.",
+  "target_population": {
+    "name": "Portugal all employed persons age 15+, 2024, both sexes",
+    "dataset": "Eurostat LFSA_EGAI2D",
+    "count_thousands": 5112.3,
+    "source_url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/lfsa_egai2d?geo=PT&time=2024&unit=THS_PER&sex=T&age=Y_GE15"
+  },
+  "detailed_occupation_evidence": [
+    {
+      "id": "EUROSTAT_2024_ISCO2",
+      "publisher": "Eurostat",
+      "url": "https://ec.europa.eu/eurostat/databrowser/product/view/lfsa_egai2d",
+      "reference_year": 2024,
+      "population": "All employed Portuguese residents aged 15+, national LFS",
+      "occupational_resolution": "ISCO-08 2-digit",
+      "availability": "RETRIEVED_VERIFIED",
+      "count_thousands": 5112.3,
+      "model_compatible_scope": true,
+      "limitations": [
+        "43 submajor 2-digit groups; OC63 and NRP not available as subcategory counts",
+        "17 two-digit groups in verified-copies crosswalk contain C and N links, covering 2363.6 thousand employed",
+        "No within-group 3/4-digit counts here"
+      ]
+    },
+    {
+      "id": "EUROSTAT_GUESSED_3D_4D",
+      "publisher": "Eurostat API",
+      "reference_year": 2024,
+      "urls_attempted": [
+        "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/lfsa_egai3d?geo=PT&time=2024&unit=THS_PER&sex=T&age=Y_GE15",
+        "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/lfsa_egai4d?geo=PT&time=2024&unit=THS_PER&sex=T&age=Y_GE15"
+      ],
+      "availability": "BOTH_ASSUMED_ENDPOINTS_RETURNED_HTTP_404",
+      "occupational_resolution": "ISCO-08 3/4-digit not obtained",
+      "model_compatible_scope": null,
+      "limitations": [
+        "404 on attempted *dataset codes* is not evidence that no data exist under any other code or confidentiality procedure"
+      ]
+    },
+    {
+      "id": "GEP_QUADROS_PESSOAL_2024",
+      "publisher": "Portugal GEP/DGCP (Ministry of Labour)",
+      "url": "https://www.dgcp.mtsss.gov.pt/sinteses-/-publicacoes?p_r_p_564233524_categoryId=11339&p_r_p_564233524_resetCur=true",
+      "download_url": "https://www.dgcp.mtsss.gov.pt/documents/10182/10928/qp2024pub.xlsx/02732373-1bae-4348-93af-74bb1bf7c8ec",
+      "reference_year": 2024,
+      "availability": "PUBLISHED_LINK_VERIFIED; DIRECT_XLSX_CONTENT_NOT_RETRIEVED",
+      "occupational_resolution": "Detailed occupation breakdown available in underlying personnel records; exact published Excel table-level CPP resolution not verified",
+      "population": "Employer-reported dependent workers in covered private firms and state-owned enterprises, not the national all-employed population",
+      "model_compatible_scope": false,
+      "limitations": [
+        "Exclude self-employment, most public administrative sector, and domestic service",
+        "Do not use QP subgroup fractions directly as national LFS occupation weights without denominator reconciliation and bias analysis",
+        "Official published files were not read programmatically in this study"
+      ]
+    },
+    {
+      "id": "BRIGHTER_FUTURE_PROFESSIONS",
+      "publisher": "Brighter Future / Fundação Belmiro de Azevedo",
+      "url": "https://www.brighterfuture.pt/professions",
+      "reference_year": null,
+      "availability": "PUBLIC_OCCUPATION_PROFILE_DIRECTORY_ACCESSIBLE",
+      "occupational_resolution": "1,802 listed occupation profiles at time of inspection, mixes aggregated and detailed professions and does not furnish a validated 2024 code-by-code bulk table",
+      "population": "QP administrative employer-reported dependent workers",
+      "model_compatible_scope": false,
+      "limitations": [
+        "Displayed occupation-worker counts on listing do not specify historical reference year, so no undated profile counts are transferred to 2024",
+        "No verified crosswalk from displayed profession slugs to four-digit ISCO codes or a bulk 2024 table",
+        "Dynamic employment charts were not extracted as auditable source data",
+        "Do not sum 1802 occupational profiles, since detail and aggregate classifications may overlap"
+      ]
+    },
+    {
+      "id": "BRIGHTER_FUTURE_2024_QP_OVERVIEW",
+      "publisher": "Brighter Future / Fundação Belmiro de Azevedo",
+      "url": "https://brighterfuture.pt/insights/numero-de-trabalhadores-cresceu-35-na-ultima-decada",
+      "publication_date": "2026-05-18",
+      "reference_year": 2024,
+      "availability": "PUBLISHED_OFFICIAL-QP-DERIVED_AGGREGATE",
+      "approx_count_millions": 3.65,
+      "population": "Workers in enterprises according to the QP-based analytical publication",
+      "model_compatible_scope": false,
+      "limitations": [
+        "Approximate company-worker count, not Eurostat employed age-15-plus total",
+        "Do not treat 3.65/5.1123 as a random sampling fraction or weight profession mixes without employer/state/self-employed reconciliation"
+      ]
+    },
+    {
+      "id": "EU_LFS_SCIENTIFIC_3D",
+      "publisher": "Eurostat scientific use EU-LFS",
+      "url": "https://ec.europa.eu/eurostat/web/microdata/european-union-labour-force-survey",
+      "reference_year": 2024,
+      "availability": "RESTRICTED_RESEARCH_APPLICATION",
+      "occupational_resolution": "ISCO-08 3-digit available in scientific-use microdata with restrictions",
+      "population": "Labour Force Survey sample",
+      "model_compatible_scope": "POTENTIALLY_WITH_SURVEY_WEIGHTS_AND_ACCESS",
+      "limitations": [
+        "Not directly publicly downloadable without approved research access",
+        "Scientific-use anonymized identifiers are not suitable for straightforward individual longitudinal linkage across waves",
+        "Sample sizes, cell suppression, questionnaire and ISCO provenance must be checked"
+      ]
+    },
+    {
+      "id": "INE_CENSUS_2021_OCC",
+      "publisher": "Statistics Portugal INE, Censos 2021",
+      "url": "https://www.ine.pt/xurl/indx/0011639/PT",
+      "reference_year": 2021,
+      "availability": "PUBLIC_2021_OCCUPATION_INFORMATION_DISCOVERED_BUT_DETAIL_NOT_VERIFIED",
+      "occupational_resolution": "Census occupational categories, not verified at all 2021 3/4-digit numeric national counts",
+      "model_compatible_scope": false,
+      "limitations": [
+        "Not a 2024 baseline",
+        "Previous public INE tables found use major CPP occupational groups",
+        "Any 2021 fine-grained allocation for 2024 needs tested stability/bias conditions"
+      ]
+    }
+  ],
+  "observed_occupational_mobility": {
+    "id": "BRIGHTER_FUTURE_2020_2022_OCCUPATIONAL_SWITCH",
+    "publisher": "Brighter Future; QP administrative matched-worker analysis",
+    "url": "https://www.brighterfuture.pt/insights/sao-cada-vez-mais-os-trabalhadores-que-mudam-de-profissao",
+    "article_publication_date": "2025-02-17",
+    "starting_occupation_year": 2020,
+    "ending_occupation_year": 2022,
+    "percent_changing_reported_occupation": 15.5,
+    "percent_staying_in_reported_occupation": 84.5,
+    "duration_years": 2,
+    "denominator": "Workers present in QP linked personnel data in both the starting and the final years; excludes those lost to observation",
+    "type": "Observed reported occupational category change (not necessarily employment-group C to N movement)",
+    "model_mu_bar_compatible": false,
+    "model_mu_compatible": false,
+    "limitations": [
+      "Earlier 2020-2022 transition, not 2024 and not monthly",
+      "Matched-worker survivor sample, excludes those not seen at both times including exits and transitions to sectors outside coverage",
+      "A transition between detailed occupations may be absorbed by the broader Brighter Future profession grouping",
+      "Marginal all-occupational switching percentage does not identify C→N or N→C flow matrix",
+      "Original model mu_bar and mu are cross-occupational effective search discounts, not observed job-switch shares",
+      "No worker-level anonymized transition records or public C/N-specific matrix obtained"
+    ]
+  },
+  "unresolved_critical_inputs": [
+    {
+      "model_field": "Fixed.cog_share",
+      "status": "NOT_IDENTIFIED",
+      "need": "Occupation counts weighted at ISCO-08 3/4-digit within 17 mixed ISCO2 groups, verified SOC mappings, explicit treatment of 26 ISCO4 units mapping to both C and N"
+    },
+    {
+      "model_field": "Fixed.mu_bar",
+      "status": "NOT_IDENTIFIED",
+      "need": "Monthly origin C/N to destination C/N job-finding and search-efficiency relation, using proper linked worker/unemployment data"
+    },
+    {
+      "model_field": "Scenario.mu",
+      "status": "SCENARIO_ASSUMPTION_NOT_MEASURED",
+      "need": "Explicit future search-discount path separate from observed 2020-2022 occupational switching"
+    },
+    {
+      "model_field": "Fixed.q_bar_ann",
+      "status": "NOT_IDENTIFIED",
+      "need": "Full monthly quits/separations including employer-to-employer moves, not just matched employees' change of occupational label"
+    }
+  ],
+  "method_decision": "Keep country audit non-executable and do not combine QP employer population, 2020-2022 switchers, 2021 census categories or undated profession profiles with official Eurostat 2024 all-employed denominator as if directly equivalent.",
+  "model_country_profile_running_allowed": false
+}
