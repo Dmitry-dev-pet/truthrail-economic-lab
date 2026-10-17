@@ -74,12 +74,11 @@ def make_rows(plan: dict, btos_idx: dict, bls_idx: dict) -> list[dict]:
         for wave in plan["exposure_waves"]:
             obs = btos_idx[sector, wave]
             earlier = btos_idx[sector, wave - 2]
-            end_date = date.fromisoformat(
-                # BTOS publishes M/D/YYYY - M/D/YYYY calendar windows
-                "{:04d}-{:02d}-{:02d}".format(
-                    *reversed(tuple(int(v) for v in obs["range"].split(" - ")[1].split("/")))
-                )
+            # BTOS publishes M/D/YYYY - M/D/YYYY survey windows.
+            end_month, end_day, end_year = (
+                int(v) for v in obs["range"].split(" - ")[1].split("/")
             )
+            end_date = date(end_year, end_month, end_day)
             month = f"{end_date.year:04d}-{end_date.month:02d}"
             series = bls_idx[sector]
             last_available = month_offset(month, -1)
