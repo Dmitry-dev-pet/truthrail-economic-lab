@@ -48,9 +48,10 @@
           "ISCO_SOC_MIRROR_2010",
           "PT_GEP_QUADROS_PESSOAL_2024",
           "EUROSTAT_PT_ISCO2_2024",
-          "INDEPENDENT_BLS_BRANDED_2010_SOC_ISCO_XLS_COPY"
+          "INDEPENDENT_BLS_BRANDED_2010_SOC_ISCO_XLS_COPY",
+          "BRIGHTER_FUTURE_QP_OCCUPATIONS_CATALOG"
         ],
-        "mapping_note": "Model share of AI-sensitive C employment; Eurostat ISCO occupational major groups do not directly identify the paper's C group. Eurostat 2024 one-digit ISCO sample supports only illustrative group subsets (38.46/50.01/68.17 percent), not a calibrated parameter; confirm fine-grained SOC-to-ISCO concordance and ISCO 3/5 mixed roles. Classification-only crosswalk audit: 43 two-digit ISCO submajor groups with 13 exclusively C, 13 exclusively N and 17 mixed by unweighted CSV relations. Third-party CSV not verified against BLS original binary; need population weights and official crosswalk verification before PT assignment. Official Eurostat LFSA_EGAI2D now supplies 2024 national 2-digit ISCO employment weights, but 17 of the 43 provisional mapped submajor codes mix C/N; the official BLS binary remains unparsed and detailed within-group weights are lacking. The provisional 37.19% C-only vs 46.44% mixed code groups are not formal bounds or adopted parameter values. Independently hosted BLS-branded XLS and CSV agree on all 1125 mapping pairs and titles; original BLS-hosted binary not checked. 26 ISCO unit codes link simultaneously to C and N; fully weighted national C/N membership still unidentified.",
+        "mapping_note": "Model share of AI-sensitive C employment; Eurostat ISCO occupational major groups do not directly identify the paper's C group. Eurostat 2024 one-digit ISCO sample supports only illustrative group subsets (38.46/50.01/68.17 percent), not a calibrated parameter; confirm fine-grained SOC-to-ISCO concordance and ISCO 3/5 mixed roles. Classification-only crosswalk audit: 43 two-digit ISCO submajor groups with 13 exclusively C, 13 exclusively N and 17 mixed by unweighted CSV relations. Third-party CSV not verified against BLS original binary; need population weights and official crosswalk verification before PT assignment. Official Eurostat LFSA_EGAI2D now supplies 2024 national 2-digit ISCO employment weights, but 17 of the 43 provisional mapped submajor codes mix C/N; the official BLS binary remains unparsed and detailed within-group weights are lacking. The provisional 37.19% C-only vs 46.44% mixed code groups are not formal bounds or adopted parameter values. Independently hosted BLS-branded XLS and CSV agree on all 1125 mapping pairs and titles; original BLS-hosted binary not checked. 26 ISCO unit codes link simultaneously to C and N; fully weighted national C/N membership still unidentified. Brighter Future has detailed occupational pages from QP employer-only data, but their current displayed profession counts lack verified 2024 year, overlap risks and ISCO4/match-universe weights. Unusable for national population assignment until code/year/coverage audited.",
         "portugal_model_value": null
       },
       {
@@ -182,7 +183,8 @@
         "candidate_sources": [
           "EUROSTAT_LFS_FLOWS",
           "EUROSTAT_MICRODATA",
-          "EUROSTAT_PT_LFS_FLOWS_2024"
+          "EUROSTAT_PT_LFS_FLOWS_2024",
+          "BRIGHTER_FUTURE_QP_OCCUPATIONAL_SWITCH_2020_2022"
         ],
         "mapping_note": "Baseline yearly quit/separation rate; E-to-U quarterly transitions alone do not capture employer-to-employer quits.",
         "portugal_model_value": null
@@ -203,7 +205,8 @@
         "calibration_status": "needs_estimation",
         "candidate_sources": [
           "EUROSTAT_MICRODATA",
-          "EUROSTAT_PT_LFS_FLOWS_2024"
+          "EUROSTAT_PT_LFS_FLOWS_2024",
+          "BRIGHTER_FUTURE_QP_OCCUPATIONAL_SWITCH_2020_2022"
         ],
         "mapping_note": "Group-C relative quit rate; requires C/N occupational mapping and longitudinal separation estimates.",
         "portugal_model_value": null
@@ -214,7 +217,8 @@
         "calibration_status": "needs_estimation",
         "candidate_sources": [
           "EUROSTAT_MICRODATA",
-          "EUROSTAT_PT_LFS_FLOWS_2024"
+          "EUROSTAT_PT_LFS_FLOWS_2024",
+          "BRIGHTER_FUTURE_QP_OCCUPATIONAL_SWITCH_2020_2022"
         ],
         "mapping_note": "Group-N relative quit rate; requires C/N occupational mapping and longitudinal separation estimates.",
         "portugal_model_value": null
@@ -237,9 +241,10 @@
         "candidate_sources": [
           "EUROSTAT_MICRODATA",
           "EUROSTAT_LFS_FLOWS",
-          "EUROSTAT_PT_LFS_FLOWS_2024"
+          "EUROSTAT_PT_LFS_FLOWS_2024",
+          "BRIGHTER_FUTURE_QP_OCCUPATIONAL_SWITCH_2020_2022"
         ],
-        "mapping_note": "Normal-times cross-group search discount; E/U/I flows do not identify movements C↔N. Official Eurostat 2024 E/U/I transitions quantify labour-status mobility (e.g. U→E 42.2% annual) but contain no observed C↔N transition matrix; microdata subject identifiers are not longitudinal in research release.",
+        "mapping_note": "Normal-times cross-group search discount; E/U/I flows do not identify movements C↔N. Official Eurostat 2024 E/U/I transitions quantify labour-status mobility (e.g. U→E 42.2% annual) but contain no observed C↔N transition matrix; microdata subject identifiers are not longitudinal in research release. Brighter Future longitudinal QP study observed 15.5% of workers present in BOTH 2020 and 2022 switched aggregated occupation, but this two-year selected population result does not identify the monthly model search discount or C→N/N→C matrix.",
         "portugal_model_value": null
       },
       {
@@ -395,9 +400,10 @@
         "calibration_status": "scenario_hypothesis",
         "candidate_sources": [
           "EUROSTAT_MICRODATA",
-          "EUROSTAT_PT_LFS_FLOWS_2024"
+          "EUROSTAT_PT_LFS_FLOWS_2024",
+          "BRIGHTER_FUTURE_QP_OCCUPATIONAL_SWITCH_2020_2022"
         ],
-        "mapping_note": "Scenario labor-search discount; do not confuse with normal-times mu_bar or a published occupational transition probability.",
+        "mapping_note": "Scenario labor-search discount; do not confuse with normal-times mu_bar or a published occupational transition probability. The 15.5% aggregate 2020-2022 QP occupational switching is not future scenario mu, a monthly rate, nor a national all-worker transition probability.",
         "portugal_model_value": null
       },
       {
@@ -520,6 +526,24 @@
       "organization": "Independent research repository carrying BLS-branded XLS copy; not direct official BLS URL",
       "reference_year": 2015,
       "description": "433,152-byte Excel 97-2003 workbook, Git blob SHA 6d8f2d6777ed2462376bcb91bf5492a3350520da; original-order sheet contains 1125 ISCO↔SOC pair/title mappings exactly matching independently hosted CSV, including 3-digit ISCO codes 211 and 315. Direct original BLS server bytes not verified."
+    },
+    "BRIGHTER_FUTURE_QP_2024_OVERVIEW": {
+      "url": "https://brighterfuture.pt/insights/numero-de-trabalhadores-cresceu-35-na-ultima-decada",
+      "organization": "Brighter Future / Fundação Belmiro de Azevedo using GEP/MTSSS Quadros de Pessoal data",
+      "reference_year": 2024,
+      "description": "Published 2026-05-18, approximately 3.65 million workers in covered enterprises 2024; NOT all employed persons or a source of national LFS occupation denominators."
+    },
+    "BRIGHTER_FUTURE_QP_OCCUPATIONAL_SWITCH_2020_2022": {
+      "url": "https://www.brighterfuture.pt/insights/sao-cada-vez-mais-os-trabalhadores-que-mudam-de-profissao",
+      "organization": "Brighter Future / Fundação Belmiro de Azevedo using linked GEP/MTSSS Quadros de Pessoal records",
+      "reference_year": 2022,
+      "description": "15.5 percent matched workers from 2020 to 2022 changed reported aggregated occupation; restricted to those present in both years. NOT 2024, monthly, C/N-specific mobility or direct model search parameter."
+    },
+    "BRIGHTER_FUTURE_QP_OCCUPATIONS_CATALOG": {
+      "url": "https://www.brighterfuture.pt/professions",
+      "organization": "Brighter Future / Fundação Belmiro de Azevedo",
+      "reference_year": 2026,
+      "description": "Public interface shows 1802 profession listings including aggregated/detail layers; per-profile headcounts/CPP codes not verified as a dated, non-overlapping 2024 raw dataset."
     }
   },
   "verified_context_observations": [
@@ -591,9 +615,9 @@
     }
   ],
   "calibration_gates": [
-    "An independently hosted 433,152-byte BLS-branded 2010 SOC↔ISCO08 XLS copy has been decoded and agrees exactly on all 1,125 code/title pairs with a separate GitHub CSV; two 3-digit codes (211,315) appear in both. Still verify bytes from the official BLS host and obtain 2024 Portugal ISCO3/ISCO4 all-employed national weights, especially for 26 four-digit units mapping to both C and N.",
+    "Eurostat LFSA_EGAI2D provides 2024 full-employed 2-digit employment counts for 43 ISCO subgroups; 17 mapped mixed, with 26 intrinsically mixed ISCO4 code correspondences. Official 3/4-digit public API guesses returned 404 (not proof of general absence). Brighter Future/QP occupational records include finer professions but cover employer-only workers; require documented CPP↔ISCO codes, reference year, matched workforce denominator and coverage weighting before using as national C/N counts.",
     "Align 2024 Portuguese factor-income/labor-share and labor-force denominators with model base-year definitions, and develop scientifically justified weights for 17 mixed 2-digit groups: 5 (686.7 thousand 2024 employed) become code-level separable with 4-digit counts; 12 (1,676.9 thousand) contain one or more 4-digit C/N ambiguous units and need further occupational or judgment-based methodology.",
-    "Estimate monthly group-specific finding/separation, vacancy fill and C↔N mobility using appropriate linked national records. Eurostat 2024 annual E/U/I transitions are observed (U→E 42.2%; E→U 2.4%) but cannot estimate mu_bar directly.",
+    "Eurostat annual E/U/I worker-state transitions do not identify C↔N moves. Brighter Future's QP-linked matched-worker study observes 15.5% aggregated occupational switching from 2020 to 2022 among workers observed in BOTH periods, not monthly or C/N-specific. Need access to occupation-by-origin/destination transition counts plus job finding, separations, vacancy fill; estimate effective mu_bar structurally, not from a raw switch percentage.",
     "Review small-open-economy capital-supply closure, investment inflows and migration; keep U.S. structural elasticities labeled as assumptions.",
     "Keep all seven AI scenario dials as explicit alternative assumptions; national firm-level AI adoption is contextual only.",
     "Require all parameter values with provenance, units, dates, transformations and uncertainty ranges before enabling country simulation.",
