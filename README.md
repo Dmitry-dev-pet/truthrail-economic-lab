@@ -86,6 +86,30 @@ changes until separately tested/deployed on the target Mac; the existing
 `[mac] economic-lab-verify` command is unchanged and still runs only its
 original three published scenarios.
 
+### Ask Alfred for a bounded experiment without deploying the Mac app
+
+The public repository supports an optional, **owner-only** GitHub issue command:
+
+- Exact issue title: `[econ] experiment`
+- Issue body: JSON for `/api/experiment`, for example
+  `{"scenario":"substantial","axes":{"psi":[0.25,0.5,0.75],"mu":[0.03,0.06,0.12]}}`.
+- A GitHub-hosted, ten-minute-bounded job verifies the public upstream model's
+  immutable SHA, computes at most 25 cells and posts the resulting table as
+  an issue comment. Alfred can create/read that issue through its existing
+  authorized GitHub connector; the user needs no shell commands.
+- Only an issue **opened by the repository owner** with the **exact title**
+  admits computation. Issue bodies are parsed as bounded JSON **data**,
+  never used as shell commands, URLs, paths or executable code.
+- Issue contents and outputs are **public**. Never put secrets or personal
+  information in an economic experiment issue.
+- The model-computation step does not receive the GitHub reporting token;
+  the comment step receives narrowly scoped `issues:write` permission.
+  No Mac runner, Docker engine, privileged daemon, tunnel or LLM is involved.
+
+This route is a GitHub-backed chat workaround, **not** a low-latency direct
+MCP connection to the Mac and not a replacement for the separate local web
+interface. The existing `mac-access` fixed verification remains unchanged.
+
 ## License and attribution
 
 This repository's original application wrapper, API, UI, tests and documentation
