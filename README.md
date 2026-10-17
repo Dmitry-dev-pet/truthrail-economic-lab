@@ -35,29 +35,38 @@ authorized existing Mac route must execute deployment when available.
 Do not substitute a new public proxy or tunnel for this localhost-only service.
 
 
-## Offline source snapshot
+## On-demand offline source snapshot
 
-The existing `.github/workflows/verify.yml` uploads a source snapshot on
-pull requests and pushes to `main`, after retrieving the pinned mathematical
-model. The artifact is named `economic-source-<checkout-sha>` and expires
-after 3 days. This uses the existing CI run; it does not start an extra workflow.
+Source archives are **not** produced by ordinary pull-request or `main` CI.
+To request a runnable copy of the latest committed project, open a GitHub Issue
+in this repository with the **exact** title `[source] snapshot`, from the
+repository owner's GitHub account. The body is ignored. Only the matching
+owner-created Issue starts the read-only
+`.github/workflows/source-snapshot.yml` packaging job.
 
-The downloadable GitHub Actions artifact is a ZIP containing:
+The job pins the project to the default-branch commit associated with the Issue
+event, fetches the independently reproduced mathematical model at its fixed
+`v1.0` commit, and produces a short-lived GitHub Actions artifact named
+`economic-source-issue-<issue-number>-<commit-sha>`. It expires in **3 days**.
+No other Issue title generates a snapshot; the normal CI tests remain unchanged.
 
-- `project.tar.gz`: all Git-tracked project files under `project/`.
-- `upstream-aiscen.tar.gz`: the required pinned mathematical Python package
-  under `upstream/aiscen/`, not the entire upstream repository.
-- `project.sha`, `upstream.sha`, `SHA256SUMS`: exact source commits and
-  checksums for both archives.
+The downloaded artifact ZIP contains:
 
-These are source snapshots: no `.git` history, secrets, or untracked files.
-For a pull request, the checkout SHA may identify GitHub's temporary test-merge
-commit rather than the pull request branch tip.
+- `project.tar.gz`: Git-tracked project files under `project/` (no Git history).
+- `upstream-aiscen.tar.gz`: the pinned `aiscen/` package, plus its upstream
+  `LICENSE` and `CREDIT.md`, under `upstream/`.
+- `project.sha`, `upstream.sha`, `SHA256SUMS`: verified source identities
+  and SHA-256 digests for both tarballs.
 
-To restore and run tests locally, or in a temporary ChatGPT environment:
+The job never executes Issue text, exposes the private Mac, deploys a service,
+or uses an LLM. Both repositories are public. The workflow token is read-only.
+
+To restore in a temporary ChatGPT or other local Linux environment after
+downloading the ZIP (replace the placeholder with the actual artifact filename):
 
 ```bash
-unzip economic-source-<checkout-sha>.zip -d snapshot
+mkdir -p snapshot
+unzip economic-source-issue-<issue-number>-<commit-sha>.zip -d snapshot
 cd snapshot
 sha256sum -c SHA256SUMS
 mkdir -p workspace
@@ -68,8 +77,9 @@ PYTHONPATH="$PWD/upstream:$PWD/project" python -m unittest discover -s project/t
 ```
 
 For the local HTTP server, also set `LAB_UPSTREAM_DIR="$PWD/upstream"`.
-The archive transfers code for isolated execution; it is not a deployment
-mechanism, and the GitHub connector does not acquire Mac or VPS privileges.
+The requester may reuse a still-available artifact for the same commit instead
+of opening another Issue. Once the artifact is downloaded and verified, close
+the service Issue to keep the issue tracker tidy.
 
 ## API
 

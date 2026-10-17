@@ -27,30 +27,6 @@ jobs:
             https://github.com/fhoces/opa-ai-macro-econ-scenarios.git "$RUNNER_TEMP/reproduction"
           test "$(git -C "$RUNNER_TEMP/reproduction" rev-parse HEAD)" = \
             d4703b6ae0d19dca08fbde11a25c218fa4c7b7a6
-      - name: Package tracked project and pinned model sources
-        shell: bash
-        run: |
-          set -euo pipefail
-          out="$RUNNER_TEMP/economic-source"
-          mkdir -p "$out"
-          project_sha="$(git rev-parse HEAD)"
-          model_sha="$(git -C "$RUNNER_TEMP/reproduction" rev-parse HEAD)"
-          test "$project_sha" = "$GITHUB_SHA"
-          test "$model_sha" = "d4703b6ae0d19dca08fbde11a25c218fa4c7b7a6"
-          git archive --format=tar.gz --prefix=project/ "$project_sha" > "$out/project.tar.gz"
-          git -C "$RUNNER_TEMP/reproduction" archive --format=tar.gz --prefix=upstream/ \
-            "$model_sha" aiscen > "$out/upstream-aiscen.tar.gz"
-          printf '%s\n' "$project_sha" > "$out/project.sha"
-          printf '%s\n' "$model_sha" > "$out/upstream.sha"
-          (cd "$out" && sha256sum project.tar.gz upstream-aiscen.tar.gz > SHA256SUMS)
-      - name: Upload offline source snapshot
-        uses: actions/upload-artifact@v4
-        with:
-          name: economic-source-${{ github.sha }}
-          path: ${{ runner.temp }}/economic-source/
-          compression-level: 0
-          retention-days: 3
-          if-no-files-found: error
       - name: Verify lab and model tests
         shell: bash
         run: |
