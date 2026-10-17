@@ -178,6 +178,78 @@ does not set `mu_bar`, `mu`, `q_rel_C`, `q_rel_N`,
 `q_bar_ann` or `fill_bar`. The existing
 U.S. mathematical replication is unchanged.
 
+## Finer SOC↔ISCO mapping discovered — classification only
+
+The original American model's group C uses **SOC-2010 major groups
+11–29, 41, 43**. The [U.S. BLS publishes an official
+ISCO-08 ↔ SOC-2010 crosswalk](https://www.bls.gov/soc/soccrosswalks.htm)
+as a legacy `XLS` workbook
+([file URL](https://www.bls.gov/soc/ISCO_SOC_Crosswalk.xls)).
+That official link is verified, but its binary contents **have not been
+independently parsed in this audit**.
+
+An [independent public CSV representation](https://github.com/danielruss/codingsystems/blob/main/isco2008_soc2010.csv)
+has been processed solely as a **provisional map of occupation codes**.
+The frozen mapping summary is [`soc2010_isco08_crosswalk_audit.json`](soc2010_isco08_crosswalk_audit.json).
+Its provenance includes the exact GitHub blob SHA, 1,125
+unweighted crosswalk relations across 43 ISCO-08 two-digit
+sub-major groups, and **two problematic source rows using three-digit
+rather than four-digit ISCO codes** (`211` and `315`).
+
+The derived code-level classification is:
+
+| Sub-major ISCO group category in the mirror | Number of 2-digit groups |
+|---|---:|
+| Every linked SOC major belongs to paper group C | 13 |
+| Every linked SOC major belongs to group N | 13 |
+| Mixed or ambiguous C/N links | 17 |
+| **Total** | **43** |
+
+**The 13 / 13 / 17 figures count occupational CODE groups, not people.**
+They do not provide Portugal's `cog_share`: some 4-digit occupations
+have SOC matches in both C and N, and these many-to-many relationships
+carry no employment weights.
+
+Examples from the mirror: ISCO **35** (ICT technicians) links to C;
+ISCO **31** (engineering and related associate professionals)
+links to C and N; ISCO **52** (sales workers) has mainly C mappings
+but exceptions, so it cannot automatically all be placed in C;
+ISCO **53** (personal care) is mainly N but contains exceptions.
+These are conditional statements about *this unverified code list*,
+not authoritative conversion probabilities.
+
+### Availability of finer Portuguese occupation counts
+
+The 2024 [Eurostat `lfsa_egais` dataset](isco_occupation_snapshot.json)
+has employment counts by **one-digit** major groups and therefore
+cannot weight a two-digit crosswalk.
+
+A more detailed, contemporaneous official source exists:
+[DGCP/GEP `Quadros de Pessoal 2024`](https://www.dgcp.mtsss.gov.pt/sinteses-/-publicacoes?p_r_p_564233524_categoryId=11339&p_r_p_564233524_resetCur=true),
+published December 2025.
+The agency's [2024 Excel publication](https://www.dgcp.mtsss.gov.pt/documents/10182/10928/qp2024pub.xlsx/02732373-1bae-4348-93af-74bb1bf7c8ec)
+is linked publicly, but its numerical workbook **could not be retrieved
+and verified in this research execution**. Further, *Quadros de
+Pessoal* surveys employer-reported employees / establishments,
+**not all residents employed, including self-employed and
+occupations outside that reporting universe**.
+Its detailed counts cannot simply be substituted as weights over
+Eurostat's 5,112.3 thousand employed people.
+
+Other potential sources:
+[2024 Portuguese employment survey published by INE](https://www.ine.pt/xurl/indx/0012153/PT)
+exposes **major** CPP-2010 groups in its standard public series,
+while the [Eurostat scientific EU-LFS microdata](https://ec.europa.eu/eurostat/web/microdata/european-union-labour-force-survey)
+provide more detailed occupation codes subject to research-data
+authorization and confidentiality conditions.
+
+**Decision:** source crosswalk structure exists and mixed occupational
+groups are now identified more precisely, but **2024 national all-employed
+two-/three-digit weights remain unverified**. The original official
+BLS crosswalk must also be checked before any code mapping is accepted.
+Thus `Fixed.cog_share` in Portugal remains **null** and the national
+profile remains `runnable:false`.
+
 ## Field coverage and calibration status
 
 | Bucket | Input count | Meaning |
@@ -219,11 +291,13 @@ No automated table-to-model ingestion exists yet.
    an external plausibility check).
 2. Download the 2024 AMECO adjusted wage-share **numeric series**,
    documenting self-employment and income-accounting definitions.
-3. Use the 2024 1-digit ISCO snapshot as an arithmetic check,
-   then obtain occupational 3-digit (or 4-digit) statistics and
-   review weighted BLS SOC-2010 to ISCO-08 mappings for the paper's
-   exact 11–29, 41, 43 group; quantify ambiguity, particularly
-   for technicians (ISCO 3) and service/sales (ISCO 5).
+3. Verify the official BLS binary `ISCO_SOC_Crosswalk.xls`
+   against the existing third-party 43-submajor code-level audit,
+   resolving the 2 malformed/short ISCO entries, then obtain a
+   *matched-universe* two-/three-digit 2024 employed-person
+   distribution for Portugal. Employer-only GEP counts are not the
+   full Eurostat/INE LFS population; quantify coverage and
+   uncertainty before weighting C/N, especially within ISCO 3 and 5.
 4. Keep the official 2024 nine-status annual E/U/I flows as
    **context**. Identify permissioned, linkable 2024 INE/national
    datasets for occupational C↔N transitions and group-specific
