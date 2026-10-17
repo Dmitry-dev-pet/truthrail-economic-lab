@@ -1,0 +1,546 @@
+{
+  "schema_version": 1,
+  "country_code": "PT",
+  "country": "Portugal",
+  "base_year": 2024,
+  "study_created": "2026-10-17",
+  "status": "audit_only_not_calibrated",
+  "runnable": false,
+  "model_namespace": "country_profiles_only",
+  "upstream": {
+    "repo": "fhoces/opa-ai-macro-econ-scenarios",
+    "tag": "v1.0",
+    "commit": "d4703b6ae0d19dca08fbde11a25c218fa4c7b7a6",
+    "file": "aiscen/params.py"
+  },
+  "baseline": "U.S. structural and scenario parameters; none is reassigned to Portugal by this audit",
+  "parameter_inventory": {
+    "Fixed": [
+      {
+        "name": "sigma",
+        "us_reference": "0.5",
+        "calibration_status": "structural_review",
+        "candidate_sources": [
+          "US_REPRODUCTION"
+        ],
+        "mapping_note": "Task substitution elasticity; cannot copy as Portuguese estimate without a model assumption/review.",
+        "portugal_model_value": null
+      },
+      {
+        "name": "s_L0",
+        "us_reference": "0.60",
+        "calibration_status": "national_statistic_candidate",
+        "candidate_sources": [
+          "AMECO_WAGE_SHARE"
+        ],
+        "mapping_note": "Labor income share; derive using comparable factor-income accounting incl. self-employed, not compensation/GDP unadjusted.",
+        "portugal_model_value": null
+      },
+      {
+        "name": "cog_share",
+        "us_reference": "0.624",
+        "calibration_status": "needs_crosswalk",
+        "candidate_sources": [
+          "EUROSTAT_ISCO",
+          "EUROSTAT_MICRODATA"
+        ],
+        "mapping_note": "Model share of AI-sensitive C employment; Eurostat ISCO occupational major groups do not directly identify the paper's C group.",
+        "portugal_model_value": null
+      },
+      {
+        "name": "eps",
+        "us_reference": "3.0",
+        "calibration_status": "structural_review",
+        "candidate_sources": [
+          "AMECO_CAPITAL"
+        ],
+        "mapping_note": "Capital-supply elasticity; open-economy Portugal/euro area capital flows may invalidate closed-country calibration.",
+        "portugal_model_value": null
+      },
+      {
+        "name": "r_bar",
+        "us_reference": "0.115",
+        "calibration_status": "needs_estimation",
+        "candidate_sources": [
+          "AMECO_CAPITAL"
+        ],
+        "mapping_note": "Gross no-AI rental return to capital; not a bond interest rate nor observable without income/stock conventions.",
+        "portugal_model_value": null
+      },
+      {
+        "name": "delta",
+        "us_reference": "0.05",
+        "calibration_status": "national_statistic_candidate",
+        "candidate_sources": [
+          "AMECO_CAPITAL"
+        ],
+        "mapping_note": "Depreciation relative to capital stock; match asset coverage, net/gross and accounting period.",
+        "portugal_model_value": null
+      },
+      {
+        "name": "lam",
+        "us_reference": "1.0",
+        "calibration_status": "structural_review",
+        "candidate_sources": [
+          "US_REPRODUCTION"
+        ],
+        "mapping_note": "Returns to research input: conceptual structural parameter, not a single national observation.",
+        "portugal_model_value": null
+      },
+      {
+        "name": "fishing_out_R",
+        "us_reference": "2.86",
+        "calibration_status": "structural_review",
+        "candidate_sources": [
+          "US_REPRODUCTION"
+        ],
+        "mapping_note": "Difficulty-of-discovering-ideas parameter: non-identifiable directly from a Portuguese statistic.",
+        "portugal_model_value": null
+      },
+      {
+        "name": "g",
+        "us_reference": "0.0167",
+        "calibration_status": "needs_estimation",
+        "candidate_sources": [
+          "AMECO_CAPITAL"
+        ],
+        "mapping_note": "No-AI idea-stock trend; observed GDP growth or labour productivity is not automatically equivalent.",
+        "portugal_model_value": null
+      },
+      {
+        "name": "n",
+        "us_reference": "0.0033",
+        "calibration_status": "national_statistic_candidate",
+        "candidate_sources": [
+          "INE_EMPLOYMENT_2024",
+          "INE_EMPLOYMENT_2025"
+        ],
+        "mapping_note": "Trend labor-force growth (not one year employment growth); estimate from consistent multi-year Portuguese labour-force series.",
+        "portugal_model_value": null
+      },
+      {
+        "name": "iota_R0",
+        "us_reference": "0.035",
+        "calibration_status": "national_statistic_candidate",
+        "candidate_sources": [
+          "US_REPRODUCTION",
+          "PT_RND_GERD_2024"
+        ],
+        "mapping_note": "Research share of GDP in the paper's ideas block; national R&D expenditure requires a strict concept and denominator check.",
+        "portugal_model_value": null
+      },
+      {
+        "name": "g_iota",
+        "us_reference": "0.028",
+        "calibration_status": "needs_estimation",
+        "candidate_sources": [
+          "US_REPRODUCTION"
+        ],
+        "mapping_note": "Growth of research share; requires consistent multi-year national research investment data and model concept crosswalk.",
+        "portugal_model_value": null
+      },
+      {
+        "name": "t0",
+        "us_reference": "2024.0",
+        "calibration_status": "model_convention",
+        "candidate_sources": [
+          "US_REPRODUCTION"
+        ],
+        "mapping_note": "Chosen comparison base year; retain 2024 until a separately reviewed redesign.",
+        "portugal_model_value": null
+      },
+      {
+        "name": "t_anchor",
+        "us_reference": "2026.5",
+        "calibration_status": "model_convention",
+        "candidate_sources": [
+          "US_REPRODUCTION"
+        ],
+        "mapping_note": "Mid-2026 scenario anchor date; not a measured Portuguese macro parameter.",
+        "portugal_model_value": null
+      },
+      {
+        "name": "t_target",
+        "us_reference": "2030.0",
+        "calibration_status": "model_convention",
+        "candidate_sources": [
+          "US_REPRODUCTION"
+        ],
+        "mapping_note": "Forecast horizon convention, not national calibration.",
+        "portugal_model_value": null
+      },
+      {
+        "name": "q_bar_ann",
+        "us_reference": "0.11",
+        "calibration_status": "needs_estimation",
+        "candidate_sources": [
+          "EUROSTAT_LFS_FLOWS",
+          "EUROSTAT_MICRODATA"
+        ],
+        "mapping_note": "Baseline yearly quit/separation rate; E-to-U quarterly transitions alone do not capture employer-to-employer quits.",
+        "portugal_model_value": null
+      },
+      {
+        "name": "q_resp_share",
+        "us_reference": "0.55",
+        "calibration_status": "needs_estimation",
+        "candidate_sources": [
+          "EUROSTAT_LFS_FLOWS"
+        ],
+        "mapping_note": "Share of quits responding to labor-market prospects; needs econometric identification, not a public count.",
+        "portugal_model_value": null
+      },
+      {
+        "name": "q_rel_C",
+        "us_reference": "0.69",
+        "calibration_status": "needs_estimation",
+        "candidate_sources": [
+          "EUROSTAT_MICRODATA"
+        ],
+        "mapping_note": "Group-C relative quit rate; requires C/N occupational mapping and longitudinal separation estimates.",
+        "portugal_model_value": null
+      },
+      {
+        "name": "q_rel_N",
+        "us_reference": "1.52",
+        "calibration_status": "needs_estimation",
+        "candidate_sources": [
+          "EUROSTAT_MICRODATA"
+        ],
+        "mapping_note": "Group-N relative quit rate; requires C/N occupational mapping and longitudinal separation estimates.",
+        "portugal_model_value": null
+      },
+      {
+        "name": "U_bar",
+        "us_reference": "0.038",
+        "calibration_status": "national_statistic_candidate",
+        "candidate_sources": [
+          "INE_EMPLOYMENT_2024",
+          "EUROSTAT_LFS_FLOWS"
+        ],
+        "mapping_note": "Baseline normal search pool. 2024 unemployment is a candidate statistic, NOT automatically equal to this model concept.",
+        "portugal_model_value": null
+      },
+      {
+        "name": "mu_bar",
+        "us_reference": "0.17",
+        "calibration_status": "needs_estimation",
+        "candidate_sources": [
+          "EUROSTAT_MICRODATA",
+          "EUROSTAT_LFS_FLOWS"
+        ],
+        "mapping_note": "Normal-times cross-group search discount; E/U/I flows do not identify movements C↔N.",
+        "portugal_model_value": null
+      },
+      {
+        "name": "iota_match",
+        "us_reference": "1.27",
+        "calibration_status": "structural_review",
+        "candidate_sources": [
+          "US_REPRODUCTION"
+        ],
+        "mapping_note": "Curvature of vacancy/search matching function; transfer only as sensitivity assumption or estimate from flow data.",
+        "portugal_model_value": null
+      },
+      {
+        "name": "fill_bar",
+        "us_reference": "0.65",
+        "calibration_status": "needs_estimation",
+        "candidate_sources": [
+          "EUROSTAT_VACANCIES",
+          "EUROSTAT_LFS_FLOWS"
+        ],
+        "mapping_note": "Mean MONTHLY vacancy filling rate: requires hires and duration/stock data; vacancy rate is not a substitute.",
+        "portugal_model_value": null
+      },
+      {
+        "name": "xi",
+        "us_reference": "0.50",
+        "calibration_status": "needs_estimation",
+        "candidate_sources": [
+          "EUROSTAT_MICRODATA"
+        ],
+        "mapping_note": "Downward adjustment/rigidity of AI-sensitive wage; requires worker-level or wage-series structural estimation.",
+        "portugal_model_value": null
+      },
+      {
+        "name": "h",
+        "us_reference": "1.0 / 12.0",
+        "calibration_status": "model_convention",
+        "candidate_sources": [
+          "US_REPRODUCTION"
+        ],
+        "mapping_note": "Monthly numerical time-step retained; not nationally re-estimated.",
+        "portugal_model_value": null
+      },
+      {
+        "name": "cc_rates",
+        "us_reference": "True",
+        "calibration_status": "model_convention",
+        "candidate_sources": [
+          "US_REPRODUCTION"
+        ],
+        "mapping_note": "Continuously compounded rate-conversion switch, keep as computational convention.",
+        "portugal_model_value": null
+      }
+    ],
+    "Scenario": [
+      {
+        "name": "m_anchor",
+        "us_reference": "0.14",
+        "calibration_status": "scenario_hypothesis",
+        "candidate_sources": [
+          "EUROSTAT_ISCO",
+          "INE_ENTERPRISE_AI_2025"
+        ],
+        "mapping_note": "Mid-2026 task mass reachable by AI; firm AI use and occupation exposure are not equivalent task mass.",
+        "portugal_model_value": null
+      },
+      {
+        "name": "m_2030",
+        "us_reference": "0.30",
+        "calibration_status": "scenario_hypothesis",
+        "candidate_sources": [
+          "EUROSTAT_ISCO"
+        ],
+        "mapping_note": "Future technical task reach in 2030; scenario assumption, not observation.",
+        "portugal_model_value": null
+      },
+      {
+        "name": "d_anchor",
+        "us_reference": "0.10",
+        "calibration_status": "scenario_hypothesis",
+        "candidate_sources": [
+          "INE_ENTERPRISE_AI_2025"
+        ],
+        "mapping_note": "Task-level AI diffusion mid-2026, not percentage of firms using any AI.",
+        "portugal_model_value": null
+      },
+      {
+        "name": "d_2030",
+        "us_reference": "0.40",
+        "calibration_status": "scenario_hypothesis",
+        "candidate_sources": [
+          "INE_ENTERPRISE_AI_2025"
+        ],
+        "mapping_note": "Future task-level adoption, requires assumptions about intensity and occupational mix.",
+        "portugal_model_value": null
+      },
+      {
+        "name": "a_anchor",
+        "us_reference": "0.35",
+        "calibration_status": "scenario_hypothesis",
+        "candidate_sources": [
+          "US_REPRODUCTION"
+        ],
+        "mapping_note": "Log gain in task-level productivity, not observed wage or GDP growth.",
+        "portugal_model_value": null
+      },
+      {
+        "name": "g_a",
+        "us_reference": "0.028",
+        "calibration_status": "scenario_hypothesis",
+        "candidate_sources": [
+          "US_REPRODUCTION"
+        ],
+        "mapping_note": "Annual slope in assumed task-level productivity gains; not a country measured growth rate.",
+        "portugal_model_value": null
+      },
+      {
+        "name": "d_ceiling",
+        "us_reference": "1.0",
+        "calibration_status": "scenario_hypothesis",
+        "candidate_sources": [
+          "US_REPRODUCTION"
+        ],
+        "mapping_note": "Logistic adoption ceiling set by model, not a measured penetration statistic.",
+        "portugal_model_value": null
+      },
+      {
+        "name": "psi",
+        "us_reference": "0.75",
+        "calibration_status": "scenario_hypothesis",
+        "candidate_sources": [
+          "US_REPRODUCTION"
+        ],
+        "mapping_note": "Labor substitution fraction among AI activity; not AI enterprise use rate.",
+        "portugal_model_value": null
+      },
+      {
+        "name": "rho",
+        "us_reference": "0.25",
+        "calibration_status": "scenario_hypothesis",
+        "candidate_sources": [
+          "US_REPRODUCTION"
+        ],
+        "mapping_note": "Number of newly reinstated human tasks per automated task; empirical target currently unavailable.",
+        "portugal_model_value": null
+      },
+      {
+        "name": "mu",
+        "us_reference": "0.08",
+        "calibration_status": "scenario_hypothesis",
+        "candidate_sources": [
+          "EUROSTAT_MICRODATA"
+        ],
+        "mapping_note": "Scenario labor-search discount; do not confuse with normal-times mu_bar or a published occupational transition probability.",
+        "portugal_model_value": null
+      },
+      {
+        "name": "theta_H",
+        "us_reference": "0.25",
+        "calibration_status": "scenario_hypothesis",
+        "candidate_sources": [
+          "EUROSTAT_VACANCIES"
+        ],
+        "mapping_note": "Firm posting speed per month; quarterly vacancy stock does not identify it.",
+        "portugal_model_value": null
+      }
+    ]
+  },
+  "sources": {
+    "INE_EMPLOYMENT_2024": {
+      "url": "https://estatistica.dgeconomia.gov.pt/estatisticas-do-emprego-ine-14/",
+      "organization": "Portugal DGE reporting INE Employment Statistics",
+      "reference_year": 2024,
+      "description": "Annual mean unemployment rate, employed and unemployed persons"
+    },
+    "INE_EMPLOYMENT_2025": {
+      "url": "https://estatistica.dgeconomia.gov.pt/estatisticas-do-emprego-ine-18/",
+      "organization": "Portugal DGE reporting INE Employment Statistics",
+      "reference_year": 2025,
+      "description": "Subsequent context year only"
+    },
+    "AMECO_WAGE_SHARE": {
+      "url": "https://webgate.ec.europa.eu/ecfin/redisstat/databrowser/product/view/ameco_chapter07-06",
+      "organization": "European Commission DG ECFIN AMECO",
+      "reference_year": 2024,
+      "description": "Adjusted wage share, ensure same valuation and self-employment treatment as model labor share; national value not retrieved"
+    },
+    "AMECO_CAPITAL": {
+      "url": "https://economy-finance.ec.europa.eu/economic-research-and-databases/economic-databases/ameco-database/download-annual-data-set-macro-economic-database-ameco_en",
+      "organization": "European Commission DG ECFIN AMECO",
+      "reference_year": 2024,
+      "description": "Capital stocks, depreciation and income accounts; no direct capital-supply elasticity"
+    },
+    "EUROSTAT_ISCO": {
+      "url": "https://ec.europa.eu/eurostat/databrowser/product/view/lfsa_egais",
+      "organization": "Eurostat Labour Force Survey",
+      "reference_year": 2024,
+      "description": "Employment by ISCO-08 occupation; requires explicitly documented C/N classification crosswalk"
+    },
+    "EUROSTAT_LFS_FLOWS": {
+      "url": "https://ec.europa.eu/eurostat/cache/metadata/EN/lfsi_long_esms.htm",
+      "organization": "Eurostat and INE Portugal",
+      "reference_year": 2024,
+      "description": "Observed E/U/I transitions, not C-to-N occupational transitions, employer quits, or monthly vacancy fill rates"
+    },
+    "EUROSTAT_MICRODATA": {
+      "url": "https://ec.europa.eu/eurostat/web/microdata/european-union-labour-force-survey",
+      "organization": "Eurostat",
+      "reference_year": 2024,
+      "description": "Restricted anonymized EU-LFS microdata for qualified scientific research, may help occupational crosswalk and transitions"
+    },
+    "EUROSTAT_VACANCIES": {
+      "url": "https://ec.europa.eu/eurostat/databrowser/product/view/jvs_q_r21",
+      "organization": "Eurostat Job Vacancy Statistics",
+      "reference_year": 2024,
+      "description": "Vacancy STOCK and rates, not vacancy FILL rate"
+    },
+    "INE_ENTERPRISE_AI_2025": {
+      "url": "https://ine.pt/xportal/xmain?DESTAQUESpagenumber=1&DESTAQUEStema=5414257&DESTAQUEStipo=ea&selTab=tab0&xlang=en&xpgid=ine_destaques&xpid=INE",
+      "organization": "Statistics Portugal INE",
+      "reference_year": 2025,
+      "description": "11.5 percent of businesses using AI is NOT the share of tasks performed with AI"
+    },
+    "US_REPRODUCTION": {
+      "url": "https://github.com/fhoces/opa-ai-macro-econ-scenarios/blob/d4703b6ae0d19dca08fbde11a25c218fa4c7b7a6/aiscen/params.py",
+      "organization": "Fernando Hoces de la Guardia independent reimplementation",
+      "reference_year": 2024,
+      "description": "Exact immutable U.S. model reference and parameter types"
+    },
+    "PT_RND_GERD_2024": {
+      "url": "https://www.pordata.pt/en/europe/expenditure+in+research+and+development+activities+(r+d)+as+a+percentage+of+gdp+by+sector+of+performance-1674",
+      "organization": "PORDATA compiling Eurostat and INE R&D data",
+      "reference_year": 2024,
+      "description": "2024 gross domestic R&D expenditure about 1.72% of GDP (marked provisional). A distinct proxy, not directly the model's ideas-sector iota_R0."
+    }
+  },
+  "verified_context_observations": [
+    {
+      "id": "PT_UNEMP_2024",
+      "label": "Annual average unemployment rate",
+      "year": 2024,
+      "value": 0.064,
+      "unit": "fraction of labor force",
+      "source_key": "INE_EMPLOYMENT_2024",
+      "candidate_for": "Fixed.U_bar",
+      "safe_to_assign_to_model": false,
+      "note": "Candidate normal-times unemployment calibration; requires age/definition alignment and matching to steady-state search pool."
+    },
+    {
+      "id": "PT_EMPLOYED_2024",
+      "label": "Annual average employed persons",
+      "year": 2024,
+      "value": 5112300,
+      "unit": "persons",
+      "source_key": "INE_EMPLOYMENT_2024",
+      "candidate_for": null,
+      "safe_to_assign_to_model": false,
+      "note": "Context statistic; not a direct model parameter because model labor force is normalized."
+    },
+    {
+      "id": "PT_UNEMPLOYED_2024",
+      "label": "Annual average unemployed persons",
+      "year": 2024,
+      "value": 351100,
+      "unit": "persons",
+      "source_key": "INE_EMPLOYMENT_2024",
+      "candidate_for": null,
+      "safe_to_assign_to_model": false,
+      "note": "Context statistic; distinguish ILO unemployed from all job seekers."
+    },
+    {
+      "id": "PT_UNEMP_2025",
+      "label": "Annual average unemployment rate, context only",
+      "year": 2025,
+      "value": 0.06,
+      "unit": "fraction of labor force",
+      "source_key": "INE_EMPLOYMENT_2025",
+      "candidate_for": null,
+      "safe_to_assign_to_model": false,
+      "note": "Not a substitute for 2024 base-year calibration."
+    },
+    {
+      "id": "PT_ENTERPRISE_AI_2025",
+      "label": "Enterprises reporting any AI use, 2025",
+      "year": 2025,
+      "value": 0.115,
+      "unit": "fraction of surveyed enterprises",
+      "source_key": "INE_ENTERPRISE_AI_2025",
+      "candidate_for": null,
+      "safe_to_assign_to_model": false,
+      "note": "2025 business adoption among covered enterprises, not labor/task-level diffusion m or d."
+    },
+    {
+      "id": "PT_RD_GERD_2024",
+      "label": "Gross domestic expenditure on R&D / GDP (provisional)",
+      "year": 2024,
+      "value": 0.0172,
+      "unit": "share of GDP",
+      "source_key": "PT_RND_GERD_2024",
+      "candidate_for": "Fixed.iota_R0",
+      "safe_to_assign_to_model": false,
+      "note": "GERD is total domestic research expenditure, not necessarily the model's ideas-input share; conceptual mapping and years must be checked before use."
+    }
+  ],
+  "calibration_gates": [
+    "Create a source-verified, occupational ISCO→paper C/N crosswalk and quantify classification uncertainty.",
+    "Align 2024 labor share (national accounts), unemployment pool and 2024 labor force into consistent model definitions.",
+    "Estimate baseline job finding, separations, vacancy fill and between-group mobility; do not substitute Eurostat E/U/I flows for C↔N.",
+    "Review small-open-economy capital-supply closure, investment inflows and migration; keep U.S. structural elasticities labeled as assumptions.",
+    "Keep all seven AI scenario dials as explicit alternative assumptions; national firm-level AI adoption is contextual only.",
+    "Require all parameter values with provenance, units, dates, transformations and uncertainty ranges before enabling country simulation.",
+    "Run U.S. original tests unchanged and independent Portugal-specific base-year and time-series validation prior to any PT 2030 headline."
+  ]
+}

@@ -230,6 +230,21 @@ and the distinction between the independent implementation and the Anthropic
 Institute research paper. The license here does not assert ownership of the
 paper, its model, third-party datasets or other upstream materials.
 
+## Country portability: Portugal feasibility (audit only)
+
+An evidence-based [Portugal 2024 calibration feasibility assessment](country_profiles/portugal/2024/README.md)
+and [machine-readable model-field audit](country_profiles/portugal/2024/calibration_audit.json)
+have been prepared. All **37 default-bearing model parameters** are
+inventoried with candidate sources and conceptual gaps, and no national
+parameter value is authorized for use in a model run.
+
+The profile is explicitly `audit_only_not_calibrated` / `runnable:false`.
+It **does not** simulate or forecast Portugal. Published Portuguese
+unemployment, occupation, R&D and AI-adoption data are separate,
+definition-sensitive evidence. Missing inputs must never inherit
+U.S. parameters silently. The existing local API and owner-only
+GitHub experiment routes continue to calculate only U.S. scenarios.
+
 ## Scientific limitation
 
 This is a United States economic model. Its seven scenario dials are
