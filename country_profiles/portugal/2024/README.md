@@ -378,6 +378,101 @@ especially estimating **inter-occupation worker mobility**.
 model input values remain unset, and `runnable:false`.
 No Portuguese scenario calculation was performed.
 
+## 2026-10-17: further detail-source search and linked worker mobility
+
+A new [machine-readable source feasibility registry](detailed_occupation_and_mobility_sources.json)
+distinguishes the **2024 all-employed national LFS** target
+(5,112.3 thousand people) from **employer-only personnel data**.
+
+### Where more detailed occupations might be obtained
+
+The [official DGCP/GEP 2024 `Quadros de Pessoal` publication](https://www.dgcp.mtsss.gov.pt/sinteses-/-publicacoes?p_r_p_564233524_categoryId=11339&p_r_p_564233524_resetCur=true)
+provides administrative employer data. Its public Excel
+[publication is listed](https://www.dgcp.mtsss.gov.pt/documents/10182/10928/qp2024pub.xlsx/02732373-1bae-4348-93af-74bb1bf7c8ec),
+but the file **did not download as a readable workbook**
+in this research session, and therefore no 2024 3-/4-digit
+numeric cells were extracted or attributed to it.
+
+A related public [Brighter Future occupational directory](https://www.brighterfuture.pt/professions)
+displays around **1,802 profession entries** at its current
+inspection date, with aggregate and detailed profession choices.
+Its source is the underlying `Quadros de Pessoal`
+administrative dataset. But its displayed occupation-level
+headcounts are **not confirmed as a non-overlapping,
+reference-year-2024, ISCO4-coded bulk export**. Do not
+sum these listings or use them as 2024 national employment weights.
+
+Brighter Future's [2024 workforce overview](https://brighterfuture.pt/insights/numero-de-trabalhadores-cresceu-35-na-ultima-decada),
+published May 2026, reports approximately **3.65 million
+employees in enterprises** in 2024. This is neither the
+5.1123-million person all-employed LFS population, nor
+a direct sampling ratio. The employer personnel universe
+excludes self-employed workers, domestic services, and
+public administrative employment. Differences in geography,
+reference months and coverage must be resolved before
+administrative employment proportions could be used for
+the nationally calibrated `cog_share`.
+
+Two guessed Eurostat public dataset codes `lfsa_egai3d` and
+`lfsa_egai4d` returned HTTP 404 when filtered for Portugal
+2024. **This does not prove there is no valid 3-/4-digit
+national occupation data under other dataset names,
+confidential releases, or approved access routes.**
+The [Eurostat scientific EU-LFS](https://ec.europa.eu/eurostat/web/microdata/european-union-labour-force-survey)
+offers approved research access to more detailed, roughly
+3-digit ISCO codes; no permissioned microdata was accessed.
+
+### Observed worker switching, still not `mu_bar`
+
+[Brighter Future analyzed matched `Quadros de Pessoal`
+work histories](https://www.brighterfuture.pt/insights/sao-cada-vez-mais-os-trabalhadores-que-mudam-de-profissao)
+and reported **15.5%** of workers changed their
+*reported aggregate occupation* between **2020 and 2022**
+(**84.5%** did not). This is a **two-year longitudinal
+statistic conditional on workers being observed in BOTH
+years**, not the share of all national workers who switched.
+
+This is more informative than annual E/U/I flows:
+it follows occupation labels for the same workers rather
+than merely recording unemployment/employment status.
+But it still cannot directly calibrate `mu_bar`
+or `mu`:
+
+- The study is for **2020–2022**, not a 2024 monthly transition
+  path. Workers exiting the covered population may be absent.
+- Switching among detailed occupations *within* the same
+  Brighter Future broad profession can be missed.
+- It does **not** publish an origin/destination **C→N
+  versus N→C** occupational transition matrix compatible
+  with our U.S. model's definition.
+- The model's `mu_bar` is an **effective search discount**,
+  not simply the fraction of workers with a different job title
+  two years later.
+
+The [source registry](detailed_occupation_and_mobility_sources.json)
+records all coverage differences, years, links and hard
+limitations. **No raw personal records were accessed, no
+C/N transition matrix obtained and no Portuguese model
+input assigned.**
+
+### Revised priority
+
+1. Obtain a **non-overlapping 2024 detailed CPP/ISCO occupation
+   count** from source with documented employment universe,
+   codes and date. For `Quadros de Pessoal`, verify exact
+   CPP table definitions and calculate explicit differences
+   from the 2024 Eurostat LFS major/submajor totals.
+2. Seek officially permitted detailed survey microdata or
+   a documented coverage-adjusted employment-mix estimator;
+   never assume QP-worker profiles are representative of
+   the missing sectors or self-employed.
+3. Seek **C/N origin-to-destination** occupational switching
+   tables for workers whose trajectories are observed in
+   linked data, reporting entrants/exits separately; only
+   then consider *structural estimation* of `mu_bar`.
+
+Status remains **AUDIT ONLY** / `runnable:false`.
+
 ## Field coverage and calibration status
 
 | Bucket | Input count | Meaning |
