@@ -107,3 +107,38 @@ jobs:
           print("Plan SHA-256:", plan["plan_sha256"])
           print("No evidence of real-world causal effects or forecasts is implied")
           PY
+
+      - name: Verify fixed local sensitivity plan
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PYTHONPATH="$RUNNER_TEMP/reproduction:$GITHUB_WORKSPACE"
+          python -m lab.sensitivity > "$RUNNER_TEMP/sensitivity.json"
+          python - "$RUNNER_TEMP/sensitivity.json" <<'PY'
+          import json, math, sys
+          data = json.load(open(sys.argv[1], encoding="utf-8"))
+          research = data["research"]
+          assert research["plan"]["scenario"] == "substantial"
+          assert len(research["plan_sha256"]) == 64
+          assert research["planned_model_evaluations"] == 19
+          assert data["metadata"]["model_evaluations"] == 19
+          assert data["metadata"]["source_commit"] == "d4703b6ae0d19dca08fbde11a25c218fa4c7b7a6"
+          assert len(data["measurements"]) == 9
+          assert set(data["rankings"]) == set(data["baseline_2030"])
+          for key, ranking in data["rankings"].items():
+              assert len(ranking) == 9
+              assert all(math.isfinite(c["signed_change_pp"]) for c in ranking)
+              assert all(c["absolute_change_pp"] >= 0 for c in ranking)
+              assert all(ranking[i]["absolute_change_pp"] >= ranking[i+1]["absolute_change_pp"] for i in range(8))
+              print("Sensitivity", key, "top 3:", [(c["parameter"], c["signed_change_pp"]) for c in ranking[:3]])
+          for sample in data["measurements"]:
+              assert sample["low"] <= sample["baseline_value"] <= sample["high"]
+              assert len(sample["high_2030"]) == 5
+              assert len(sample["low_2030"]) == 5
+              assert math.isclose(
+                  (sample["high"]-sample["low"])/(sample["allowed_max"]-sample["allowed_min"]),
+                  0.10, rel_tol=1e-8,
+              )
+          print("Verified 19-model, 9-parameter owner sensitivity audit")
+          print("Pre-computation sensitivity plan:", research["plan_sha256"])
+          PY
