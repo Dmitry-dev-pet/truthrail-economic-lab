@@ -36,7 +36,11 @@ class SOCToISCOAuditTests(unittest.TestCase):
         self.assertEqual(m["status"], "CLASSIFICATION_ONLY_NOT_EMPLOYMENT_ESTIMATE")
         self.assertIn("BINARY_NOT_PARSED", m["sources"]["official"]["verification"])
         self.assertIn("UNVERIFIED", m["sources"]["mirror"]["verification"])
-        self.assertIsNone(m["portugal_2024_weight_data"]["all_employed_two_digit_counts"])
+        weights = m["portugal_2024_weight_data"]["all_employed_two_digit_counts"]
+        self.assertEqual(weights["source"], "Eurostat LFSA_EGAI2D")
+        self.assertEqual(weights["two_digit_groups"], 43)
+        self.assertEqual(weights["verified_all_employed_total_thousand"], 5112.3)
+        self.assertIn("UNVERIFIED", weights["weighted_classification_status"])
         self.assertEqual(m["extraction"]["csv_relationship_rows"], 1125)
         self.assertEqual(m["extraction"]["parse_failures"], [])
         self.assertEqual(m["extraction"]["distinct_ISCO_codes"], 438)
