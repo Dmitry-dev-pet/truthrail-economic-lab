@@ -46,9 +46,10 @@
           "EUROSTAT_PT_OCCUPATION_2024",
           "BLS_SOC_ISCO_2010",
           "ISCO_SOC_MIRROR_2010",
-          "PT_GEP_QUADROS_PESSOAL_2024"
+          "PT_GEP_QUADROS_PESSOAL_2024",
+          "EUROSTAT_PT_ISCO2_2024"
         ],
-        "mapping_note": "Model share of AI-sensitive C employment; Eurostat ISCO occupational major groups do not directly identify the paper's C group. Eurostat 2024 one-digit ISCO sample supports only illustrative group subsets (38.46/50.01/68.17 percent), not a calibrated parameter; confirm fine-grained SOC-to-ISCO concordance and ISCO 3/5 mixed roles. Classification-only crosswalk audit: 43 two-digit ISCO submajor groups with 13 exclusively C, 13 exclusively N and 17 mixed by unweighted CSV relations. Third-party CSV not verified against BLS original binary; need population weights and official crosswalk verification before PT assignment.",
+        "mapping_note": "Model share of AI-sensitive C employment; Eurostat ISCO occupational major groups do not directly identify the paper's C group. Eurostat 2024 one-digit ISCO sample supports only illustrative group subsets (38.46/50.01/68.17 percent), not a calibrated parameter; confirm fine-grained SOC-to-ISCO concordance and ISCO 3/5 mixed roles. Classification-only crosswalk audit: 43 two-digit ISCO submajor groups with 13 exclusively C, 13 exclusively N and 17 mixed by unweighted CSV relations. Third-party CSV not verified against BLS original binary; need population weights and official crosswalk verification before PT assignment. Official Eurostat LFSA_EGAI2D now supplies 2024 national 2-digit ISCO employment weights, but 17 of the 43 provisional mapped submajor codes mix C/N; the official BLS binary remains unparsed and detailed within-group weights are lacking. The provisional 37.19% C-only vs 46.44% mixed code groups are not formal bounds or adopted parameter values.",
         "portugal_model_value": null
       },
       {
@@ -506,6 +507,12 @@
       "organization": "Portugal DGCP/GEP Quadros de Pessoal 2024",
       "reference_year": 2024,
       "description": "Official 2024 employer personnel publication contains detailed occupations, but covers employer-reported employees, not the full LFS employed universe; content not retrieved in this audit."
+    },
+    "EUROSTAT_PT_ISCO2_2024": {
+      "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/lfsa_egai2d?geo=PT&time=2024&unit=THS_PER&sex=T&age=Y_GE15",
+      "organization": "Eurostat",
+      "reference_year": 2024,
+      "description": "Verified Portugal 2024 all-employed counts by 2-digit ISCO-08 occupation, 15+ all sexes (Eurostat LFSA_EGAI2D). Reconciles 5,112.3k total; flagged low-reliability units and one missing OC63. Classification to U.S. SOC model C/N remains unverified."
     }
   },
   "verified_context_observations": [
@@ -577,8 +584,8 @@
     }
   ],
   "calibration_gates": [
-    "Parse/verify the official BLS 2010 SOC↔ISCO08 XLS against the community-derived 43-submajor correspondence, resolving 2 non-four-digit source codes, then obtain detailed 2024 Portugal national all-employed occupation weights. Employer-reported GEP Quadros de Pessoal 2024 is a distinct universe; do not multiply its counts into Eurostat total without coverage and definitions.",
-    "Align Portuguese 2024 labor income share from national accounts, the unemployment search pool and labor-force denominators with the model's base-year definitions; simultaneously require an occupational C/N split weighted by real employment rather than counts of crosswalk links.",
+    "Official 2024 Portugal all-employed two-digit ISCO weights now verified from LFSA_EGAI2D (43 groups, 5,112.3 thousand total). Independently parse and verify official BLS SOC 2010–ISCO08 XLS against third-party mirror, resolve anomalous codes, and obtain 3/4-digit matched-population weights for the numerous mixed groups; avoid using employer-only Quadros de Pessoal as national counts unadjusted.",
+    "Align 2024 Portuguese labor income share and search-pool/labor-force denominators to base-year model accounting; construct a credible occupational C/N split from detailed employment weights with explicit ambiguous mapping treatment and population age/civilian reconciliation.",
     "Estimate monthly group-specific finding/separation, vacancy fill and C↔N mobility using appropriate linked national records. Eurostat 2024 annual E/U/I transitions are observed (U→E 42.2%; E→U 2.4%) but cannot estimate mu_bar directly.",
     "Review small-open-economy capital-supply closure, investment inflows and migration; keep U.S. structural elasticities labeled as assumptions.",
     "Keep all seven AI scenario dials as explicit alternative assumptions; national firm-level AI adoption is contextual only.",
