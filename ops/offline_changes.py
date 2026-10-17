@@ -68,6 +68,8 @@ def build_manifest(baseline, working, base_commit, paths):
         except UnicodeDecodeError as exc:
             raise ValueError(f"Non-UTF-8 file: {name}") from exc
         changes.append({"path": name, "status": "added" if before is None else "modified",
+                        "baseline_sha256": (hashlib.sha256(before).hexdigest()
+                                            if before is not None else None),
                         "sha256": hashlib.sha256(after).hexdigest(), "content": content})
     if not changes:
         raise ValueError("No actual changes found")
