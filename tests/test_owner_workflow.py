@@ -22,9 +22,13 @@ class OwnerExperimentWorkflowGuard(unittest.TestCase):
 
     def test_model_computation_does_not_receive_report_token(self):
         text = WORKFLOW.read_text(encoding="utf-8")
-        execute, report = text.split("      - name: Publish bounded issue result", 1)
+        execute, report = text.split("  report:\n", 1)
         self.assertNotIn("GH_TOKEN:", execute)
+        self.assertNotIn("issues: write", execute)
         self.assertIn("ECON_ISSUE_JSON: ${{ github.event.issue.body }}", execute)
+        self.assertIn("actions/upload-artifact@v4", execute)
+        self.assertIn("actions/download-artifact@v4", report)
+        self.assertIn("issues: write", report)
         self.assertIn("GH_TOKEN: ${{ github.token }}", report)
         self.assertIn("gh issue comment", report)
 
