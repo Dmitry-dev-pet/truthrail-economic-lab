@@ -61,7 +61,7 @@ def market_response(*, productivity_gain_pct: float,
     return {"price_change_pct": 100 * (p - 1),
             "real_output_growth_pct": 100 * (q - 1),
             "labor_hours_growth_pct": 100 * (hours - 1),
-            "payroll_jobs_growth_pct": 100 * (jobs - 1),
+            "worker_count_growth_pct": 100 * (jobs - 1),
             "effective_demand_compensation": price_pass_through * demand_price_elasticity}
 
 
