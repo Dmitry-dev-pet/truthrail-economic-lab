@@ -102,8 +102,9 @@ The public repository supports an optional, **owner-only** GitHub issue command:
   never used as shell commands, URLs, paths or executable code.
 - Issue contents and outputs are **public**. Never put secrets or personal
   information in an economic experiment issue.
-- The model-computation step does not receive the GitHub reporting token;
-  the comment step receives narrowly scoped `issues:write` permission.
+- The model-computation job has only `contents:read` permission. A separate
+  hosted reporting job receives narrowly scoped `issues:write` permission
+  and reads a bounded one-day result artifact.
   No Mac runner, Docker engine, privileged daemon, tunnel or LLM is involved.
 
 This route is a GitHub-backed chat workaround, **not** a low-latency direct
