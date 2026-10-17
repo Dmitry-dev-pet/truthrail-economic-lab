@@ -1,0 +1,452 @@
+{
+  "schema_version": 1,
+  "country_code": "PT",
+  "year": 2024,
+  "source": {
+    "publisher": "Eurostat",
+    "dataset": "lfsa_egai2d",
+    "doi": "10.2908/LFSA_EGAI2D",
+    "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/lfsa_egai2d?geo=PT&time=2024&unit=THS_PER&sex=T&age=Y_GE15",
+    "updated": "2026-09-10T23:00:00+0200",
+    "sex": "T",
+    "age": "Y_GE15",
+    "unit": "THS_PER",
+    "geo": "PT",
+    "time": "2024",
+    "revision": "Values returned 2026-10-17; source last updated 2026-09-10"
+  },
+  "purpose": "2024 all-employed weights by 2-digit ISCO08, not a calibrated model input",
+  "runnable": false,
+  "counts": [
+    {
+      "code": "TOTAL",
+      "label": "Total",
+      "thousands": 5112.3,
+      "flag": null
+    },
+    {
+      "code": "OC1",
+      "label": "Managers",
+      "thousands": 309.8,
+      "flag": null
+    },
+    {
+      "code": "OC11",
+      "label": "Chief executives, senior officials and legislators",
+      "thousands": 34.6,
+      "flag": null
+    },
+    {
+      "code": "OC12",
+      "label": "Administrative and commercial managers",
+      "thousands": 56.4,
+      "flag": null
+    },
+    {
+      "code": "OC13",
+      "label": "Production and specialised services managers",
+      "thousands": 109.8,
+      "flag": null
+    },
+    {
+      "code": "OC14",
+      "label": "Hospitality, retail and other services managers",
+      "thousands": 109,
+      "flag": null
+    },
+    {
+      "code": "OC2",
+      "label": "Professionals",
+      "thousands": 1178.3,
+      "flag": null
+    },
+    {
+      "code": "OC21",
+      "label": "Science and engineering professionals",
+      "thousands": 195,
+      "flag": null
+    },
+    {
+      "code": "OC22",
+      "label": "Health professionals",
+      "thousands": 205.8,
+      "flag": null
+    },
+    {
+      "code": "OC23",
+      "label": "Teaching professionals",
+      "thousands": 272.4,
+      "flag": null
+    },
+    {
+      "code": "OC24",
+      "label": "Business and administration professionals",
+      "thousands": 207.4,
+      "flag": null
+    },
+    {
+      "code": "OC25",
+      "label": "Information and communications technology professionals",
+      "thousands": 150.4,
+      "flag": null
+    },
+    {
+      "code": "OC26",
+      "label": "Legal, social and cultural professionals",
+      "thousands": 147.2,
+      "flag": null
+    },
+    {
+      "code": "OC3",
+      "label": "Technicians and associate professionals",
+      "thousands": 590.8,
+      "flag": null
+    },
+    {
+      "code": "OC31",
+      "label": "Science and engineering associate professionals",
+      "thousands": 125,
+      "flag": null
+    },
+    {
+      "code": "OC32",
+      "label": "Health associate professionals",
+      "thousands": 67.3,
+      "flag": null
+    },
+    {
+      "code": "OC33",
+      "label": "Business and administration associate professionals",
+      "thousands": 279.6,
+      "flag": null
+    },
+    {
+      "code": "OC34",
+      "label": "Legal, social, cultural and related associate professionals",
+      "thousands": 67.9,
+      "flag": null
+    },
+    {
+      "code": "OC35",
+      "label": "Information and communications technicians",
+      "thousands": 51,
+      "flag": null
+    },
+    {
+      "code": "OC4",
+      "label": "Clerical support workers",
+      "thousands": 478,
+      "flag": null
+    },
+    {
+      "code": "OC41",
+      "label": "General and keyboard clerks",
+      "thousands": 265.5,
+      "flag": null
+    },
+    {
+      "code": "OC42",
+      "label": "Customer services clerks",
+      "thousands": 109.8,
+      "flag": null
+    },
+    {
+      "code": "OC43",
+      "label": "Numerical and material recording clerks",
+      "thousands": 88.3,
+      "flag": null
+    },
+    {
+      "code": "OC44",
+      "label": "Other clerical support workers",
+      "thousands": 14.3,
+      "flag": null
+    },
+    {
+      "code": "OC5",
+      "label": "Service and sales workers",
+      "thousands": 928.3,
+      "flag": null
+    },
+    {
+      "code": "OC51",
+      "label": "Personal service workers",
+      "thousands": 212,
+      "flag": null
+    },
+    {
+      "code": "OC52",
+      "label": "Sales workers",
+      "thousands": 374.3,
+      "flag": null
+    },
+    {
+      "code": "OC53",
+      "label": "Personal care workers",
+      "thousands": 235.7,
+      "flag": null
+    },
+    {
+      "code": "OC54",
+      "label": "Protective services workers",
+      "thousands": 106.4,
+      "flag": null
+    },
+    {
+      "code": "OC6",
+      "label": "Skilled agricultural, forestry and fishery workers",
+      "thousands": 115.8,
+      "flag": null
+    },
+    {
+      "code": "OC61",
+      "label": "Market-oriented skilled agricultural workers",
+      "thousands": 98.6,
+      "flag": null
+    },
+    {
+      "code": "OC62",
+      "label": "Market-oriented skilled forestry, fishery and hunting workers",
+      "thousands": 17.2,
+      "flag": null
+    },
+    {
+      "code": "OC63",
+      "label": "Subsistence farmers, fishers, hunters and gatherers",
+      "thousands": null,
+      "flag": null
+    },
+    {
+      "code": "OC7",
+      "label": "Craft and related trades workers",
+      "thousands": 656.2,
+      "flag": null
+    },
+    {
+      "code": "OC71",
+      "label": "Building and related trades workers, excluding electricians",
+      "thousands": 218.6,
+      "flag": null
+    },
+    {
+      "code": "OC72",
+      "label": "Metal, machinery and related trades workers",
+      "thousands": 173.7,
+      "flag": null
+    },
+    {
+      "code": "OC73",
+      "label": "Handicraft and printing workers",
+      "thousands": 27.8,
+      "flag": null
+    },
+    {
+      "code": "OC74",
+      "label": "Electrical and electronic trades workers",
+      "thousands": 79.1,
+      "flag": null
+    },
+    {
+      "code": "OC75",
+      "label": "Food processing, wood working, garment and other craft and related trades workers",
+      "thousands": 156.9,
+      "flag": null
+    },
+    {
+      "code": "OC8",
+      "label": "Plant and machine operators and assemblers",
+      "thousands": 403.8,
+      "flag": null
+    },
+    {
+      "code": "OC81",
+      "label": "Stationary plant and machine operators",
+      "thousands": 167.1,
+      "flag": null
+    },
+    {
+      "code": "OC82",
+      "label": "Assemblers",
+      "thousands": 24.6,
+      "flag": null
+    },
+    {
+      "code": "OC83",
+      "label": "Drivers and mobile plant operators",
+      "thousands": 212.1,
+      "flag": null
+    },
+    {
+      "code": "OC9",
+      "label": "Elementary occupations",
+      "thousands": 429.1,
+      "flag": null
+    },
+    {
+      "code": "OC91",
+      "label": "Cleaners and helpers",
+      "thousands": 208.1,
+      "flag": null
+    },
+    {
+      "code": "OC92",
+      "label": "Agricultural, forestry and fishery labourers",
+      "thousands": 19.8,
+      "flag": null
+    },
+    {
+      "code": "OC93",
+      "label": "Labourers in mining, construction, manufacturing and transport",
+      "thousands": 88.4,
+      "flag": null
+    },
+    {
+      "code": "OC94",
+      "label": "Food preparation assistants",
+      "thousands": 45.2,
+      "flag": null
+    },
+    {
+      "code": "OC95",
+      "label": "Street and related sales and service workers",
+      "thousands": 6.1,
+      "flag": "u"
+    },
+    {
+      "code": "OC96",
+      "label": "Refuse workers and other elementary workers",
+      "thousands": 61.4,
+      "flag": null
+    },
+    {
+      "code": "OC0",
+      "label": "Armed forces occupations",
+      "thousands": 22.3,
+      "flag": null
+    },
+    {
+      "code": "OC01",
+      "label": "Commissioned armed forces officers",
+      "thousands": 6.9,
+      "flag": "u"
+    },
+    {
+      "code": "OC02",
+      "label": "Non-commissioned armed forces officers",
+      "thousands": 8.5,
+      "flag": "u"
+    },
+    {
+      "code": "OC03",
+      "label": "Armed forces occupations, other ranks",
+      "thousands": 6.9,
+      "flag": "u"
+    },
+    {
+      "code": "NRP",
+      "label": "No response",
+      "thousands": null,
+      "flag": null
+    }
+  ],
+  "totals": {
+    "employed_thousand": 5112.3,
+    "armed_forces_thousand": 22.3,
+    "provisional_civilian_thousand": 5090
+  },
+  "data_quality": {
+    "reliability_flag_u": "low reliability",
+    "flagged_codes": [
+      {
+        "code": "OC95",
+        "flag": "u",
+        "thousands": 6.1
+      },
+      {
+        "code": "OC01",
+        "flag": "u",
+        "thousands": 6.9
+      },
+      {
+        "code": "OC02",
+        "flag": "u",
+        "thousands": 8.5
+      },
+      {
+        "code": "OC03",
+        "flag": "u",
+        "thousands": 6.9
+      }
+    ],
+    "missing_data": [
+      "OC63",
+      "NRP"
+    ],
+    "major_reconciliation": {
+      "OC0": {
+        "published_thousand": 22.3,
+        "known_submajor_sum_thousand": 22.3,
+        "missing_codes": [],
+        "rounding_difference_thousand": 0
+      },
+      "OC1": {
+        "published_thousand": 309.8,
+        "known_submajor_sum_thousand": 309.8,
+        "missing_codes": [],
+        "rounding_difference_thousand": 0
+      },
+      "OC2": {
+        "published_thousand": 1178.3,
+        "known_submajor_sum_thousand": 1178.2,
+        "missing_codes": [],
+        "rounding_difference_thousand": 0.1
+      },
+      "OC3": {
+        "published_thousand": 590.8,
+        "known_submajor_sum_thousand": 590.8,
+        "missing_codes": [],
+        "rounding_difference_thousand": 0
+      },
+      "OC4": {
+        "published_thousand": 478,
+        "known_submajor_sum_thousand": 477.9,
+        "missing_codes": [],
+        "rounding_difference_thousand": 0.1
+      },
+      "OC5": {
+        "published_thousand": 928.3,
+        "known_submajor_sum_thousand": 928.4,
+        "missing_codes": [],
+        "rounding_difference_thousand": -0.1
+      },
+      "OC6": {
+        "published_thousand": 115.8,
+        "known_submajor_sum_thousand": 115.8,
+        "missing_codes": [
+          "OC63"
+        ],
+        "rounding_difference_thousand": 0
+      },
+      "OC7": {
+        "published_thousand": 656.2,
+        "known_submajor_sum_thousand": 656.1,
+        "missing_codes": [],
+        "rounding_difference_thousand": 0.1
+      },
+      "OC8": {
+        "published_thousand": 403.8,
+        "known_submajor_sum_thousand": 403.8,
+        "missing_codes": [],
+        "rounding_difference_thousand": 0
+      },
+      "OC9": {
+        "published_thousand": 429.1,
+        "known_submajor_sum_thousand": 429,
+        "missing_codes": [],
+        "rounding_difference_thousand": 0.1
+      }
+    },
+    "submajor_known_sum_thousand": 5112.1,
+    "note": "Missing OC63 and NRP must remain null. Parent and child levels are published independently and may differ by rounding or suppression; do not sum parent and children together."
+  }
+}
