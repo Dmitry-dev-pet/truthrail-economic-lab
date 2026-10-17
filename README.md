@@ -252,8 +252,13 @@ have now been retrieved for the full employed-person population.
 A [provisional crosswalk-weighted audit](country_profiles/portugal/2024/soc_isco_employment_weighted_review_2024.json)
 shows 37.19% of civilian employment in C-only mapped sub-major
 **codes**, 46.44% in mixed mapped codes and 16.37% in N-only codes.
-The mapping source is still an **unverified third-party mirror** and
-nearly half of employed persons belong to ambiguous groups.
+The CSV source now **agrees exactly (1,125 of 1,125 code
+pairs and titles)** with a separately GitHub-hosted BLS-branded
+Excel workbook, but **the official BLS-hosted binary has not
+been checked directly**. Nearly half of employed people are
+in ambiguous two-digit groups; in 26 four-digit codes the
+crosswalk itself permits mappings to both C and N.
+See [the independent binary/CSV verification](country_profiles/portugal/2024/independent_xls_vs_csv_verification_2024.json).
 These proportions are classification coverage categories, not
 Portugal `cog_share` values, formal bounds or employment
 exposure-to-AI statistics. Finer occupational codes and primary
