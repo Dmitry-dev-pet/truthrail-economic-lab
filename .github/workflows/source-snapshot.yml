@@ -1,0 +1,61 @@
+name: Owner-requested Economic Lab source snapshot
+run-name: "Source snapshot for issue #${{ github.event.issue.number }}"
+
+on:
+  issues:
+    types: [opened]
+
+permissions:
+  contents: read
+
+jobs:
+  snapshot:
+    # Exact owner-created command; the Issue body is not interpreted.
+    if: >-
+      github.event.issue.user.login == github.repository_owner &&
+      github.event.issue.title == '[source] snapshot'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - name: Retrieve pinned public mathematical source
+        shell: bash
+        run: |
+          set -euo pipefail
+          git -c credential.helper= clone --depth 1 --branch v1.0 \
+            https://github.com/fhoces/opa-ai-macro-econ-scenarios.git "$RUNNER_TEMP/reproduction"
+          test "$(git -C "$RUNNER_TEMP/reproduction" rev-parse HEAD)" = \
+            d4703b6ae0d19dca08fbde11a25c218fa4c7b7a6
+      - name: Build offline source snapshot with provenance
+        shell: bash
+        run: |
+          set -euo pipefail
+          project_sha="$(git rev-parse HEAD)"
+          model_sha="$(git -C "$RUNNER_TEMP/reproduction" rev-parse HEAD)"
+          test "$project_sha" = "$GITHUB_SHA"
+          test "$model_sha" = "d4703b6ae0d19dca08fbde11a25c218fa4c7b7a6"
+          out="$RUNNER_TEMP/economic-source"
+          mkdir -p "$out"
+          git archive --format=tar.gz --prefix=project/ "$project_sha" > "$out/project.tar.gz"
+          git -C "$RUNNER_TEMP/reproduction" archive --format=tar.gz --prefix=upstream/ \
+            "$model_sha" aiscen LICENSE CREDIT.md > "$out/upstream-aiscen.tar.gz"
+          printf '%s\n' "$project_sha" > "$out/project.sha"
+          printf '%s\n' "$model_sha" > "$out/upstream.sha"
+          (
+            cd "$out"
+            sha256sum project.tar.gz upstream-aiscen.tar.gz > SHA256SUMS
+            sha256sum --check SHA256SUMS
+          )
+      - name: Upload requested source snapshot
+        uses: actions/upload-artifact@v4
+        with:
+          name: economic-source-issue-${{ github.event.issue.number }}-${{ github.sha }}
+          path: ${{ runner.temp }}/economic-source/
+          if-no-files-found: error
+          retention-days: 3
+          compression-level: 0
