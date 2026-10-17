@@ -47,6 +47,9 @@ class Portugal2024SourceSnapshots(unittest.TestCase):
         )
         groups = d["coarse_subsets"]
         self.assertEqual(len(groups), 3)
+        civilian = counts["TOTAL"]["thousands"] - counts["OC0"]["thousands"]
+        self.assertAlmostEqual(d["provisional_civilian_employment_thousand"], civilian)
+        self.assertEqual(civilian, 5090.0)
         self.assertEqual(groups[0]["codes"], ["OC1", "OC2", "OC4"])
         self.assertEqual(groups[1]["codes"], ["OC1", "OC2", "OC3", "OC4"])
         self.assertEqual(groups[2]["codes"], ["OC1", "OC2", "OC3", "OC4", "OC5"])
@@ -55,6 +58,9 @@ class Portugal2024SourceSnapshots(unittest.TestCase):
             self.assertAlmostEqual(item["thousands"], expected, places=5)
             self.assertAlmostEqual(
                 item["share_of_total"], expected / counts["TOTAL"]["thousands"], places=6,
+            )
+            self.assertAlmostEqual(
+                item["share_of_civilian_proxy"], expected / civilian, places=6,
             )
             self.assertTrue(item["notes"])
         self.assertLess(groups[0]["share_of_total"], groups[1]["share_of_total"])
