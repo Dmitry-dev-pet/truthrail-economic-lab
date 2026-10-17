@@ -17,6 +17,9 @@ A small reproducible **US economic research sandbox**. It is not a US employment
 - Use reviewed existing Truthrail routes; do not add a new MCP simply to call localhost.
 - The public hosted `[econ] experiment` issue route accepts only owner-opened exact-title issues, bounded JSON numeric axes (maximum 25 cells), and never executes issue text as commands. Computation runs in a separate `contents:read` job; only the isolated `issues:write` report job can comment, using a bounded short-retention artifact. It never reaches the Mac or local API.
 - Issue bodies and posted results on this public repository are public; do not include private/user data.
+- Research requests are strictly `{"research":"auto"}` or an allowlisted `research` id with an optional named US scenario. `lab.research.prepare` ranks **predeclared** candidate hypotheses without executing simulations, records every predicted direction and a SHA-256 plan fingerprint, then `run_research` runs one nine-cell grid plus baseline. Never add a general natural-language-to-code, issue-body script, unbounded self-iteration, external LLM request or scheduled science agent.
+- The `rho` parameter represents reinstatement of new labor tasks per automated task, distinct from occupational transition efficiency `mu`. State that model results are scenario sensitivities, not economic forecasts or independent empirical tests. A score is an internal research priority, not probability. Claims about "confirmation" must always be scoped "consistent within the tested model grid".
+- Keep the existing `[econ] experiment` route fully backward-compatible with explicit two-axis grids; hypothesis studies use the same hosted Linux calculate/report isolation. New Mac actions need separate owner-reviewed immutable mac-access authority.
 - No execution or deployment should be claimed without observed evidence from the target runtime.
 
 ## Development
