@@ -1,0 +1,115 @@
+{
+  "title": "Next-month U.S. payroll employment growth versus prior BTOS AI adoption",
+  "date": "2026-10-17",
+  "analysis": "exploratory predefined split for small-panel forecasting, not causal inference",
+  "primary_metric": "RMSE of one-month percentage change in BLS CES seasonally adjusted payroll employee counts",
+  "sources": {
+    "btos": "research/data/2026-10-17-btos-sector-lag-panel.json",
+    "bls": "research/data/2026-10-17-bls-ces-sector-employment.json",
+    "btos_questionnaire_break": "2025-11-17",
+    "bls_latest": "2026-09",
+    "bls_next_release": "2026-11-06"
+  },
+  "industries": [
+    "23",
+    "31",
+    "42",
+    "44",
+    "48",
+    "51",
+    "52",
+    "54",
+    "62",
+    "72"
+  ],
+  "exposure_waves": [
+    90,
+    92,
+    94,
+    96,
+    98,
+    100,
+    102,
+    104,
+    106
+  ],
+  "mapping_rule": "Use full BTOS collection END calendar month c as origin month. Latest BLS predictor value = c-1 (last generally released month); outcome = 100*(CES[c+1]/CES[c]-1), one-month growth in subsequent calendar month. No Oct 2026 CES (not yet released). For wave 106 ending August 9, forecast September growth.",
+  "training_exposure_waves": [
+    90,
+    92,
+    94,
+    96,
+    98,
+    100
+  ],
+  "held_out_exposure_waves": [
+    102,
+    104,
+    106
+  ],
+  "data_counts": {
+    "sectors": 10,
+    "all_records": 90,
+    "training": 60,
+    "holdout": 30
+  },
+  "baseline_features": [
+    "industry intercepts (10 incl global intercept)",
+    "last published BLS one-month payroll growth to end-month c-1",
+    "BTOS firm revenue increase minus decrease percentage shares at survey wave"
+  ],
+  "models": [
+    {
+      "name": "persistence",
+      "features": [
+        "last published BLS monthly growth"
+      ],
+      "fitting": false
+    },
+    {
+      "name": "M0",
+      "features": [
+        "industry effects",
+        "last published payroll growth",
+        "BTOS revenue balance"
+      ],
+      "fitting": true
+    },
+    {
+      "name": "M1_AIlevel",
+      "features": [
+        "industry effects",
+        "last published payroll growth",
+        "BTOS revenue balance",
+        "current BTOS AI use %"
+      ],
+      "fitting": true
+    },
+    {
+      "name": "M2_AIchange",
+      "features": [
+        "industry effects",
+        "last published payroll growth",
+        "BTOS revenue balance",
+        "change in BTOS AI % from previous four-week wave"
+      ],
+      "fitting": true
+    }
+  ],
+  "metrics": [
+    "out-of-time RMSE, pp",
+    "out-of-time MAE, pp",
+    "median and 95% spread of sector resampling of M0-M1 fixed-prediction RMSE difference"
+  ],
+  "scientific_limitations": [
+    "sector-level observational association, no causal identification; AI use potentially endogenous",
+    "CES and BTOS cover different employer/workforce concepts (payroll jobs vs percentage responding firms)",
+    "manufacturing and retail broad NAICS groups require equivalence checks",
+    "BTOS questionnaires changed in November 2025; no comparably long post-break series",
+    "10 purposefully selected industries not probability sample; high within-sector dependence",
+    "original CES values are as-of Oct 17 2026, preliminary for Aug/Sep 2026 and subject to revisions",
+    "one-month outcome, not 6-12 month structural transformation; longer lags too thin for strong claims",
+    "no estimating task reinstatement rho or changing pinned US macro model"
+  ],
+  "no_posthoc_changes_to_primary_models": true
+}

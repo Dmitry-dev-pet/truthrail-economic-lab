@@ -1,0 +1,1142 @@
+{
+  "study": "BTOS AI adoption vs BLS actual monthly payroll employment; research followup to PR34",
+  "retrieved_utc_date": "2026-10-17",
+  "reference_note": "BLS API GET returns 3-year rolling current values, BLS payroll revisions possible. Frozen as-of 2026-10-17, through September 2026. Original 2026 Oct data not released until Nov 6.",
+  "source": "US Bureau of Labor Statistics, Current Employment Statistics (CES), official API https://api.bls.gov/publicAPI/v2/timeseries/data/{series_id}",
+  "unit": "thousands of payroll employees, seasonally adjusted, monthly",
+  "observations_date_range": "2025-01 to 2026-09",
+  "naics_mapping_caveat": "Broad sector mapping for NAICS 31-33, 44-45 and 48-49. BTOS codes 31, 44, 48 represent aggregated sectors; verify published strata definitions for exact equivalence. BLS CES excludes proprietors, unincorporated self-employed and other workers.",
+  "available_publication_note": "September BLS estimates first released Oct 2, 2026; August/September 2026 values preliminary. BTOS records through Oct 4 cannot be assigned contemporaneous October CES.",
+  "series": [
+    {
+      "sector": "23",
+      "series_id": "CES2000000001",
+      "industry": "Construction, NAICS 23",
+      "source_api_url": "https://api.bls.gov/publicAPI/v2/timeseries/data/CES2000000001",
+      "observations": [
+        {
+          "month": "2025-01",
+          "persons_thousands": 8264,
+          "preliminary": false
+        },
+        {
+          "month": "2025-02",
+          "persons_thousands": 8267,
+          "preliminary": false
+        },
+        {
+          "month": "2025-03",
+          "persons_thousands": 8273,
+          "preliminary": false
+        },
+        {
+          "month": "2025-04",
+          "persons_thousands": 8271,
+          "preliminary": false
+        },
+        {
+          "month": "2025-05",
+          "persons_thousands": 8269,
+          "preliminary": false
+        },
+        {
+          "month": "2025-06",
+          "persons_thousands": 8267,
+          "preliminary": false
+        },
+        {
+          "month": "2025-07",
+          "persons_thousands": 8261,
+          "preliminary": false
+        },
+        {
+          "month": "2025-08",
+          "persons_thousands": 8239,
+          "preliminary": false
+        },
+        {
+          "month": "2025-09",
+          "persons_thousands": 8255,
+          "preliminary": false
+        },
+        {
+          "month": "2025-10",
+          "persons_thousands": 8243,
+          "preliminary": false
+        },
+        {
+          "month": "2025-11",
+          "persons_thousands": 8279,
+          "preliminary": false
+        },
+        {
+          "month": "2025-12",
+          "persons_thousands": 8272,
+          "preliminary": false
+        },
+        {
+          "month": "2026-01",
+          "persons_thousands": 8317,
+          "preliminary": false
+        },
+        {
+          "month": "2026-02",
+          "persons_thousands": 8296,
+          "preliminary": false
+        },
+        {
+          "month": "2026-03",
+          "persons_thousands": 8311,
+          "preliminary": false
+        },
+        {
+          "month": "2026-04",
+          "persons_thousands": 8314,
+          "preliminary": false
+        },
+        {
+          "month": "2026-05",
+          "persons_thousands": 8316,
+          "preliminary": false
+        },
+        {
+          "month": "2026-06",
+          "persons_thousands": 8319,
+          "preliminary": false
+        },
+        {
+          "month": "2026-07",
+          "persons_thousands": 8337,
+          "preliminary": false
+        },
+        {
+          "month": "2026-08",
+          "persons_thousands": 8353,
+          "preliminary": true
+        },
+        {
+          "month": "2026-09",
+          "persons_thousands": 8364,
+          "preliminary": true
+        }
+      ]
+    },
+    {
+      "sector": "31",
+      "series_id": "CES3000000001",
+      "industry": "Manufacturing, NAICS 31-33 (BTOS sector 31 is grouped manufacturing)",
+      "source_api_url": "https://api.bls.gov/publicAPI/v2/timeseries/data/CES3000000001",
+      "observations": [
+        {
+          "month": "2025-01",
+          "persons_thousands": 12673,
+          "preliminary": false
+        },
+        {
+          "month": "2025-02",
+          "persons_thousands": 12671,
+          "preliminary": false
+        },
+        {
+          "month": "2025-03",
+          "persons_thousands": 12666,
+          "preliminary": false
+        },
+        {
+          "month": "2025-04",
+          "persons_thousands": 12662,
+          "preliminary": false
+        },
+        {
+          "month": "2025-05",
+          "persons_thousands": 12651,
+          "preliminary": false
+        },
+        {
+          "month": "2025-06",
+          "persons_thousands": 12636,
+          "preliminary": false
+        },
+        {
+          "month": "2025-07",
+          "persons_thousands": 12625,
+          "preliminary": false
+        },
+        {
+          "month": "2025-08",
+          "persons_thousands": 12615,
+          "preliminary": false
+        },
+        {
+          "month": "2025-09",
+          "persons_thousands": 12612,
+          "preliminary": false
+        },
+        {
+          "month": "2025-10",
+          "persons_thousands": 12603,
+          "preliminary": false
+        },
+        {
+          "month": "2025-11",
+          "persons_thousands": 12593,
+          "preliminary": false
+        },
+        {
+          "month": "2025-12",
+          "persons_thousands": 12580,
+          "preliminary": false
+        },
+        {
+          "month": "2026-01",
+          "persons_thousands": 12582,
+          "preliminary": false
+        },
+        {
+          "month": "2026-02",
+          "persons_thousands": 12583,
+          "preliminary": false
+        },
+        {
+          "month": "2026-03",
+          "persons_thousands": 12598,
+          "preliminary": false
+        },
+        {
+          "month": "2026-04",
+          "persons_thousands": 12597,
+          "preliminary": false
+        },
+        {
+          "month": "2026-05",
+          "persons_thousands": 12595,
+          "preliminary": false
+        },
+        {
+          "month": "2026-06",
+          "persons_thousands": 12608,
+          "preliminary": false
+        },
+        {
+          "month": "2026-07",
+          "persons_thousands": 12628,
+          "preliminary": false
+        },
+        {
+          "month": "2026-08",
+          "persons_thousands": 12643,
+          "preliminary": true
+        },
+        {
+          "month": "2026-09",
+          "persons_thousands": 12652,
+          "preliminary": true
+        }
+      ]
+    },
+    {
+      "sector": "42",
+      "series_id": "CES4142000001",
+      "industry": "Wholesale trade, NAICS 42",
+      "source_api_url": "https://api.bls.gov/publicAPI/v2/timeseries/data/CES4142000001",
+      "observations": [
+        {
+          "month": "2025-01",
+          "persons_thousands": 6073.3,
+          "preliminary": false
+        },
+        {
+          "month": "2025-02",
+          "persons_thousands": 6075.9,
+          "preliminary": false
+        },
+        {
+          "month": "2025-03",
+          "persons_thousands": 6062,
+          "preliminary": false
+        },
+        {
+          "month": "2025-04",
+          "persons_thousands": 6066.9,
+          "preliminary": false
+        },
+        {
+          "month": "2025-05",
+          "persons_thousands": 6067.7,
+          "preliminary": false
+        },
+        {
+          "month": "2025-06",
+          "persons_thousands": 6057.3,
+          "preliminary": false
+        },
+        {
+          "month": "2025-07",
+          "persons_thousands": 6051.6,
+          "preliminary": false
+        },
+        {
+          "month": "2025-08",
+          "persons_thousands": 6043,
+          "preliminary": false
+        },
+        {
+          "month": "2025-09",
+          "persons_thousands": 6051.8,
+          "preliminary": false
+        },
+        {
+          "month": "2025-10",
+          "persons_thousands": 6054.6,
+          "preliminary": false
+        },
+        {
+          "month": "2025-11",
+          "persons_thousands": 6048.2,
+          "preliminary": false
+        },
+        {
+          "month": "2025-12",
+          "persons_thousands": 6042.5,
+          "preliminary": false
+        },
+        {
+          "month": "2026-01",
+          "persons_thousands": 6044.6,
+          "preliminary": false
+        },
+        {
+          "month": "2026-02",
+          "persons_thousands": 6053,
+          "preliminary": false
+        },
+        {
+          "month": "2026-03",
+          "persons_thousands": 6051.3,
+          "preliminary": false
+        },
+        {
+          "month": "2026-04",
+          "persons_thousands": 6051.9,
+          "preliminary": false
+        },
+        {
+          "month": "2026-05",
+          "persons_thousands": 6054.4,
+          "preliminary": false
+        },
+        {
+          "month": "2026-06",
+          "persons_thousands": 6059,
+          "preliminary": false
+        },
+        {
+          "month": "2026-07",
+          "persons_thousands": 6065.3,
+          "preliminary": false
+        },
+        {
+          "month": "2026-08",
+          "persons_thousands": 6073.3,
+          "preliminary": true
+        },
+        {
+          "month": "2026-09",
+          "persons_thousands": 6078.3,
+          "preliminary": true
+        }
+      ]
+    },
+    {
+      "sector": "44",
+      "series_id": "CES4200000001",
+      "industry": "Retail trade, NAICS 44-45 (BTOS sector 44 is grouped retail)",
+      "source_api_url": "https://api.bls.gov/publicAPI/v2/timeseries/data/CES4200000001",
+      "observations": [
+        {
+          "month": "2025-01",
+          "persons_thousands": 15459.3,
+          "preliminary": false
+        },
+        {
+          "month": "2025-02",
+          "persons_thousands": 15441.8,
+          "preliminary": false
+        },
+        {
+          "month": "2025-03",
+          "persons_thousands": 15457.5,
+          "preliminary": false
+        },
+        {
+          "month": "2025-04",
+          "persons_thousands": 15461.6,
+          "preliminary": false
+        },
+        {
+          "month": "2025-05",
+          "persons_thousands": 15440,
+          "preliminary": false
+        },
+        {
+          "month": "2025-06",
+          "persons_thousands": 15425.5,
+          "preliminary": false
+        },
+        {
+          "month": "2025-07",
+          "persons_thousands": 15430.2,
+          "preliminary": false
+        },
+        {
+          "month": "2025-08",
+          "persons_thousands": 15440.3,
+          "preliminary": false
+        },
+        {
+          "month": "2025-09",
+          "persons_thousands": 15453.4,
+          "preliminary": false
+        },
+        {
+          "month": "2025-10",
+          "persons_thousands": 15438,
+          "preliminary": false
+        },
+        {
+          "month": "2025-11",
+          "persons_thousands": 15437.1,
+          "preliminary": false
+        },
+        {
+          "month": "2025-12",
+          "persons_thousands": 15413.5,
+          "preliminary": false
+        },
+        {
+          "month": "2026-01",
+          "persons_thousands": 15426.2,
+          "preliminary": false
+        },
+        {
+          "month": "2026-02",
+          "persons_thousands": 15425.9,
+          "preliminary": false
+        },
+        {
+          "month": "2026-03",
+          "persons_thousands": 15435.5,
+          "preliminary": false
+        },
+        {
+          "month": "2026-04",
+          "persons_thousands": 15459,
+          "preliminary": false
+        },
+        {
+          "month": "2026-05",
+          "persons_thousands": 15464,
+          "preliminary": false
+        },
+        {
+          "month": "2026-06",
+          "persons_thousands": 15473.6,
+          "preliminary": false
+        },
+        {
+          "month": "2026-07",
+          "persons_thousands": 15479.2,
+          "preliminary": false
+        },
+        {
+          "month": "2026-08",
+          "persons_thousands": 15474.1,
+          "preliminary": true
+        },
+        {
+          "month": "2026-09",
+          "persons_thousands": 15479.9,
+          "preliminary": true
+        }
+      ]
+    },
+    {
+      "sector": "48",
+      "series_id": "CES4300000001",
+      "industry": "Transportation and warehousing, NAICS 48-49 (BTOS sector 48 is grouped)",
+      "source_api_url": "https://api.bls.gov/publicAPI/v2/timeseries/data/CES4300000001",
+      "observations": [
+        {
+          "month": "2025-01",
+          "persons_thousands": 6664.9,
+          "preliminary": false
+        },
+        {
+          "month": "2025-02",
+          "persons_thousands": 6689.1,
+          "preliminary": false
+        },
+        {
+          "month": "2025-03",
+          "persons_thousands": 6671.7,
+          "preliminary": false
+        },
+        {
+          "month": "2025-04",
+          "persons_thousands": 6655.4,
+          "preliminary": false
+        },
+        {
+          "month": "2025-05",
+          "persons_thousands": 6655.5,
+          "preliminary": false
+        },
+        {
+          "month": "2025-06",
+          "persons_thousands": 6655.5,
+          "preliminary": false
+        },
+        {
+          "month": "2025-07",
+          "persons_thousands": 6659.4,
+          "preliminary": false
+        },
+        {
+          "month": "2025-08",
+          "persons_thousands": 6657.8,
+          "preliminary": false
+        },
+        {
+          "month": "2025-09",
+          "persons_thousands": 6618.5,
+          "preliminary": false
+        },
+        {
+          "month": "2025-10",
+          "persons_thousands": 6619.1,
+          "preliminary": false
+        },
+        {
+          "month": "2025-11",
+          "persons_thousands": 6560.2,
+          "preliminary": false
+        },
+        {
+          "month": "2025-12",
+          "persons_thousands": 6555.4,
+          "preliminary": false
+        },
+        {
+          "month": "2026-01",
+          "persons_thousands": 6578,
+          "preliminary": false
+        },
+        {
+          "month": "2026-02",
+          "persons_thousands": 6532.5,
+          "preliminary": false
+        },
+        {
+          "month": "2026-03",
+          "persons_thousands": 6557.6,
+          "preliminary": false
+        },
+        {
+          "month": "2026-04",
+          "persons_thousands": 6597,
+          "preliminary": false
+        },
+        {
+          "month": "2026-05",
+          "persons_thousands": 6597.8,
+          "preliminary": false
+        },
+        {
+          "month": "2026-06",
+          "persons_thousands": 6587.5,
+          "preliminary": false
+        },
+        {
+          "month": "2026-07",
+          "persons_thousands": 6597.8,
+          "preliminary": false
+        },
+        {
+          "month": "2026-08",
+          "persons_thousands": 6601.1,
+          "preliminary": true
+        },
+        {
+          "month": "2026-09",
+          "persons_thousands": 6608.7,
+          "preliminary": true
+        }
+      ]
+    },
+    {
+      "sector": "51",
+      "series_id": "CES5000000001",
+      "industry": "Information, NAICS 51",
+      "source_api_url": "https://api.bls.gov/publicAPI/v2/timeseries/data/CES5000000001",
+      "observations": [
+        {
+          "month": "2025-01",
+          "persons_thousands": 2877,
+          "preliminary": false
+        },
+        {
+          "month": "2025-02",
+          "persons_thousands": 2876,
+          "preliminary": false
+        },
+        {
+          "month": "2025-03",
+          "persons_thousands": 2867,
+          "preliminary": false
+        },
+        {
+          "month": "2025-04",
+          "persons_thousands": 2865,
+          "preliminary": false
+        },
+        {
+          "month": "2025-05",
+          "persons_thousands": 2864,
+          "preliminary": false
+        },
+        {
+          "month": "2025-06",
+          "persons_thousands": 2863,
+          "preliminary": false
+        },
+        {
+          "month": "2025-07",
+          "persons_thousands": 2861,
+          "preliminary": false
+        },
+        {
+          "month": "2025-08",
+          "persons_thousands": 2860,
+          "preliminary": false
+        },
+        {
+          "month": "2025-09",
+          "persons_thousands": 2859,
+          "preliminary": false
+        },
+        {
+          "month": "2025-10",
+          "persons_thousands": 2853,
+          "preliminary": false
+        },
+        {
+          "month": "2025-11",
+          "persons_thousands": 2848,
+          "preliminary": false
+        },
+        {
+          "month": "2025-12",
+          "persons_thousands": 2842,
+          "preliminary": false
+        },
+        {
+          "month": "2026-01",
+          "persons_thousands": 2815,
+          "preliminary": false
+        },
+        {
+          "month": "2026-02",
+          "persons_thousands": 2792,
+          "preliminary": false
+        },
+        {
+          "month": "2026-03",
+          "persons_thousands": 2793,
+          "preliminary": false
+        },
+        {
+          "month": "2026-04",
+          "persons_thousands": 2787,
+          "preliminary": false
+        },
+        {
+          "month": "2026-05",
+          "persons_thousands": 2782,
+          "preliminary": false
+        },
+        {
+          "month": "2026-06",
+          "persons_thousands": 2763,
+          "preliminary": false
+        },
+        {
+          "month": "2026-07",
+          "persons_thousands": 2767,
+          "preliminary": false
+        },
+        {
+          "month": "2026-08",
+          "persons_thousands": 2749,
+          "preliminary": true
+        },
+        {
+          "month": "2026-09",
+          "persons_thousands": 2739,
+          "preliminary": true
+        }
+      ]
+    },
+    {
+      "sector": "52",
+      "series_id": "CES5552000001",
+      "industry": "Finance and insurance, NAICS 52",
+      "source_api_url": "https://api.bls.gov/publicAPI/v2/timeseries/data/CES5552000001",
+      "observations": [
+        {
+          "month": "2025-01",
+          "persons_thousands": 6731.2,
+          "preliminary": false
+        },
+        {
+          "month": "2025-02",
+          "persons_thousands": 6740.5,
+          "preliminary": false
+        },
+        {
+          "month": "2025-03",
+          "persons_thousands": 6743,
+          "preliminary": false
+        },
+        {
+          "month": "2025-04",
+          "persons_thousands": 6740.4,
+          "preliminary": false
+        },
+        {
+          "month": "2025-05",
+          "persons_thousands": 6744.9,
+          "preliminary": false
+        },
+        {
+          "month": "2025-06",
+          "persons_thousands": 6741.5,
+          "preliminary": false
+        },
+        {
+          "month": "2025-07",
+          "persons_thousands": 6747.3,
+          "preliminary": false
+        },
+        {
+          "month": "2025-08",
+          "persons_thousands": 6733.4,
+          "preliminary": false
+        },
+        {
+          "month": "2025-09",
+          "persons_thousands": 6737.9,
+          "preliminary": false
+        },
+        {
+          "month": "2025-10",
+          "persons_thousands": 6737.8,
+          "preliminary": false
+        },
+        {
+          "month": "2025-11",
+          "persons_thousands": 6735.3,
+          "preliminary": false
+        },
+        {
+          "month": "2025-12",
+          "persons_thousands": 6734.2,
+          "preliminary": false
+        },
+        {
+          "month": "2026-01",
+          "persons_thousands": 6710.4,
+          "preliminary": false
+        },
+        {
+          "month": "2026-02",
+          "persons_thousands": 6707.7,
+          "preliminary": false
+        },
+        {
+          "month": "2026-03",
+          "persons_thousands": 6688,
+          "preliminary": false
+        },
+        {
+          "month": "2026-04",
+          "persons_thousands": 6684.8,
+          "preliminary": false
+        },
+        {
+          "month": "2026-05",
+          "persons_thousands": 6666.6,
+          "preliminary": false
+        },
+        {
+          "month": "2026-06",
+          "persons_thousands": 6671.5,
+          "preliminary": false
+        },
+        {
+          "month": "2026-07",
+          "persons_thousands": 6659.5,
+          "preliminary": false
+        },
+        {
+          "month": "2026-08",
+          "persons_thousands": 6651.6,
+          "preliminary": true
+        },
+        {
+          "month": "2026-09",
+          "persons_thousands": 6644.6,
+          "preliminary": true
+        }
+      ]
+    },
+    {
+      "sector": "54",
+      "series_id": "CES6054000001",
+      "industry": "Professional, scientific, technical services, NAICS 54",
+      "source_api_url": "https://api.bls.gov/publicAPI/v2/timeseries/data/CES6054000001",
+      "observations": [
+        {
+          "month": "2025-01",
+          "persons_thousands": 10792.7,
+          "preliminary": false
+        },
+        {
+          "month": "2025-02",
+          "persons_thousands": 10779.9,
+          "preliminary": false
+        },
+        {
+          "month": "2025-03",
+          "persons_thousands": 10782.3,
+          "preliminary": false
+        },
+        {
+          "month": "2025-04",
+          "persons_thousands": 10786.7,
+          "preliminary": false
+        },
+        {
+          "month": "2025-05",
+          "persons_thousands": 10783.8,
+          "preliminary": false
+        },
+        {
+          "month": "2025-06",
+          "persons_thousands": 10768,
+          "preliminary": false
+        },
+        {
+          "month": "2025-07",
+          "persons_thousands": 10772.5,
+          "preliminary": false
+        },
+        {
+          "month": "2025-08",
+          "persons_thousands": 10765.7,
+          "preliminary": false
+        },
+        {
+          "month": "2025-09",
+          "persons_thousands": 10760.6,
+          "preliminary": false
+        },
+        {
+          "month": "2025-10",
+          "persons_thousands": 10754.1,
+          "preliminary": false
+        },
+        {
+          "month": "2025-11",
+          "persons_thousands": 10790.8,
+          "preliminary": false
+        },
+        {
+          "month": "2025-12",
+          "persons_thousands": 10784.6,
+          "preliminary": false
+        },
+        {
+          "month": "2026-01",
+          "persons_thousands": 10790.4,
+          "preliminary": false
+        },
+        {
+          "month": "2026-02",
+          "persons_thousands": 10810,
+          "preliminary": false
+        },
+        {
+          "month": "2026-03",
+          "persons_thousands": 10795.6,
+          "preliminary": false
+        },
+        {
+          "month": "2026-04",
+          "persons_thousands": 10808.9,
+          "preliminary": false
+        },
+        {
+          "month": "2026-05",
+          "persons_thousands": 10815.8,
+          "preliminary": false
+        },
+        {
+          "month": "2026-06",
+          "persons_thousands": 10833.6,
+          "preliminary": false
+        },
+        {
+          "month": "2026-07",
+          "persons_thousands": 10835.9,
+          "preliminary": false
+        },
+        {
+          "month": "2026-08",
+          "persons_thousands": 10837.2,
+          "preliminary": true
+        },
+        {
+          "month": "2026-09",
+          "persons_thousands": 10843.6,
+          "preliminary": true
+        }
+      ]
+    },
+    {
+      "sector": "62",
+      "series_id": "CES6562000001",
+      "industry": "Health care and social assistance, NAICS 62",
+      "source_api_url": "https://api.bls.gov/publicAPI/v2/timeseries/data/CES6562000001",
+      "observations": [
+        {
+          "month": "2025-01",
+          "persons_thousands": 22960.4,
+          "preliminary": false
+        },
+        {
+          "month": "2025-02",
+          "persons_thousands": 23008.3,
+          "preliminary": false
+        },
+        {
+          "month": "2025-03",
+          "persons_thousands": 23076,
+          "preliminary": false
+        },
+        {
+          "month": "2025-04",
+          "persons_thousands": 23152,
+          "preliminary": false
+        },
+        {
+          "month": "2025-05",
+          "persons_thousands": 23217,
+          "preliminary": false
+        },
+        {
+          "month": "2025-06",
+          "persons_thousands": 23277.5,
+          "preliminary": false
+        },
+        {
+          "month": "2025-07",
+          "persons_thousands": 23360.1,
+          "preliminary": false
+        },
+        {
+          "month": "2025-08",
+          "persons_thousands": 23382.9,
+          "preliminary": false
+        },
+        {
+          "month": "2025-09",
+          "persons_thousands": 23438.2,
+          "preliminary": false
+        },
+        {
+          "month": "2025-10",
+          "persons_thousands": 23485.8,
+          "preliminary": false
+        },
+        {
+          "month": "2025-11",
+          "persons_thousands": 23545.7,
+          "preliminary": false
+        },
+        {
+          "month": "2025-12",
+          "persons_thousands": 23587.5,
+          "preliminary": false
+        },
+        {
+          "month": "2026-01",
+          "persons_thousands": 23694.4,
+          "preliminary": false
+        },
+        {
+          "month": "2026-02",
+          "persons_thousands": 23664,
+          "preliminary": false
+        },
+        {
+          "month": "2026-03",
+          "persons_thousands": 23756.7,
+          "preliminary": false
+        },
+        {
+          "month": "2026-04",
+          "persons_thousands": 23813.8,
+          "preliminary": false
+        },
+        {
+          "month": "2026-05",
+          "persons_thousands": 23848.6,
+          "preliminary": false
+        },
+        {
+          "month": "2026-06",
+          "persons_thousands": 23887.2,
+          "preliminary": false
+        },
+        {
+          "month": "2026-07",
+          "persons_thousands": 23900.5,
+          "preliminary": false
+        },
+        {
+          "month": "2026-08",
+          "persons_thousands": 23935.6,
+          "preliminary": true
+        },
+        {
+          "month": "2026-09",
+          "persons_thousands": 23958.6,
+          "preliminary": true
+        }
+      ]
+    },
+    {
+      "sector": "72",
+      "series_id": "CES7072000001",
+      "industry": "Accommodation and food services, NAICS 72",
+      "source_api_url": "https://api.bls.gov/publicAPI/v2/timeseries/data/CES7072000001",
+      "observations": [
+        {
+          "month": "2025-01",
+          "persons_thousands": 14180.1,
+          "preliminary": false
+        },
+        {
+          "month": "2025-02",
+          "persons_thousands": 14136.3,
+          "preliminary": false
+        },
+        {
+          "month": "2025-03",
+          "persons_thousands": 14153.1,
+          "preliminary": false
+        },
+        {
+          "month": "2025-04",
+          "persons_thousands": 14168.1,
+          "preliminary": false
+        },
+        {
+          "month": "2025-05",
+          "persons_thousands": 14158,
+          "preliminary": false
+        },
+        {
+          "month": "2025-06",
+          "persons_thousands": 14147.2,
+          "preliminary": false
+        },
+        {
+          "month": "2025-07",
+          "persons_thousands": 14151.9,
+          "preliminary": false
+        },
+        {
+          "month": "2025-08",
+          "persons_thousands": 14168.3,
+          "preliminary": false
+        },
+        {
+          "month": "2025-09",
+          "persons_thousands": 14205.3,
+          "preliminary": false
+        },
+        {
+          "month": "2025-10",
+          "persons_thousands": 14250.7,
+          "preliminary": false
+        },
+        {
+          "month": "2025-11",
+          "persons_thousands": 14271.6,
+          "preliminary": false
+        },
+        {
+          "month": "2025-12",
+          "persons_thousands": 14281.8,
+          "preliminary": false
+        },
+        {
+          "month": "2026-01",
+          "persons_thousands": 14296.9,
+          "preliminary": false
+        },
+        {
+          "month": "2026-02",
+          "persons_thousands": 14249.5,
+          "preliminary": false
+        },
+        {
+          "month": "2026-03",
+          "persons_thousands": 14291.6,
+          "preliminary": false
+        },
+        {
+          "month": "2026-04",
+          "persons_thousands": 14284.2,
+          "preliminary": false
+        },
+        {
+          "month": "2026-05",
+          "persons_thousands": 14323.2,
+          "preliminary": false
+        },
+        {
+          "month": "2026-06",
+          "persons_thousands": 14294.1,
+          "preliminary": false
+        },
+        {
+          "month": "2026-07",
+          "persons_thousands": 14261.8,
+          "preliminary": false
+        },
+        {
+          "month": "2026-08",
+          "persons_thousands": 14302.3,
+          "preliminary": true
+        },
+        {
+          "month": "2026-09",
+          "persons_thousands": 14309.5,
+          "preliminary": true
+        }
+      ]
+    }
+  ]
+}
