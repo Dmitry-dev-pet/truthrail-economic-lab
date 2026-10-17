@@ -15,11 +15,15 @@
     "provisional_crosswalk": {
       "repo": "danielruss/codingsystems",
       "source_blob_sha": "f6a72a3519f9cd53104b2b89dedc562d8b31bcb9",
-      "verified_against_BLS": false
+      "verified_against_BLS": false,
+      "verified_against_independent_BLS_branded_XLS_copy": true,
+      "direct_official_BLS_binary_verified": false,
+      "independent_comparison_file": "country_profiles/portugal/2024/independent_xls_vs_csv_verification_2024.json"
     },
     "official_crosswalk": {
       "url": "https://www.bls.gov/soc/ISCO_SOC_Crosswalk.xls",
-      "parsed_and_verified": false
+      "parsed_and_verified": false,
+      "note": "Official BLS URL identified, but direct bytes not independently parsed; a separately hosted BLS-branded workbook COPY and the community CSV agree exactly for all 1,125 code/title links."
     },
     "us_model_commit": "d4703b6ae0d19dca08fbde11a25c218fa4c7b7a6"
   },
@@ -597,6 +601,7 @@
     "Provisional C-only and C+mixed fractions are NOT formally identified lower/upper bounds and must not be plugged into Fixed.cog_share.",
     "Eurostat OC63 is null/suppressed; don't impute, including zero; all-employed vs civilian frames differ and reliability flags apply.",
     "The 2024 public Eurostat two-digit dataset provides the SAME national employed population denominator as 2024 one-digit statistics, resolving the previous need to mix employer-only QP weights, but does not resolve 3/4-digit mixed codes.",
-    "Original BLS binary workbook validation and mapped occupation-weighting remain scientific blockers. No Portugal model runs permitted."
+    "Original BLS binary workbook validation and mapped occupation-weighting remain scientific blockers. No Portugal model runs permitted.",
+    "1,125 code pairs and titles match a separate BLS-branded XLS copy, but direct official BLS-hosted bytes remain unverified. Even at ISCO four-digit resolution, 26 codes have both C and N mappings."
   ]
 }

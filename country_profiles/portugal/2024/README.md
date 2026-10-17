@@ -185,16 +185,14 @@ The original American model's group C uses **SOC-2010 major groups
 ISCO-08 ↔ SOC-2010 crosswalk](https://www.bls.gov/soc/soccrosswalks.htm)
 as a legacy `XLS` workbook
 ([file URL](https://www.bls.gov/soc/ISCO_SOC_Crosswalk.xls)).
-That official link is verified, but its binary contents **have not been
-independently parsed in this audit**.
+The current official-host binary remains **unverified**, although a BLS-branded XLS copy in a separate public research repository has now been independently parsed and crosschecked against the CSV with exact 1,125/1,125 agreement.
 
 An [independent public CSV representation](https://github.com/danielruss/codingsystems/blob/main/isco2008_soc2010.csv)
 has been processed solely as a **provisional map of occupation codes**.
 The frozen mapping summary is [`soc2010_isco08_crosswalk_audit.json`](soc2010_isco08_crosswalk_audit.json).
 Its provenance includes the exact GitHub blob SHA, 1,125
 unweighted crosswalk relations across 43 ISCO-08 two-digit
-sub-major groups, and **two problematic source rows using three-digit
-rather than four-digit ISCO codes** (`211` and `315`).
+sub-major groups, and two **three-digit source mapping rows** (`211` and `315`) also found identically in the independently hosted BLS-branded XLS (not CSV conversion typos).
 
 The derived code-level classification is:
 
@@ -217,6 +215,85 @@ but exceptions, so it cannot automatically all be placed in C;
 ISCO **53** (personal care) is mainly N but contains exceptions.
 These are conditional statements about *this unverified code list*,
 not authoritative conversion probabilities.
+
+### Independent cross-check of the 2010 BLS occupation concordance
+
+The [official BLS SOC-2010 / ISCO-08 source](https://www.bls.gov/soc/soccrosswalks.htm)
+is published as a legacy
+[`ISCO_SOC_Crosswalk.xls`](https://www.bls.gov/soc/ISCO_SOC_Crosswalk.xls).
+The **current file bytes from the official BLS host could not be
+retrieved** by the available tools; do not claim authoritative
+byte-for-byte source verification.
+
+However, a [separate academic GitHub project](https://github.com/Cici6101/low-carbon-transition-and-labor-market/blob/main/isco_soc_crosswalk.xls)
+contains a genuine **BLS-branded, 433,152-byte OLE2/BIFF8 XLS**
+with the header `Bureau of Labor Statistics`,
+`August 2012 (Updated June 2015)`, and the three sheets:
+`ISCO-08 to 2010 SOC`, `2010 SOC to ISCO-08`,
+and `match`. Its GitHub blob SHA is
+`6d8f2d6777ed2462376bcb91bf5492a3350520da`.
+
+I independently decoded its BIFF8 shared strings and first
+worksheet's cell records, obtaining **1,125 relationship rows**.
+All **1,125 ISCO–SOC code pairs and both occupation titles matched
+exactly** against the separate
+[danielruss/codingsystems CSV](https://github.com/danielruss/codingsystems/blob/main/isco2008_soc2010.csv),
+Git blob SHA `f6a72a3519f9cd53104b2b89dedc562d8b31bcb9`.
+
+The original previously suspicious three-digit source ISCO
+codes **211** and **315** appear identically in both copies.
+They are *not CSV transcription errors*; they require interpretation
+as mappings at a parent category rather than automatic zero-padding
+into a fabricated 4-digit occupation.
+
+The [complete audit, source fingerprints, 26 code ambiguities
+and occupation-priority list](independent_xls_vs_csv_verification_2024.json)
+is stored in JSON and covered by an offline test.
+
+| Code-level classification under the independently concordant copies | Distinct ISCO code entries |
+|---|---:|
+| Only U.S. model group C links | 221 |
+| Only U.S. model group N links | 191 |
+| Links to **both** C and N | **26** |
+| **Total** | **438** |
+
+This is a **mapping agreement, not worker counts**.
+At the two-digit level, **17** submajor groups have both C/N
+code links; of these:
+
+- **Five** two-digit groups, covering **686.7 thousand employed
+  workers in 2024**, contain distinct 4-digit codes each mapping
+  exclusively to C or to N. Their allocation is potentially
+  resolvable with actual national 4-digit occupation weights.
+- **Twelve** groups, covering **1,676.9 thousand 2024 workers**,
+  contain at least one 4-digit ISCO unit that itself has **both**
+  C and N SOC associations. 4-digit population counts alone
+  do not fully identify group C; occupation-level judgment
+  or further empirical data will be required.
+
+These are **amounts employed in potentially ambiguous groups**,
+not the number of workers definitively allocated to either C or N.
+The evidence therefore narrows the data request: four-digit
+employment weights are most valuable for the 17 mixed groups,
+but 26 code-level correspondences will still need a reviewed
+statistical classification rule.
+
+**Population coverage is still the central constraint.**
+Official Eurostat `lfsa_egai2d` supplies national 2-digit totals,
+but neither the non-existent public dataset endpoint
+`lfsa_egai3d` nor `lfsa_egai4d` returned 2024 data during
+this research. The 2024 Portuguese
+[Quadros de Pessoal](https://www.dgcp.mtsss.gov.pt/sinteses-/-publicacoes?p_r_p_564233524_categoryId=11339&p_r_p_564233524_resetCur=true)
+publishes detailed employer-only occupation statistics and
+is **not the same national all-employed universe** as
+Eurostat's 5,112.3 thousand workers. Its public original
+Excel/PDF content was not successfully ingested in this run.
+
+**Crucial interpretation:** even a perfect coding crosswalk and
+full 4-digit headcounts would only reproduce the model's
+SOC-defined occupational **C/N partition**. It would not
+measure actual gen-AI task exposure, task substitution,
+future unemployment or the scenario adoption parameters.
 
 ### Official all-employed employment counts at two-digit ISCO resolution
 
@@ -257,7 +334,7 @@ group classifications:
 
 The [new occupation-weighted review](soc_isco_employment_weighted_review_2024.json)
 combines **official Eurostat worker counts** with a
-**third-party, unverified CSV representation** of the BLS
+**third-party CSV representation**, independently crosschecked with a BLS-branded XLS copy but **not verified against the direct official-host bytes**, of the BLS
 SOC↔ISCO mapping. It does *not* validate that CSV against the
 [official BLS XLS file](https://www.bls.gov/soc/ISCO_SOC_Crosswalk.xls)
 and does not produce a Portuguese model `Fixed.cog_share`.
@@ -342,15 +419,16 @@ No automated table-to-model ingestion exists yet.
    an external plausibility check).
 2. Download the 2024 AMECO adjusted wage-share **numeric series**,
    documenting self-employment and income-accounting definitions.
-3. Use the verified 2024 national *two-digit* employed-person
-   weights from `lfsa_egai2d` and independently verify the original
-   BLS binary `ISCO_SOC_Crosswalk.xls` against the unverified
-   CSV mirror. Then seek finer 3-/4-digit Portuguese employment
-   counts for the numerous mixed 2-digit groups (about 46.44%
-   of provisional civilian employment); resolve the 2 short
-   mirror codes, missing OC63 and low-reliability flags.
-   Never import employer-only QP weights without checking
-   coverage and denominators.
+3. Preserve the established 1,125/1,125 concordance between
+   two independently GitHub-hosted BLS-branded XLS/CSV copies.
+   Check **the exact current official BLS host file bytes**
+   separately and interpret its parent-level 3-digit `211`,
+   `315` mapping rows. Acquire true Portugal 2024 all-employed
+   **ISCO3/ISCO4** counts, prioritizing the 17 mixed
+   two-digit groups (2,363.6 thousand people), and develop a
+   defensible rule for the 26 four-digit codes with both
+   C and N links. Do not use employer-only Quadros de Pessoal
+   headcounts as national weights without audited coverage.
 4. Keep the official 2024 nine-status annual E/U/I flows as
    **context**. Identify permissioned, linkable 2024 INE/national
    datasets for occupational C↔N transitions and group-specific
