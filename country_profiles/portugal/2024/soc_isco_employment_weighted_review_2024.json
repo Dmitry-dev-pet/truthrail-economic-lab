@@ -1,0 +1,602 @@
+{
+  "schema_version": 1,
+  "country_code": "PT",
+  "year": 2024,
+  "method": "Join official 2024 ISCO-08 2-digit all-employed counts to a PROVISIONAL UNVERIFIED SOC2010-ISCO08 community crosswalk, assessing scope and ambiguity only.",
+  "runnable": false,
+  "final_portugal_cog_share": null,
+  "not_an_estimate": true,
+  "sources": {
+    "employment": {
+      "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/lfsa_egai2d?geo=PT&time=2024&unit=THS_PER&sex=T&age=Y_GE15",
+      "dataset": "lfsa_egai2d",
+      "updated": "2026-09-10T23:00:00+0200"
+    },
+    "provisional_crosswalk": {
+      "repo": "danielruss/codingsystems",
+      "source_blob_sha": "f6a72a3519f9cd53104b2b89dedc562d8b31bcb9",
+      "verified_against_BLS": false
+    },
+    "official_crosswalk": {
+      "url": "https://www.bls.gov/soc/ISCO_SOC_Crosswalk.xls",
+      "parsed_and_verified": false
+    },
+    "us_model_commit": "d4703b6ae0d19dca08fbde11a25c218fa4c7b7a6"
+  },
+  "breakdown": [
+    {
+      "code": "OC01",
+      "label": "Commissioned armed forces officers",
+      "thousands": 6.9,
+      "flag": "u",
+      "provisional_mirror_determination": "all_mapped_N",
+      "mirror_C_only_unit_codes": 0,
+      "mirror_N_only_unit_codes": 1,
+      "mirror_mixed_unit_codes": 0,
+      "link_count_not_employment_weight": 8
+    },
+    {
+      "code": "OC02",
+      "label": "Non-commissioned armed forces officers",
+      "thousands": 8.5,
+      "flag": "u",
+      "provisional_mirror_determination": "all_mapped_N",
+      "mirror_C_only_unit_codes": 0,
+      "mirror_N_only_unit_codes": 1,
+      "mirror_mixed_unit_codes": 0,
+      "link_count_not_employment_weight": 3
+    },
+    {
+      "code": "OC03",
+      "label": "Armed forces occupations, other ranks",
+      "thousands": 6.9,
+      "flag": "u",
+      "provisional_mirror_determination": "all_mapped_N",
+      "mirror_C_only_unit_codes": 0,
+      "mirror_N_only_unit_codes": 1,
+      "mirror_mixed_unit_codes": 0,
+      "link_count_not_employment_weight": 9
+    },
+    {
+      "code": "OC11",
+      "label": "Chief executives, senior officials and legislators",
+      "thousands": 34.6,
+      "flag": null,
+      "provisional_mirror_determination": "all_mapped_C",
+      "mirror_C_only_unit_codes": 5,
+      "mirror_N_only_unit_codes": 0,
+      "mirror_mixed_unit_codes": 0,
+      "link_count_not_employment_weight": 11
+    },
+    {
+      "code": "OC12",
+      "label": "Administrative and commercial managers",
+      "thousands": 56.4,
+      "flag": null,
+      "provisional_mirror_determination": "all_mapped_C",
+      "mirror_C_only_unit_codes": 7,
+      "mirror_N_only_unit_codes": 0,
+      "mirror_mixed_unit_codes": 0,
+      "link_count_not_employment_weight": 17
+    },
+    {
+      "code": "OC13",
+      "label": "Production and specialised services managers",
+      "thousands": 109.8,
+      "flag": null,
+      "provisional_mirror_determination": "all_mapped_C",
+      "mirror_C_only_unit_codes": 14,
+      "mirror_N_only_unit_codes": 0,
+      "mirror_mixed_unit_codes": 0,
+      "link_count_not_employment_weight": 18
+    },
+    {
+      "code": "OC14",
+      "label": "Hospitality, retail and other services managers",
+      "thousands": 109,
+      "flag": null,
+      "provisional_mirror_determination": "all_mapped_C",
+      "mirror_C_only_unit_codes": 5,
+      "mirror_N_only_unit_codes": 0,
+      "mirror_mixed_unit_codes": 0,
+      "link_count_not_employment_weight": 6
+    },
+    {
+      "code": "OC21",
+      "label": "Science and engineering professionals",
+      "thousands": 195,
+      "flag": null,
+      "provisional_mirror_determination": "all_mapped_C",
+      "mirror_C_only_unit_codes": 25,
+      "mirror_N_only_unit_codes": 0,
+      "mirror_mixed_unit_codes": 0,
+      "link_count_not_employment_weight": 59
+    },
+    {
+      "code": "OC22",
+      "label": "Health professionals",
+      "thousands": 205.8,
+      "flag": null,
+      "provisional_mirror_determination": "all_mapped_C",
+      "mirror_C_only_unit_codes": 15,
+      "mirror_N_only_unit_codes": 0,
+      "mirror_mixed_unit_codes": 0,
+      "link_count_not_employment_weight": 37
+    },
+    {
+      "code": "OC23",
+      "label": "Teaching professionals",
+      "thousands": 272.4,
+      "flag": null,
+      "provisional_mirror_determination": "all_mapped_C",
+      "mirror_C_only_unit_codes": 12,
+      "mirror_N_only_unit_codes": 0,
+      "mirror_mixed_unit_codes": 0,
+      "link_count_not_employment_weight": 61
+    },
+    {
+      "code": "OC24",
+      "label": "Business and administration professionals",
+      "thousands": 207.4,
+      "flag": null,
+      "provisional_mirror_determination": "all_mapped_C",
+      "mirror_C_only_unit_codes": 11,
+      "mirror_N_only_unit_codes": 0,
+      "mirror_mixed_unit_codes": 0,
+      "link_count_not_employment_weight": 24
+    },
+    {
+      "code": "OC25",
+      "label": "Information and communications technology professionals",
+      "thousands": 150.4,
+      "flag": null,
+      "provisional_mirror_determination": "all_mapped_C",
+      "mirror_C_only_unit_codes": 9,
+      "mirror_N_only_unit_codes": 0,
+      "mirror_mixed_unit_codes": 0,
+      "link_count_not_employment_weight": 12
+    },
+    {
+      "code": "OC26",
+      "label": "Legal, social and cultural professionals",
+      "thousands": 147.2,
+      "flag": null,
+      "provisional_mirror_determination": "all_mapped_C",
+      "mirror_C_only_unit_codes": 21,
+      "mirror_N_only_unit_codes": 0,
+      "mirror_mixed_unit_codes": 0,
+      "link_count_not_employment_weight": 52
+    },
+    {
+      "code": "OC31",
+      "label": "Science and engineering associate professionals",
+      "thousands": 125,
+      "flag": null,
+      "provisional_mirror_determination": "mixed_or_ambiguous",
+      "mirror_C_only_unit_codes": 11,
+      "mirror_N_only_unit_codes": 14,
+      "mirror_mixed_unit_codes": 2,
+      "link_count_not_employment_weight": 66
+    },
+    {
+      "code": "OC32",
+      "label": "Health associate professionals",
+      "thousands": 67.3,
+      "flag": null,
+      "provisional_mirror_determination": "mixed_or_ambiguous",
+      "mirror_C_only_unit_codes": 10,
+      "mirror_N_only_unit_codes": 0,
+      "mirror_mixed_unit_codes": 7,
+      "link_count_not_employment_weight": 42
+    },
+    {
+      "code": "OC33",
+      "label": "Business and administration associate professionals",
+      "thousands": 279.6,
+      "flag": null,
+      "provisional_mirror_determination": "mixed_or_ambiguous",
+      "mirror_C_only_unit_codes": 20,
+      "mirror_N_only_unit_codes": 2,
+      "mirror_mixed_unit_codes": 2,
+      "link_count_not_employment_weight": 59
+    },
+    {
+      "code": "OC34",
+      "label": "Legal, social, cultural and related associate professionals",
+      "thousands": 67.9,
+      "flag": null,
+      "provisional_mirror_determination": "mixed_or_ambiguous",
+      "mirror_C_only_unit_codes": 7,
+      "mirror_N_only_unit_codes": 1,
+      "mirror_mixed_unit_codes": 3,
+      "link_count_not_employment_weight": 32
+    },
+    {
+      "code": "OC35",
+      "label": "Information and communications technicians",
+      "thousands": 51,
+      "flag": null,
+      "provisional_mirror_determination": "all_mapped_C",
+      "mirror_C_only_unit_codes": 6,
+      "mirror_N_only_unit_codes": 0,
+      "mirror_mixed_unit_codes": 0,
+      "link_count_not_employment_weight": 12
+    },
+    {
+      "code": "OC41",
+      "label": "General and keyboard clerks",
+      "thousands": 265.5,
+      "flag": null,
+      "provisional_mirror_determination": "all_mapped_C",
+      "mirror_C_only_unit_codes": 4,
+      "mirror_N_only_unit_codes": 0,
+      "mirror_mixed_unit_codes": 0,
+      "link_count_not_employment_weight": 5
+    },
+    {
+      "code": "OC42",
+      "label": "Customer services clerks",
+      "thousands": 109.8,
+      "flag": null,
+      "provisional_mirror_determination": "mixed_or_ambiguous",
+      "mirror_C_only_unit_codes": 10,
+      "mirror_N_only_unit_codes": 0,
+      "mirror_mixed_unit_codes": 2,
+      "link_count_not_employment_weight": 28
+    },
+    {
+      "code": "OC43",
+      "label": "Numerical and material recording clerks",
+      "thousands": 88.3,
+      "flag": null,
+      "provisional_mirror_determination": "all_mapped_C",
+      "mirror_C_only_unit_codes": 6,
+      "mirror_N_only_unit_codes": 0,
+      "mirror_mixed_unit_codes": 0,
+      "link_count_not_employment_weight": 14
+    },
+    {
+      "code": "OC44",
+      "label": "Other clerical support workers",
+      "thousands": 14.3,
+      "flag": null,
+      "provisional_mirror_determination": "mixed_or_ambiguous",
+      "mirror_C_only_unit_codes": 6,
+      "mirror_N_only_unit_codes": 1,
+      "mirror_mixed_unit_codes": 0,
+      "link_count_not_employment_weight": 17
+    },
+    {
+      "code": "OC51",
+      "label": "Personal service workers",
+      "thousands": 212,
+      "flag": null,
+      "provisional_mirror_determination": "mixed_or_ambiguous",
+      "mirror_C_only_unit_codes": 2,
+      "mirror_N_only_unit_codes": 15,
+      "mirror_mixed_unit_codes": 0,
+      "link_count_not_employment_weight": 47
+    },
+    {
+      "code": "OC52",
+      "label": "Sales workers",
+      "thousands": 374.3,
+      "flag": null,
+      "provisional_mirror_determination": "mixed_or_ambiguous",
+      "mirror_C_only_unit_codes": 10,
+      "mirror_N_only_unit_codes": 2,
+      "mirror_mixed_unit_codes": 1,
+      "link_count_not_employment_weight": 20
+    },
+    {
+      "code": "OC53",
+      "label": "Personal care workers",
+      "thousands": 235.7,
+      "flag": null,
+      "provisional_mirror_determination": "mixed_or_ambiguous",
+      "mirror_C_only_unit_codes": 1,
+      "mirror_N_only_unit_codes": 4,
+      "mirror_mixed_unit_codes": 0,
+      "link_count_not_employment_weight": 16
+    },
+    {
+      "code": "OC54",
+      "label": "Protective services workers",
+      "thousands": 106.4,
+      "flag": null,
+      "provisional_mirror_determination": "mixed_or_ambiguous",
+      "mirror_C_only_unit_codes": 0,
+      "mirror_N_only_unit_codes": 4,
+      "mirror_mixed_unit_codes": 1,
+      "link_count_not_employment_weight": 19
+    },
+    {
+      "code": "OC61",
+      "label": "Market-oriented skilled agricultural workers",
+      "thousands": 98.6,
+      "flag": null,
+      "provisional_mirror_determination": "all_mapped_N",
+      "mirror_C_only_unit_codes": 0,
+      "mirror_N_only_unit_codes": 9,
+      "mirror_mixed_unit_codes": 0,
+      "link_count_not_employment_weight": 20
+    },
+    {
+      "code": "OC62",
+      "label": "Market-oriented skilled forestry, fishery and hunting workers",
+      "thousands": 17.2,
+      "flag": null,
+      "provisional_mirror_determination": "all_mapped_N",
+      "mirror_C_only_unit_codes": 0,
+      "mirror_N_only_unit_codes": 5,
+      "mirror_mixed_unit_codes": 0,
+      "link_count_not_employment_weight": 14
+    },
+    {
+      "code": "OC63",
+      "label": "Subsistence farmers, fishers, hunters and gatherers",
+      "thousands": null,
+      "flag": null,
+      "provisional_mirror_determination": "all_mapped_N",
+      "mirror_C_only_unit_codes": 0,
+      "mirror_N_only_unit_codes": 4,
+      "mirror_mixed_unit_codes": 0,
+      "link_count_not_employment_weight": 6
+    },
+    {
+      "code": "OC71",
+      "label": "Building and related trades workers, excluding electricians",
+      "thousands": 218.6,
+      "flag": null,
+      "provisional_mirror_determination": "mixed_or_ambiguous",
+      "mirror_C_only_unit_codes": 1,
+      "mirror_N_only_unit_codes": 15,
+      "mirror_mixed_unit_codes": 0,
+      "link_count_not_employment_weight": 34
+    },
+    {
+      "code": "OC72",
+      "label": "Metal, machinery and related trades workers",
+      "thousands": 173.7,
+      "flag": null,
+      "provisional_mirror_determination": "all_mapped_N",
+      "mirror_C_only_unit_codes": 0,
+      "mirror_N_only_unit_codes": 13,
+      "mirror_mixed_unit_codes": 0,
+      "link_count_not_employment_weight": 56
+    },
+    {
+      "code": "OC73",
+      "label": "Handicraft and printing workers",
+      "thousands": 27.8,
+      "flag": null,
+      "provisional_mirror_determination": "mixed_or_ambiguous",
+      "mirror_C_only_unit_codes": 1,
+      "mirror_N_only_unit_codes": 8,
+      "mirror_mixed_unit_codes": 3,
+      "link_count_not_employment_weight": 23
+    },
+    {
+      "code": "OC74",
+      "label": "Electrical and electronic trades workers",
+      "thousands": 79.1,
+      "flag": null,
+      "provisional_mirror_determination": "all_mapped_N",
+      "mirror_C_only_unit_codes": 0,
+      "mirror_N_only_unit_codes": 5,
+      "mirror_mixed_unit_codes": 0,
+      "link_count_not_employment_weight": 31
+    },
+    {
+      "code": "OC75",
+      "label": "Food processing, wood working, garment and other craft and related trades workers",
+      "thousands": 156.9,
+      "flag": null,
+      "provisional_mirror_determination": "mixed_or_ambiguous",
+      "mirror_C_only_unit_codes": 0,
+      "mirror_N_only_unit_codes": 19,
+      "mirror_mixed_unit_codes": 1,
+      "link_count_not_employment_weight": 40
+    },
+    {
+      "code": "OC81",
+      "label": "Stationary plant and machine operators",
+      "thousands": 167.1,
+      "flag": null,
+      "provisional_mirror_determination": "all_mapped_N",
+      "mirror_C_only_unit_codes": 0,
+      "mirror_N_only_unit_codes": 26,
+      "mirror_mixed_unit_codes": 0,
+      "link_count_not_employment_weight": 81
+    },
+    {
+      "code": "OC82",
+      "label": "Assemblers",
+      "thousands": 24.6,
+      "flag": null,
+      "provisional_mirror_determination": "all_mapped_N",
+      "mirror_C_only_unit_codes": 0,
+      "mirror_N_only_unit_codes": 3,
+      "mirror_mixed_unit_codes": 0,
+      "link_count_not_employment_weight": 9
+    },
+    {
+      "code": "OC83",
+      "label": "Drivers and mobile plant operators",
+      "thousands": 212.1,
+      "flag": null,
+      "provisional_mirror_determination": "mixed_or_ambiguous",
+      "mirror_C_only_unit_codes": 0,
+      "mirror_N_only_unit_codes": 10,
+      "mirror_mixed_unit_codes": 1,
+      "link_count_not_employment_weight": 40
+    },
+    {
+      "code": "OC91",
+      "label": "Cleaners and helpers",
+      "thousands": 208.1,
+      "flag": null,
+      "provisional_mirror_determination": "all_mapped_N",
+      "mirror_C_only_unit_codes": 0,
+      "mirror_N_only_unit_codes": 6,
+      "mirror_mixed_unit_codes": 0,
+      "link_count_not_employment_weight": 9
+    },
+    {
+      "code": "OC92",
+      "label": "Agricultural, forestry and fishery labourers",
+      "thousands": 19.8,
+      "flag": null,
+      "provisional_mirror_determination": "all_mapped_N",
+      "mirror_C_only_unit_codes": 0,
+      "mirror_N_only_unit_codes": 6,
+      "mirror_mixed_unit_codes": 0,
+      "link_count_not_employment_weight": 14
+    },
+    {
+      "code": "OC93",
+      "label": "Labourers in mining, construction, manufacturing and transport",
+      "thousands": 88.4,
+      "flag": null,
+      "provisional_mirror_determination": "mixed_or_ambiguous",
+      "mirror_C_only_unit_codes": 1,
+      "mirror_N_only_unit_codes": 7,
+      "mirror_mixed_unit_codes": 1,
+      "link_count_not_employment_weight": 28
+    },
+    {
+      "code": "OC94",
+      "label": "Food preparation assistants",
+      "thousands": 45.2,
+      "flag": null,
+      "provisional_mirror_determination": "all_mapped_N",
+      "mirror_C_only_unit_codes": 0,
+      "mirror_N_only_unit_codes": 2,
+      "mirror_mixed_unit_codes": 0,
+      "link_count_not_employment_weight": 6
+    },
+    {
+      "code": "OC95",
+      "label": "Street and related sales and service workers",
+      "thousands": 6.1,
+      "flag": "u",
+      "provisional_mirror_determination": "mixed_or_ambiguous",
+      "mirror_C_only_unit_codes": 1,
+      "mirror_N_only_unit_codes": 1,
+      "mirror_mixed_unit_codes": 0,
+      "link_count_not_employment_weight": 2
+    },
+    {
+      "code": "OC96",
+      "label": "Refuse workers and other elementary workers",
+      "thousands": 61.4,
+      "flag": null,
+      "provisional_mirror_determination": "mixed_or_ambiguous",
+      "mirror_C_only_unit_codes": 0,
+      "mirror_N_only_unit_codes": 6,
+      "mirror_mixed_unit_codes": 2,
+      "link_count_not_employment_weight": 18
+    }
+  ],
+  "class_weights_thousand": {
+    "all_mapped_C": 1892.8,
+    "all_mapped_N": 855.7,
+    "mixed_or_ambiguous": 2363.6
+  },
+  "denominator": {
+    "all_employed_thousand": 5112.3,
+    "provisional_civilian_thousand": 5090,
+    "armed_excluded_thousand": 22.3
+  },
+  "provisional_code_class_shares_of_civilian": {
+    "C_only": 0.371866,
+    "N_only_excluding_army": 0.163733,
+    "mixed": 0.464361
+  },
+  "foremost_ambiguous_submajors": [
+    {
+      "code": "OC52",
+      "label": "Sales workers",
+      "thousands": 374.3,
+      "flag": null
+    },
+    {
+      "code": "OC33",
+      "label": "Business and administration associate professionals",
+      "thousands": 279.6,
+      "flag": null
+    },
+    {
+      "code": "OC53",
+      "label": "Personal care workers",
+      "thousands": 235.7,
+      "flag": null
+    },
+    {
+      "code": "OC71",
+      "label": "Building and related trades workers, excluding electricians",
+      "thousands": 218.6,
+      "flag": null
+    },
+    {
+      "code": "OC83",
+      "label": "Drivers and mobile plant operators",
+      "thousands": 212.1,
+      "flag": null
+    },
+    {
+      "code": "OC51",
+      "label": "Personal service workers",
+      "thousands": 212,
+      "flag": null
+    },
+    {
+      "code": "OC75",
+      "label": "Food processing, wood working, garment and other craft and related trades workers",
+      "thousands": 156.9,
+      "flag": null
+    },
+    {
+      "code": "OC31",
+      "label": "Science and engineering associate professionals",
+      "thousands": 125,
+      "flag": null
+    },
+    {
+      "code": "OC42",
+      "label": "Customer services clerks",
+      "thousands": 109.8,
+      "flag": null
+    },
+    {
+      "code": "OC54",
+      "label": "Protective services workers",
+      "thousands": 106.4,
+      "flag": null
+    },
+    {
+      "code": "OC93",
+      "label": "Labourers in mining, construction, manufacturing and transport",
+      "thousands": 88.4,
+      "flag": null
+    },
+    {
+      "code": "OC34",
+      "label": "Legal, social, cultural and related associate professionals",
+      "thousands": 67.9,
+      "flag": null
+    }
+  ],
+  "unmatched_or_suppressed": [
+    "OC63"
+  ],
+  "arithmetic_residual_thousand": 0.2,
+  "caveats": [
+    "Even exclusively C-linked two-digit groups derive from an unverified community transcription of the official BLS XLS; counts reflect code correspondence, NOT proven Portuguese occupation classification.",
+    "Mixed groups cover a large share of employment. No employment distribution within their four-digit units is observed in this dataset, so a precise C/N split is not identified.",
+    "Provisional C-only and C+mixed fractions are NOT formally identified lower/upper bounds and must not be plugged into Fixed.cog_share.",
+    "Eurostat OC63 is null/suppressed; don't impute, including zero; all-employed vs civilian frames differ and reliability flags apply.",
+    "The 2024 public Eurostat two-digit dataset provides the SAME national employed population denominator as 2024 one-digit statistics, resolving the previous need to mix employer-only QP weights, but does not resolve 3/4-digit mixed codes.",
+    "Original BLS binary workbook validation and mapped occupation-weighting remain scientific blockers. No Portugal model runs permitted."
+  ]
+}
