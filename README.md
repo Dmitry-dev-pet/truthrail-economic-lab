@@ -34,6 +34,43 @@ Stop with: docker compose down
 authorized existing Mac route must execute deployment when available.
 Do not substitute a new public proxy or tunnel for this localhost-only service.
 
+
+## Offline source snapshot
+
+The existing `.github/workflows/verify.yml` uploads a source snapshot on
+pull requests and pushes to `main`, after retrieving the pinned mathematical
+model. The artifact is named `economic-source-<checkout-sha>` and expires
+after 3 days. This uses the existing CI run; it does not start an extra workflow.
+
+The downloadable GitHub Actions artifact is a ZIP containing:
+
+- `project.tar.gz`: all Git-tracked project files under `project/`.
+- `upstream-aiscen.tar.gz`: the required pinned mathematical Python package
+  under `upstream/aiscen/`, not the entire upstream repository.
+- `project.sha`, `upstream.sha`, `SHA256SUMS`: exact source commits and
+  checksums for both archives.
+
+These are source snapshots: no `.git` history, secrets, or untracked files.
+For a pull request, the checkout SHA may identify GitHub's temporary test-merge
+commit rather than the pull request branch tip.
+
+To restore and run tests locally, or in a temporary ChatGPT environment:
+
+```bash
+unzip economic-source-<checkout-sha>.zip -d snapshot
+cd snapshot
+sha256sum -c SHA256SUMS
+mkdir -p workspace
+tar -xzf project.tar.gz -C workspace
+tar -xzf upstream-aiscen.tar.gz -C workspace
+cd workspace
+PYTHONPATH="$PWD/upstream:$PWD/project" python -m unittest discover -s project/tests -v
+```
+
+For the local HTTP server, also set `LAB_UPSTREAM_DIR="$PWD/upstream"`.
+The archive transfers code for isolated execution; it is not a deployment
+mechanism, and the GitHub connector does not acquire Mac or VPS privileges.
+
 ## API
 
 - GET /api/health
