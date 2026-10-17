@@ -49,3 +49,33 @@ jobs:
           for name, x in p["scenarios"].items():
               print(name, x)
           PY
+
+      - name: Verify fixed two-axis economic experiment
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PYTHONPATH="$RUNNER_TEMP/reproduction:$GITHUB_WORKSPACE"
+          python -m lab.experiment > "$RUNNER_TEMP/economic-grid.json"
+          python - "$RUNNER_TEMP/economic-grid.json" <<'PY'
+          import json, math, sys
+          data = json.load(open(sys.argv[1], encoding="utf-8"))
+          assert data["metadata"]["source_commit"] == "d4703b6ae0d19dca08fbde11a25c218fa4c7b7a6"
+          assert data["metadata"]["geography"] == "USA"
+          assert data["metadata"]["model_runs"] == 10
+          assert data["assumptions"]["scenario"] == "substantial"
+          assert len(data["cells"]) == 9
+          assert data["assumptions"]["axes"] == {
+              "psi": [0.25, 0.5, 0.75],
+              "mu": [0.03, 0.06, 0.12],
+          }
+          for cell in data["cells"]:
+              assert set(cell["summary_2030"]) == set(data["baseline"]["summary_2030"])
+              assert all(math.isfinite(x) for x in cell["summary_2030"].values())
+              assert all(math.isfinite(x) for x in cell["delta_vs_baseline_pp"].values())
+          print("Verified 9 bounded scenario cells against a single pinned-model baseline")
+          print("psi,mu,gdp_gain_pct,labor_share_pct,unemployment_total_pct,unemployment_sensitive_pct")
+          for cell in data["cells"]:
+              x = cell["coordinates"]
+              y = cell["summary_2030"]
+              print(f'{x["psi"]:.3f},{x["mu"]:.3f},{y["gdp_gain_pct"]:.4f},{y["labor_share_pct"]:.4f},{y["unemployment_total_pct"]:.4f},{y["unemployment_sensitive_pct"]:.4f}')
+          PY

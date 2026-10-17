@@ -13,7 +13,7 @@ A small reproducible **US economic research sandbox**. It is not a US employment
 ## Runtime boundaries
 - Docker runs on the operator's Mac on demand, **not** an always-on VPS service.
 - Compose binds only to 127.0.0.1:8765, with no authentication. Never expose it publicly or add a tunnel without a separate review.
-- No LLM/GPU/OpenCode/AGY calls are needed. No token-using CI, cron, or GitHub-hosted Actions workflows.
+- No LLM/GPU/OpenCode/AGY calls or scheduled token-using jobs are needed. The existing public-repository GitHub-hosted workflow may run pinned, no-secret numerical checks on PRs and main; it does not target the Mac, authorize project deployment or use model-provider credentials. Private Mac execution remains solely under reviewed mac-access admission.
 - Use reviewed existing Truthrail routes; do not add a new MCP simply to call localhost.
 - No execution or deployment should be claimed without observed evidence from the target runtime.
 
