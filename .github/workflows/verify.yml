@@ -79,3 +79,31 @@ jobs:
               y = cell["summary_2030"]
               print(f'{x["psi"]:.3f},{x["mu"]:.3f},{y["gdp_gain_pct"]:.4f},{y["labor_share_pct"]:.4f},{y["unemployment_total_pct"]:.4f},{y["unemployment_sensitive_pct"]:.4f}')
           PY
+
+      - name: Verify model-generated hypothesis plan and directional comparisons
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PYTHONPATH="$RUNNER_TEMP/reproduction:$GITHUB_WORKSPACE"
+          python -m lab.research > "$RUNNER_TEMP/economic-research.json"
+          python - "$RUNNER_TEMP/economic-research.json" <<'PY'
+          import json, math, sys
+          data = json.load(open(sys.argv[1], encoding="utf-8"))
+          plan = data["research"]
+          exp = data["experiment"]
+          assert plan["plan"]["selected"]["id"] == "new_tasks_vs_automation"
+          assert len(plan["plan_sha256"]) == 64
+          assert plan["planned_model_evaluations"] == 10
+          assert exp["metadata"]["model_runs"] == 10
+          assert exp["metadata"]["source_commit"] == "d4703b6ae0d19dca08fbde11a25c218fa4c7b7a6"
+          assert len(exp["cells"]) == 9
+          assert len(data["tests"]) == 3
+          for test in data["tests"]:
+              assert len(test["controlled_comparisons"]) == 3
+              assert all(math.isfinite(c["observed_delta_pp"]) for c in test["controlled_comparisons"])
+              print(test["axis"], test["metric"], test["outcome"])
+              for c in test["controlled_comparisons"]:
+                  print("  held", c["held_axis"], c["held_value"], "delta_pp", c["observed_delta_pp"])
+          print("Plan SHA-256:", plan["plan_sha256"])
+          print("No evidence of real-world causal effects or forecasts is implied")
+          PY
