@@ -264,6 +264,14 @@ Portugal `cog_share` values, formal bounds or employment
 exposure-to-AI statistics. Finer occupational codes and primary
 BLS crosswalk verification remain prerequisites.
 
+The [detailed-occupation and administrative-mobility source audit](country_profiles/portugal/2024/detailed_occupation_and_mobility_sources.json)
+also identifies potentially finer occupational records in Portugal's
+employer-only `Quadros de Pessoal` system and a historical
+**15.5% two-year occupational switching figure (2020–2022)
+among QP workers present in both years** from Brighter Future.
+Neither is a national 2024 C/N occupational split or an
+estimate of the model's monthly `mu_bar`.
+
 The profile is explicitly `audit_only_not_calibrated` / `runnable:false`.
 It **does not** simulate or forecast Portugal. Published Portuguese
 unemployment, occupation, R&D and AI-adoption data are separate,
