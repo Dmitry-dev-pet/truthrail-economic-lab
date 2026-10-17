@@ -11,8 +11,10 @@ publish a Portuguese 2030 scenario, deploy Docker, or authorize Mac execution.
 The precise baseline is:
 [original `aiscen/params.py` at v1.0 / `d4703b6`](https://github.com/fhoces/opa-ai-macro-econ-scenarios/blob/d4703b6ae0d19dca08fbde11a25c218fa4c7b7a6/aiscen/params.py).
 The [machine-readable field audit](calibration_audit.json) enumerates **all 37
-primitive dataclass input fields** from that source (26 `Fixed` + 11
-`Scenario`), including computational conventions. Derived Python
+default-bearing primitive parameters** from that source (26 `Fixed` + 11
+`Scenario`), including computational conventions. The additional required `Scenario.name`
+is only a string identifier and is excluded from the numeric/Boolean
+parameter count. Derived Python
 properties such as `s_C0` and `l_C0` are **not** additional free inputs.
 
 ## Initial decision
@@ -58,6 +60,10 @@ nationally calibrated forecast.**
 - **2025 follow-up:** annual average unemployment **6.0%**;
   a *different year*, not a 2024 base-year substitute.
   [INE 2025 via DGE](https://estatistica.dgeconomia.gov.pt/estatisticas-do-emprego-ine-18/).
+- **2024 gross R&D expenditure:** approximately **1.72% of GDP**
+  (provisional), [Eurostat/INE via PORDATA](https://www.pordata.pt/en/europe/expenditure%2Bin%2Bresearch%2Band%2Bdevelopment%2Bactivities%2B%28r%2Bd%29%2Bas%2Ba%2Bpercentage%2Bof%2Bgdp%2Bby%2Bsector%2Bof%2Bperformance-1674).
+  This is contextual evidence, **not an adopted value** of `iota_R0`:
+  the model's research-input concept needs separate verification.
 - **2025 enterprise AI adoption:** **11.5%** of enterprises in the
   surveyed universe reported AI use.
   [Statistics Portugal / INE releases](https://ine.pt/xportal/xmain?DESTAQUESpagenumber=1&DESTAQUEStema=5414257&DESTAQUEStipo=ea&selTab=tab0&xlang=en&xpgid=ine_destaques&xpid=INE).
