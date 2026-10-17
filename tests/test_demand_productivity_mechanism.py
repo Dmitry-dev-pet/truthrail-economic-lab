@@ -36,12 +36,12 @@ class TestDemandProductivityMechanism(unittest.TestCase):
                     demand_price_elasticity=2)
         no_demand = market_response(**args)
         shifted = market_response(**args, autonomous_real_demand_growth_pct=20)
-        self.assertLess(no_demand["payroll_jobs_growth_pct"], 0)
-        self.assertGreater(shifted["payroll_jobs_growth_pct"], 0)
+        self.assertLess(no_demand["worker_count_growth_pct"], 0)
+        self.assertGreater(shifted["worker_count_growth_pct"], 0)
         hours_change = market_response(**args, autonomous_real_demand_growth_pct=20,
                                        hours_per_worker_growth_pct=10)
-        self.assertLess(hours_change["payroll_jobs_growth_pct"],
-                        shifted["payroll_jobs_growth_pct"])
+        self.assertLess(hours_change["worker_count_growth_pct"],
+                        shifted["worker_count_growth_pct"])
         self.assertIsNone(equilibrium_elasticity_threshold(
             productivity_gain_pct=10, price_pass_through=0))
 
