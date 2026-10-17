@@ -38,9 +38,11 @@ class PortugalCalibrationAuditTests(unittest.TestCase):
             entries = blocks[name]
             self.assertEqual(
                 {item["name"] for item in entries},
-                {field.name for field in fields(target)},
+                {field.name for field in fields(target) if field.name != "name"},
             )
-            self.assertEqual(len(entries), len(fields(target)))
+            self.assertEqual(len(entries), len(fields(target)) - (1 if name == "Scenario" else 0))
+            if name == "Scenario":
+                self.assertIn("name", {f.name for f in fields(Scenario)})
             for item in entries:
                 source_value = getattr(target, item["name"])
                 reference = item["us_reference"]
@@ -85,13 +87,14 @@ class PortugalCalibrationAuditTests(unittest.TestCase):
         self.assertEqual(set(o), {
             "PT_UNEMP_2024", "PT_EMPLOYED_2024",
             "PT_UNEMPLOYED_2024", "PT_UNEMP_2025",
-            "PT_ENTERPRISE_AI_2025",
+            "PT_ENTERPRISE_AI_2025", "PT_RD_GERD_2024",
         })
         self.assertEqual(o["PT_UNEMP_2024"]["value"], 0.064)
         self.assertEqual(o["PT_EMPLOYED_2024"]["value"], 5_112_300)
         self.assertEqual(o["PT_UNEMPLOYED_2024"]["value"], 351_100)
         self.assertEqual(o["PT_UNEMP_2025"]["value"], 0.060)
         self.assertEqual(o["PT_ENTERPRISE_AI_2025"]["value"], 0.115)
+        self.assertAlmostEqual(o["PT_RD_GERD_2024"]["value"], 0.0172)
         self.assertEqual(o["PT_UNEMP_2024"]["candidate_for"], "Fixed.U_bar")
         for item in o.values():
             self.assertIs(item["safe_to_assign_to_model"], False)
