@@ -247,6 +247,18 @@ be available via GEP `Quadros de Pessoal`, but do not confuse that
 restricted reporting population with Portugal's total employed
 population. Therefore `cog_share` is still unset.
 
+**New:** The [official Eurostat 2024 two-digit ISCO employment data](country_profiles/portugal/2024/isco_two_digit_employment_2024.json)
+have now been retrieved for the full employed-person population.
+A [provisional crosswalk-weighted audit](country_profiles/portugal/2024/soc_isco_employment_weighted_review_2024.json)
+shows 37.19% of civilian employment in C-only mapped sub-major
+**codes**, 46.44% in mixed mapped codes and 16.37% in N-only codes.
+The mapping source is still an **unverified third-party mirror** and
+nearly half of employed persons belong to ambiguous groups.
+These proportions are classification coverage categories, not
+Portugal `cog_share` values, formal bounds or employment
+exposure-to-AI statistics. Finer occupational codes and primary
+BLS crosswalk verification remain prerequisites.
+
 The profile is explicitly `audit_only_not_calibrated` / `runnable:false`.
 It **does not** simulate or forecast Portugal. Published Portuguese
 unemployment, occupation, R&D and AI-adoption data are separate,
