@@ -173,14 +173,20 @@ class Handler(SimpleHTTPRequestHandler):
             return self.send_json(HTTPStatus.NOT_FOUND, {"error":"Unknown endpoint"})
         return super().do_GET()
     def do_POST(self):
-        if urlsplit(self.path).path != "/api/run":
+        path = urlsplit(self.path).path
+        if path not in ("/api/run", "/api/experiment"):
             return self.send_json(HTTPStatus.NOT_FOUND, {"error":"Unknown endpoint"})
         try:
             length = int(self.headers.get("Content-Length", "0"))
             if length < 1 or length > 16384:
                 raise ValueError("Invalid request length")
             payload = json.loads(self.rfile.read(length))
-            return self.send_json(HTTPStatus.OK, compute(payload))
+            if path == "/api/experiment":
+                from .experiment import run_experiment
+                result = run_experiment(payload)
+            else:
+                result = compute(payload)
+            return self.send_json(HTTPStatus.OK, result)
         except (ValueError, TypeError) as exc:
             return self.send_json(HTTPStatus.BAD_REQUEST, {"error":str(exc)})
         except Exception:
