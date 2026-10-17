@@ -42,9 +42,10 @@
         "calibration_status": "needs_crosswalk",
         "candidate_sources": [
           "EUROSTAT_ISCO",
-          "EUROSTAT_MICRODATA"
+          "EUROSTAT_MICRODATA",
+          "EUROSTAT_PT_OCCUPATION_2024"
         ],
-        "mapping_note": "Model share of AI-sensitive C employment; Eurostat ISCO occupational major groups do not directly identify the paper's C group.",
+        "mapping_note": "Model share of AI-sensitive C employment; Eurostat ISCO occupational major groups do not directly identify the paper's C group. Eurostat 2024 one-digit ISCO sample supports only illustrative group subsets (38.46/50.01/68.17 percent), not a calibrated parameter; confirm fine-grained SOC-to-ISCO concordance and ISCO 3/5 mixed roles.",
         "portugal_model_value": null
       },
       {
@@ -175,7 +176,8 @@
         "calibration_status": "needs_estimation",
         "candidate_sources": [
           "EUROSTAT_LFS_FLOWS",
-          "EUROSTAT_MICRODATA"
+          "EUROSTAT_MICRODATA",
+          "EUROSTAT_PT_LFS_FLOWS_2024"
         ],
         "mapping_note": "Baseline yearly quit/separation rate; E-to-U quarterly transitions alone do not capture employer-to-employer quits.",
         "portugal_model_value": null
@@ -195,7 +197,8 @@
         "us_reference": "0.69",
         "calibration_status": "needs_estimation",
         "candidate_sources": [
-          "EUROSTAT_MICRODATA"
+          "EUROSTAT_MICRODATA",
+          "EUROSTAT_PT_LFS_FLOWS_2024"
         ],
         "mapping_note": "Group-C relative quit rate; requires C/N occupational mapping and longitudinal separation estimates.",
         "portugal_model_value": null
@@ -205,7 +208,8 @@
         "us_reference": "1.52",
         "calibration_status": "needs_estimation",
         "candidate_sources": [
-          "EUROSTAT_MICRODATA"
+          "EUROSTAT_MICRODATA",
+          "EUROSTAT_PT_LFS_FLOWS_2024"
         ],
         "mapping_note": "Group-N relative quit rate; requires C/N occupational mapping and longitudinal separation estimates.",
         "portugal_model_value": null
@@ -227,9 +231,10 @@
         "calibration_status": "needs_estimation",
         "candidate_sources": [
           "EUROSTAT_MICRODATA",
-          "EUROSTAT_LFS_FLOWS"
+          "EUROSTAT_LFS_FLOWS",
+          "EUROSTAT_PT_LFS_FLOWS_2024"
         ],
-        "mapping_note": "Normal-times cross-group search discount; E/U/I flows do not identify movements C↔N.",
+        "mapping_note": "Normal-times cross-group search discount; E/U/I flows do not identify movements C↔N. Official Eurostat 2024 E/U/I transitions quantify labour-status mobility (e.g. U→E 42.2% annual) but contain no observed C↔N transition matrix; microdata subject identifiers are not longitudinal in research release.",
         "portugal_model_value": null
       },
       {
@@ -248,7 +253,8 @@
         "calibration_status": "needs_estimation",
         "candidate_sources": [
           "EUROSTAT_VACANCIES",
-          "EUROSTAT_LFS_FLOWS"
+          "EUROSTAT_LFS_FLOWS",
+          "EUROSTAT_PT_LFS_FLOWS_2024"
         ],
         "mapping_note": "Mean MONTHLY vacancy filling rate: requires hires and duration/stock data; vacancy rate is not a substitute.",
         "portugal_model_value": null
@@ -291,7 +297,8 @@
         "calibration_status": "scenario_hypothesis",
         "candidate_sources": [
           "EUROSTAT_ISCO",
-          "INE_ENTERPRISE_AI_2025"
+          "INE_ENTERPRISE_AI_2025",
+          "EUROSTAT_PT_OCCUPATION_2024"
         ],
         "mapping_note": "Mid-2026 task mass reachable by AI; firm AI use and occupation exposure are not equivalent task mass.",
         "portugal_model_value": null
@@ -301,7 +308,8 @@
         "us_reference": "0.30",
         "calibration_status": "scenario_hypothesis",
         "candidate_sources": [
-          "EUROSTAT_ISCO"
+          "EUROSTAT_ISCO",
+          "EUROSTAT_PT_OCCUPATION_2024"
         ],
         "mapping_note": "Future technical task reach in 2030; scenario assumption, not observation.",
         "portugal_model_value": null
@@ -381,7 +389,8 @@
         "us_reference": "0.08",
         "calibration_status": "scenario_hypothesis",
         "candidate_sources": [
-          "EUROSTAT_MICRODATA"
+          "EUROSTAT_MICRODATA",
+          "EUROSTAT_PT_LFS_FLOWS_2024"
         ],
         "mapping_note": "Scenario labor-search discount; do not confuse with normal-times mu_bar or a published occupational transition probability.",
         "portugal_model_value": null
@@ -464,6 +473,18 @@
       "organization": "PORDATA compiling Eurostat and INE R&D data",
       "reference_year": 2024,
       "description": "2024 gross domestic R&D expenditure about 1.72% of GDP (marked provisional). A distinct proxy, not directly the model's ideas-sector iota_R0."
+    },
+    "EUROSTAT_PT_OCCUPATION_2024": {
+      "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/lfsa_egais?geo=PT&time=2024&unit=THS_PER&age=Y_GE15&sex=T&wstatus=EMP",
+      "organization": "Eurostat",
+      "reference_year": 2024,
+      "description": "Official detailed-filter 2024 Portuguese occupied persons across single-digit ISCO08 groups (thousands, ages >=15), stored locally in isco_occupation_snapshot.json; insufficient to identify paper's US SOC cognitive group."
+    },
+    "EUROSTAT_PT_LFS_FLOWS_2024": {
+      "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/lfsi_long_a?geo=PT&time=2024&sex=T",
+      "organization": "Eurostat / INE Portugal",
+      "reference_year": 2024,
+      "description": "Annual status flows E/U/I with published initial-origin percentages, stored in lfs_annual_status_flows.json; not occupational C↔N transition, employer quits, or monthly vacancy fill."
     }
   },
   "verified_context_observations": [
@@ -535,9 +556,9 @@
     }
   ],
   "calibration_gates": [
-    "Create a source-verified, occupational ISCO→paper C/N crosswalk and quantify classification uncertainty.",
+    "Obtain an ISCO 3/4-digit occupational breakdown and construct independently reviewed SOC 2010 11-29 / 41 / 43 → ISCO-08 C/N mapping; 2024 Eurostat single-digit data only give high/medium/broad illustrative aggregates (38.46 / 50.01 / 68.17%).",
     "Align 2024 labor share (national accounts), unemployment pool and 2024 labor force into consistent model definitions.",
-    "Estimate baseline job finding, separations, vacancy fill and between-group mobility; do not substitute Eurostat E/U/I flows for C↔N.",
+    "Estimate monthly group-specific finding/separation, vacancy fill and C↔N mobility using appropriate linked national records. Eurostat 2024 annual E/U/I transitions are observed (U→E 42.2%; E→U 2.4%) but cannot estimate mu_bar directly.",
     "Review small-open-economy capital-supply closure, investment inflows and migration; keep U.S. structural elasticities labeled as assumptions.",
     "Keep all seven AI scenario dials as explicit alternative assumptions; national firm-level AI adoption is contextual only.",
     "Require all parameter values with provenance, units, dates, transformations and uncertainty ranges before enabling country simulation.",

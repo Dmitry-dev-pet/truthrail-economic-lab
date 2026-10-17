@@ -1,0 +1,118 @@
+{
+  "schema_version": 1,
+  "country_code": "PT",
+  "year": 2024,
+  "calibration_status": "auxiliary_status_transitions_not_cross_occupation_mobility",
+  "runnable": false,
+  "source": {
+    "publisher": "Eurostat / INE Portugal",
+    "dataset": "lfsi_long_a",
+    "endpoint": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/lfsi_long_a?geo=PT&time=2024&sex=T",
+    "updated": "2026-08-05T23:00:00+0200",
+    "geo": "PT",
+    "sex": "T",
+    "period": "2024",
+    "count_unit": "thousand persons",
+    "rate_definition": "percentage of persons in initial employment status; annual linked cross-sectional LFS samples"
+  },
+  "matrix": [
+    {
+      "code": "EMP_EMP",
+      "label": "Employed to employed persons",
+      "count_thousand": 4739,
+      "origin_share_pct": 94.5,
+      "percent_unit": "PC_EMP"
+    },
+    {
+      "code": "EMP_UNE",
+      "label": "Employed to unemployed persons",
+      "count_thousand": 120,
+      "origin_share_pct": 2.4,
+      "percent_unit": "PC_EMP"
+    },
+    {
+      "code": "EMP_INAC",
+      "label": "Employed to outside the labour force",
+      "count_thousand": 157,
+      "origin_share_pct": 3.1,
+      "percent_unit": "PC_EMP"
+    },
+    {
+      "code": "UNE_EMP",
+      "label": "Unemployed to employed persons",
+      "count_thousand": 148,
+      "origin_share_pct": 42.2,
+      "percent_unit": "PC_UNE"
+    },
+    {
+      "code": "UNE_UNE",
+      "label": "Unemployed to unemployed persons",
+      "count_thousand": 123,
+      "origin_share_pct": 35,
+      "percent_unit": "PC_UNE"
+    },
+    {
+      "code": "UNE_INAC",
+      "label": "Unemployed to outside the labour fource",
+      "count_thousand": 80,
+      "origin_share_pct": 22.8,
+      "percent_unit": "PC_UNE"
+    },
+    {
+      "code": "INAC_EMP",
+      "label": "Outside the labour fource to employed persons",
+      "count_thousand": 196,
+      "origin_share_pct": 7.4,
+      "percent_unit": "PC_INAC"
+    },
+    {
+      "code": "INAC_UNE",
+      "label": "Outside the labour fource to unemployed persons",
+      "count_thousand": 108,
+      "origin_share_pct": 4.1,
+      "percent_unit": "PC_INAC"
+    },
+    {
+      "code": "INAC_INAC",
+      "label": "Outside the labour fource to outside the labour force",
+      "count_thousand": 2356,
+      "origin_share_pct": 88.6,
+      "percent_unit": "PC_INAC"
+    }
+  ],
+  "model_mapping": {
+    "observed_labour_states": [
+      "employed",
+      "unemployed",
+      "inactive"
+    ],
+    "unobserved": [
+      "C-to-N occupational move",
+      "N-to-C occupational move",
+      "within-occupation employer quits",
+      "monthly vacancy fills",
+      "monthly job finding by occupation group"
+    ],
+    "candidates": "Annual U→E and E→U are contextual turnover evidence only.",
+    "cannot_calibrate_directly": [
+      "mu_bar",
+      "mu",
+      "q_rel_C",
+      "q_rel_N",
+      "fill_bar",
+      "q_bar_ann"
+    ]
+  },
+  "scientific_microdata": {
+    "source": "https://ec.europa.eu/eurostat/web/microdata/european-union-labour-force-survey",
+    "scientific_isco_detail": "3-digit ISCO scientific use files",
+    "linkage_note": "Public EU-LFS scientific data HHNUM identifiers regenerated randomly per quarter, so respondent trajectories cannot be tracked across quarters using those files; obtain separately approved national matched microdata or administrative longitudinal records."
+  },
+  "caveats": [
+    "Annual transition rates are not directly monthly model search probabilities.",
+    "E→E includes both continuing at the same occupation and changing occupations.",
+    "E/U/I rates differ conceptually from model cross-occupation job-finding discount.",
+    "Full INE national rotating-panel methodology differs from public scientific-use EU-LFS access; no individual records acquired.",
+    "All Portuguese model parameters remain unassigned."
+  ]
+}

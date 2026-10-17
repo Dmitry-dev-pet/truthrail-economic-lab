@@ -74,6 +74,110 @@ Everything in the machine-readable audit has `portugal_model_value: null`.
 The observations above are **contextual evidence** or **candidates**,
 not promoted to model parameters.
 
+## New: Portugal occupation headcounts with auditable classification scenarios
+
+The [Eurostat 2024 ISCO-08 snapshot](isco_occupation_snapshot.json) is a
+frozen, dimension-filtered download of the **official** Eurostat statistics
+API `lfsa_egais`, `geo=PT`, `time=2024`, `sex=T`,
+`age=Y_GE15`, `wstatus=EMP`, `unit=THS_PER`.
+The archived response reflects Eurostat's **10 September 2026** update.
+Counts are **thousands of employed persons**:
+
+| ISCO major group | 2024 thousands | Preliminary mapping to US paper's SOC C/N partition |
+|---|---:|---|
+| OC1 — Managers | 309.8 | C candidate |
+| OC2 — Professionals | 1,178.3 | C candidate |
+| OC3 — Technicians and associate professionals | 590.8 | **Mixed/needs fine-grained crosswalk** |
+| OC4 — Clerical support workers | 478.0 | C candidate |
+| OC5 — Service **and** sales workers | 928.3 | **Mixed:** sales vs personal/protective services must be split |
+| OC6 — Skilled agricultural / forestry / fishery | 115.8 | Primarily N candidate |
+| OC7 — Craft and related trades | 656.2 | Primarily N candidate |
+| OC8 — Plant / machine operators and assemblers | 403.8 | Primarily N candidate |
+| OC9 — Elementary occupations | 429.1 | Predominantly N candidate; detailed sales exceptions may exist |
+| OC0 — Armed forces | 22.3 | Treat separately from civilian CPS reference |
+| **TOTAL** | **5,112.3** | Sum of rounded major groups may differ by 0.1 thousand |
+
+**How the original paper defines C:** SOC 2010 major groups **11–29,
+41 and 43**, covering management, professional, sales and office work
+(see [reproduction's labor-market discussion](https://econ-ark.github.io/econ-scenarios/reproduction-appendix/)
+and [BLS SOC–ISCO crosswalk](https://www.bls.gov/soc/ISCO_SOC_Crosswalk_process.pdf)).
+ISCO is not a direct one-to-one substitute for U.S. SOC.
+
+The three **heuristic classification sensitivity examples**, using
+Eurostat's entire all-employed denominator and, separately, an
+approximate *civilian-only* denominator that excludes the 22.3 thousand
+armed-forces workers, are:
+
+| Inclusions | Thousand people | Share of Eurostat total | Share of provisional civilian employment |
+|---|---:|---:|---:|
+| ISCO 1 + 2 + 4 | 1,966.1 | 38.46% | 38.63% |
+| ISCO 1 + 2 + 3 + 4 | 2,556.9 | 50.01% | 50.23% |
+| ISCO 1 + 2 + 3 + 4 + 5 | 3,485.2 | 68.17% | 68.47% |
+
+The provisional civilian denominator is **5,090.0 thousand**,
+`5,112.3 - 22.3`. Excluding armed forces improves comparison
+to the CPS's civilian frame but is *not* a complete harmonization
+of age, employment or institutional definitions.
+
+**These are intentionally coarse mapping examples, not a
+calibrated value for `cog_share`, and not a formal statistical
+lower/upper confidence interval.** ISCO 3 and 5 contain mixed
+groups; ISCO 5 includes personal services that the paper excludes
+while sales professions within ISCO 5 are included. A defensible
+mapping requires detailed ISCO codes and weighted U.S. SOC
+2010 ↔ ISCO-08 correspondence, with special handling for
+one-to-many mappings. The public `lfsa_egais` endpoint exposes
+only 1-digit groups. The more detailed scientific EU-LFS files
+include **3-digit ISCO**, but require research authorization.
+
+All three group fractions are stored as experimental alternatives
+in [`isco_occupation_snapshot.json`](isco_occupation_snapshot.json);
+**none** is assigned to the Portugal `Fixed.cog_share` parameter.
+
+## New: observed labor-market status flows are not occupational mobility
+
+The [Eurostat 2024 annual flows snapshot](lfs_annual_status_flows.json),
+extracted from `lfsi_long_a`, `geo=PT`, `time=2024`,
+`sex=T` (updated 5 August 2026), contains the complete
+**9-flow transition matrix** between employed (E),
+unemployed (U) and inactive (I). Published transitions include:
+
+| Initial status → final status | Persons, thousands | Percent of initial-status group |
+|---|---:|---:|
+| E → E | 4,739 | 94.5% |
+| E → U | 120 | 2.4% |
+| E → I | 157 | 3.1% |
+| U → E | 148 | 42.2% |
+| U → U | 123 | 35.0% |
+| U → I | 80 | 22.8% |
+| I → E | 196 | 7.4% |
+| I → U | 108 | 4.1% |
+| I → I | 2,356 | 88.6% |
+
+The rates and population counts represent annual linked
+EU-LFS estimates; they are **not automatically monthly rates**.
+Among people classified E→E are both persons who kept the
+same occupation and those who moved between professions.
+As a result, **the C→N and N→C occupational transition
+probabilities cannot be recovered from this 9-cell matrix**.
+They are also conceptually different from `mu_bar`, which
+represents a search-efficiency discount, not a raw fraction
+of people who change occupation.
+
+Eurostat's [scientific EU-LFS microdata](https://ec.europa.eu/eurostat/web/microdata/european-union-labour-force-survey)
+preserves 3-digit ISCO values but **re-generates household identifiers
+by quarter**, preventing ordinary linkage of individual respondents
+across waves. Nationally linked INE microdata or other longitudinal
+administrative data and permission to access them would be needed
+to recover occupational transitions or group-level hire/quit rates.
+The official [Eurostat flow methodology](https://ec.europa.eu/eurostat/cache/metadata/en/lfsi_long_esms.htm)
+notes specific Portuguese INE flow estimates.
+
+**The Portugal country profile remains audit-only**; the snapshot
+does not set `mu_bar`, `mu`, `q_rel_C`, `q_rel_N`,
+`q_bar_ann` or `fill_bar`. The existing
+U.S. mathematical replication is unchanged.
+
 ## Field coverage and calibration status
 
 | Bucket | Input count | Meaning |
@@ -115,11 +219,16 @@ No automated table-to-model ingestion exists yet.
    an external plausibility check).
 2. Download the 2024 AMECO adjusted wage-share **numeric series**,
    documenting self-employment and income-accounting definitions.
-3. Define and review an ISCO occupation-to-C/N concordance,
-   including sensitivity bands and the impact of ISCO aggregation.
-4. Determine which monthly separation, hiring, job mobility and
-   vacancy-filling inputs can be estimated from national sources;
-   list those still unidentifiable with public series.
+3. Use the 2024 1-digit ISCO snapshot as an arithmetic check,
+   then obtain occupational 3-digit (or 4-digit) statistics and
+   review weighted BLS SOC-2010 to ISCO-08 mappings for the paper's
+   exact 11–29, 41, 43 group; quantify ambiguity, particularly
+   for technicians (ISCO 3) and service/sales (ISCO 5).
+4. Keep the official 2024 nine-status annual E/U/I flows as
+   **context**. Identify permissioned, linkable 2024 INE/national
+   datasets for occupational C↔N transitions and group-specific
+   hiring, quitting and vacancy-filling rates. Scientific EU-LFS
+   household pseudonyms cannot be used to link quarters.
 5. Scientifically review the capital-supply closure and cross-border
    labor dynamics for a small open euro-area economy.
 6. Build a **distinct experimental Portugal calibration profile**
