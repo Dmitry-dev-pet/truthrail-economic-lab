@@ -1,0 +1,62 @@
+name: Owner economic experiment
+
+on:
+  issues:
+    types: [opened]
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  owner_experiment:
+    # Only the account owner can request one of these bounded public calculations.
+    # Issue titles and bodies are never interpreted as shell commands or code paths.
+    if: >-
+      github.event.issue.user.login == github.repository_owner &&
+      github.event.issue.title == '[econ] experiment'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    concurrency:
+      group: economic-owner-${{ github.repository }}
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Retrieve pinned public mathematical source
+        shell: bash
+        run: |
+          set -euo pipefail
+          git -c credential.helper= clone --depth 1 --branch v1.0 \
+            https://github.com/fhoces/opa-ai-macro-econ-scenarios.git "$RUNNER_TEMP/econ-source"
+          test "$(git -C "$RUNNER_TEMP/econ-source" rev-parse HEAD)" = \
+            d4703b6ae0d19dca08fbde11a25c218fa4c7b7a6
+      - name: Run bounded JSON-only experiment without GitHub token
+        shell: bash
+        env:
+          ECON_ISSUE_JSON: ${{ github.event.issue.body }}
+          PYTHONDONTWRITEBYTECODE: "1"
+          PYTHONNOUSERSITE: "1"
+        run: |
+          set -euo pipefail
+          export PYTHONPATH="$RUNNER_TEMP/econ-source:$GITHUB_WORKSPACE"
+          python -m lab.issue_runner > "$RUNNER_TEMP/economic-report.md"
+      - name: Publish bounded issue result
+        if: always()
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ISSUE_NUM: ${{ github.event.issue.number }}
+        run: |
+          set -euo pipefail
+          if [ ! -s "$RUNNER_TEMP/economic-report.md" ]; then
+            printf '%s\n' '### Economic Lab · experiment unavailable' '' \
+              'The pinned run did not produce a report. Inspect the linked Actions run. No Mac workload was started.' \
+              > "$RUNNER_TEMP/economic-report.md"
+          fi
+          gh issue comment "$ISSUE_NUM" --repo "$GITHUB_REPOSITORY" \
+            --body-file "$RUNNER_TEMP/economic-report.md"
