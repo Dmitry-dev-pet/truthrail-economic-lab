@@ -1,0 +1,142 @@
+name: One-time official Python 3.12 OCI image handoff
+
+on:
+  push:
+    branches:
+      - experiment/chatgpt-python312-oci-20261017
+
+permissions:
+  contents: read
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Pull the public official Python image and record immutable digest
+        shell: bash
+        run: |
+          set -euo pipefail
+          image='python:3.12.15-slim-trixie'
+          docker pull --platform linux/amd64 "$image"
+          docker run --rm --network none --platform linux/amd64 "$image" python --version | tee python-version.txt
+          test "$(cat python-version.txt)" = "Python 3.12.15"
+          docker image inspect --format '{{json .RepoDigests}}' "$image" > repo-digests.json
+          docker image inspect --format '{{.Id}}' "$image" > image-config-digest.txt
+          docker save "$image" | gzip -3 > python312-official-docker-save.tar.gz
+          sha256sum python312-official-docker-save.tar.gz > SHA256SUMS
+          mkdir -p transfer
+          split -b 8M -d -a 2 python312-official-docker-save.tar.gz transfer/part-
+          (cd transfer && sha256sum part-* > ../PART-SHA256SUMS)
+          du -h python312-official-docker-save.tar.gz
+          ls -lh transfer/
+          sha256sum -c SHA256SUMS
+      - name: Upload checksums and exact image identity
+        uses: actions/upload-artifact@v4
+        with:
+          name: python312-image-metadata
+          path: |
+            repo-digests.json
+            image-config-digest.txt
+            python-version.txt
+            SHA256SUMS
+            PART-SHA256SUMS
+          retention-days: 1
+          compression-level: 0
+          if-no-files-found: error
+      - name: Upload image transfer part 00
+        uses: actions/upload-artifact@v4
+        with:
+          name: python312-image-part-00
+          path: transfer/part-00
+          retention-days: 1
+          compression-level: 0
+          if-no-files-found: ignore
+      - name: Upload image transfer part 01
+        uses: actions/upload-artifact@v4
+        with:
+          name: python312-image-part-01
+          path: transfer/part-01
+          retention-days: 1
+          compression-level: 0
+          if-no-files-found: ignore
+      - name: Upload image transfer part 02
+        uses: actions/upload-artifact@v4
+        with:
+          name: python312-image-part-02
+          path: transfer/part-02
+          retention-days: 1
+          compression-level: 0
+          if-no-files-found: ignore
+      - name: Upload image transfer part 03
+        uses: actions/upload-artifact@v4
+        with:
+          name: python312-image-part-03
+          path: transfer/part-03
+          retention-days: 1
+          compression-level: 0
+          if-no-files-found: ignore
+      - name: Upload image transfer part 04
+        uses: actions/upload-artifact@v4
+        with:
+          name: python312-image-part-04
+          path: transfer/part-04
+          retention-days: 1
+          compression-level: 0
+          if-no-files-found: ignore
+      - name: Upload image transfer part 05
+        uses: actions/upload-artifact@v4
+        with:
+          name: python312-image-part-05
+          path: transfer/part-05
+          retention-days: 1
+          compression-level: 0
+          if-no-files-found: ignore
+      - name: Upload image transfer part 06
+        uses: actions/upload-artifact@v4
+        with:
+          name: python312-image-part-06
+          path: transfer/part-06
+          retention-days: 1
+          compression-level: 0
+          if-no-files-found: ignore
+      - name: Upload image transfer part 07
+        uses: actions/upload-artifact@v4
+        with:
+          name: python312-image-part-07
+          path: transfer/part-07
+          retention-days: 1
+          compression-level: 0
+          if-no-files-found: ignore
+      - name: Upload image transfer part 08
+        uses: actions/upload-artifact@v4
+        with:
+          name: python312-image-part-08
+          path: transfer/part-08
+          retention-days: 1
+          compression-level: 0
+          if-no-files-found: ignore
+      - name: Upload image transfer part 09
+        uses: actions/upload-artifact@v4
+        with:
+          name: python312-image-part-09
+          path: transfer/part-09
+          retention-days: 1
+          compression-level: 0
+          if-no-files-found: ignore
+      - name: Upload image transfer part 10
+        uses: actions/upload-artifact@v4
+        with:
+          name: python312-image-part-10
+          path: transfer/part-10
+          retention-days: 1
+          compression-level: 0
+          if-no-files-found: ignore
+      - name: Upload image transfer part 11
+        uses: actions/upload-artifact@v4
+        with:
+          name: python312-image-part-11
+          path: transfer/part-11
+          retention-days: 1
+          compression-level: 0
+          if-no-files-found: ignore
