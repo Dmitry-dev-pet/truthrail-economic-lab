@@ -272,6 +272,15 @@ among QP workers present in both years** from Brighter Future.
 Neither is a national 2024 C/N occupational split or an
 estimate of the model's monthly `mu_bar`.
 
+The [official AMECO 2024 income-accounting audit](country_profiles/portugal/2024/ameco_income_accounting_2024.json)
+now retrieves **64.59205% at factor cost (`ALCD2`)** and
+**56.14314% at market-price GDP (`ALCD0`)**, reproducing both from
+employee compensation, matched domestic employment and self-employment
+imputation. The difference is the treatment of net production/import taxes,
+not two future scenarios. Source archives, hashes and rounding tolerances
+are preserved. Choosing a modeled valuation/population convention remains
+open, so neither observation is assigned to `s_L0`.
+
 The profile is explicitly `audit_only_not_calibrated` / `runnable:false`.
 It **does not** simulate or forecast Portugal. Published Portuguese
 unemployment, occupation, R&D and AI-adoption data are separate,
