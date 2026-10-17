@@ -1,0 +1,24 @@
+{
+  "study": "Demand-productivity-employment mechanics: BLS 2025 industry illustration",
+  "compiled_on": "2026-10-18",
+  "data_years": "2024 to 2025",
+  "statistical_office": "US Bureau of Labor Statistics",
+  "measurement": "Percent change between 2024 and 2025; real sectoral output, output per hour worked, total hours of all workers. Values published rounded to 0.1 percentage point.",
+  "method": "Ten deliberately chosen, manually transcribed rows from 2025 BLS Industry Productivity news release Table 1, not a representative sample. These values have no AI-specific attribution.",
+  "source_service_url": "https://www.bls.gov/news.release/prin2.t01.htm",
+  "source_service_release": "2026-08-26",
+  "source_manufacturing_url": "https://www.bls.gov/news.release/prin.htm",
+  "source_manufacturing_release": "2026-06-24",
+  "rows": [
+    {"industry": "Software publishers", "naics": "5112", "group": "service", "output_growth_pct": 12.1, "labor_productivity_growth_pct": 12.9, "hours_growth_pct": -0.7},
+    {"industry": "Gambling industries", "naics": "7132", "group": "service", "output_growth_pct": 11.2, "labor_productivity_growth_pct": 2.7, "hours_growth_pct": 8.3},
+    {"industry": "Engineering services", "naics": "54133", "group": "service", "output_growth_pct": 2.6, "labor_productivity_growth_pct": -0.2, "hours_growth_pct": 2.8},
+    {"industry": "Commercial banking", "naics": "52211", "group": "service", "output_growth_pct": 2.9, "labor_productivity_growth_pct": 3.2, "hours_growth_pct": -0.3},
+    {"industry": "Warehousing and storage", "naics": "493", "group": "service", "output_growth_pct": 1.8, "labor_productivity_growth_pct": 1.4, "hours_growth_pct": 0.4},
+    {"industry": "Full-service restaurants", "naics": "722511", "group": "service", "output_growth_pct": 3.9, "labor_productivity_growth_pct": 4.5, "hours_growth_pct": -0.6},
+    {"industry": "Wired telecommunications carriers", "naics": "517311", "group": "service", "output_growth_pct": -8.3, "labor_productivity_growth_pct": -10.8, "hours_growth_pct": 2.8},
+    {"industry": "Wireless telecommunications carriers", "naics": "517312", "group": "service", "output_growth_pct": 4.1, "labor_productivity_growth_pct": 8.8, "hours_growth_pct": -4.3},
+    {"industry": "Other transportation equipment", "naics": "3369", "group": "manufacturing", "output_growth_pct": -2.3, "labor_productivity_growth_pct": 14.9, "hours_growth_pct": -15.0},
+    {"industry": "Medical equipment and supplies", "naics": "3391", "group": "manufacturing", "output_growth_pct": -6.1, "labor_productivity_growth_pct": -5.9, "hours_growth_pct": -0.2}
+  ]
+}
