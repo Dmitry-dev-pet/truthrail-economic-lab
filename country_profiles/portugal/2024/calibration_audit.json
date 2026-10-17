@@ -578,7 +578,7 @@
   ],
   "calibration_gates": [
     "Parse/verify the official BLS 2010 SOC↔ISCO08 XLS against the community-derived 43-submajor correspondence, resolving 2 non-four-digit source codes, then obtain detailed 2024 Portugal national all-employed occupation weights. Employer-reported GEP Quadros de Pessoal 2024 is a distinct universe; do not multiply its counts into Eurostat total without coverage and definitions.",
-    "Require a weighted, coverage-matched occupational C/N split with per-submajor mixed-code sensitivity and age/civilian scope normalization; original US C groups SOC11-29,41,43. Do not turn 13 C / 13 N / 17 mixed submajor *classes* into shares of workers.",
+    "Align Portuguese 2024 labor income share from national accounts, the unemployment search pool and labor-force denominators with the model's base-year definitions; simultaneously require an occupational C/N split weighted by real employment rather than counts of crosswalk links.",
     "Estimate monthly group-specific finding/separation, vacancy fill and C↔N mobility using appropriate linked national records. Eurostat 2024 annual E/U/I transitions are observed (U→E 42.2%; E→U 2.4%) but cannot estimate mu_bar directly.",
     "Review small-open-economy capital-supply closure, investment inflows and migration; keep U.S. structural elasticities labeled as assumptions.",
     "Keep all seven AI scenario dials as explicit alternative assumptions; national firm-level AI adoption is contextual only.",
