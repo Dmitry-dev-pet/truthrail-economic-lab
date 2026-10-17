@@ -328,3 +328,18 @@ research workflow runs on hosted Linux, not on the Mac.
 
 The published table's consistency check is numerical reproducibility, not
 evidence that the future will follow any of these conditional scenarios.
+
+## Direct task-environment research
+
+The pinned Python model can also run directly in an available task execution
+runtime. A one-shot OpenAI task-environment check passed all 53 lab tests and
+16 HTTP checks, including the local UI assets, scenarios, bounded experiments,
+research and sensitivity endpoints. The HTTP service was stopped after the
+check; this is not permanent hosting or a Mac Docker deployment.
+
+A subsequent unchanged three-preset reproduction and descriptive interaction
+analysis ran directly in the task environment in about 0.59 seconds for
+30 model evaluations. See the [joint new-task/mobility report](research/2026-10-17-rho-mu-interaction.md)
+and its versioned inputs and outputs. Source preparation and interpretation
+time are excluded. Existing GitHub experiment workflows remain optional
+execution routes, and PR CI remains separate validation.
