@@ -181,14 +181,17 @@ class Handler(SimpleHTTPRequestHandler):
         return super().do_GET()
     def do_POST(self):
         path = urlsplit(self.path).path
-        if path not in ("/api/run", "/api/experiment", "/api/research"):
+        if path not in ("/api/run", "/api/experiment", "/api/research", "/api/sensitivity"):
             return self.send_json(HTTPStatus.NOT_FOUND, {"error":"Unknown endpoint"})
         try:
             length = int(self.headers.get("Content-Length", "0"))
             if length < 1 or length > 16384:
                 raise ValueError("Invalid request length")
             payload = json.loads(self.rfile.read(length))
-            if path == "/api/research":
+            if path == "/api/sensitivity":
+                from .sensitivity import run_sensitivity
+                result = run_sensitivity(payload)
+            elif path == "/api/research":
                 from .research import run_research
                 result = run_research(payload)
             elif path == "/api/experiment":

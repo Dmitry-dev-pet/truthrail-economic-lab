@@ -42,6 +42,7 @@ Do not substitute a new public proxy or tunnel for this localhost-only service.
 - POST /api/experiment (bounded two-axis comparison; local API only)
 - GET /api/hypotheses (predeclared proposal catalogue; local API only)
 - POST /api/research (one bounded hypothesis-guided study; local API only)
+- POST /api/sensitivity (fixed nine-parameter, 19-evaluation numerical audit; local API only)
 
 Examples of JSON bodies:
 
@@ -161,6 +162,62 @@ We study their conditional effects **inside the U.S. model**, not whether
 real-world policies, surveys or workers will behave accordingly. Outputs
 are model sensitivity results, not empirical validation or statistical
 tests.
+
+### Rank sensitivity of all nine model assumptions
+
+An owner-created GitHub issue with the **existing exact title**
+`[econ] experiment` accepts one of these fixed **public mathematical**
+requests:
+
+```json
+{"analysis":"sensitivity","scenario":"substantial"}
+```
+
+`scenario` is required and must be exactly `modest`, `substantial`
+or `extreme`. The `analysis` must be exactly `sensitivity`: arbitrary
+parameter lists, scripts, URLs, added fields, unbounded sweeps, prompt text
+and private data are not accepted.
+
+**Method fixed before calculation:** The baseline is the original preset.
+Each of the seven scenario parameters (`m_2030`, `d_2030`, `a_2030`,
+`psi`, `rho`, `mu`, `theta_H`) and two structural parameters
+(`eps`, `xi`) is independently changed over a **10% interval of that
+parameter's published/implemented allowed range**, with all other
+parameters held at the preset. For presets at a bound, the same-length
+window shifts inward, so a sampled comparison need not be symmetric about
+the original preset. Nine inputs × two simulated endpoints, plus one
+baseline = exactly **19** model evaluations for **one named preset**.
+No follow-on scenarios are triggered automatically.
+
+The report records both exact endpoints and the baseline value for
+**each** input, the observed difference in 2030 outputs (high minus low,
+percentage points), and **five independent ranked lists** for GDP gain
+relative to no AI, labor share, overall unemployment, AI-sensitive
+unemployment, and average wage gain. Rankings use the absolute numerical
+difference `abs(high-low)` for the same *fraction of implemented bound
+width*, **not** a pooled or theoretically weighted score.
+
+A SHA-256 fingerprint of all planned contrasts and pinned model source is
+created *before* simulation. Results are published in the same public,
+owner-only GitHub issue via the existing hosted calculate/report workflow;
+no Mac runtime, Docker, MCP, agent loop, LLM token or new credential
+is introduced.
+
+**Scientific limitation:** a chosen numerical input range is neither a
+credible interval for its real-world value nor a statistically estimated
+distribution. The resulting sensitivity ordering is specific to that
+range, endpoint choice and conditional macroeconomic preset. It is not
+a probability, parameter elasticity, causal decomposition, ranking
+of real-world economic importance, nor proof that the model is
+empirically calibrated. Interactions between varied parameters are
+*not* identified by one-factor-at-a-time comparisons. The Anthropic
+Economic Index is a separate observational dataset and is not
+used to set parameter ranges.
+
+`POST /api/sensitivity` additionally exposes exactly this bounded analysis
+through the **local-only** API *if* a separately authorized Docker runtime
+is eventually deployed; its existence in code does not mean that service
+is running on the Mac.
 
 ## License and attribution
 

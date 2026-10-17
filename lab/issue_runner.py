@@ -10,6 +10,7 @@ import os
 
 from .experiment import run_experiment
 from .research import run_research
+from .sensitivity import run_sensitivity
 
 MAX_ISSUE_BYTES = 4096
 METRICS = (
@@ -132,6 +133,65 @@ def format_research_report(result):
     return "\n".join(lines)
 
 
+
+def format_sensitivity_report(result):
+    """Publish all nine factors and separate absolute impact rankings per outcome."""
+    envelope = result["research"]
+    plan = envelope["plan"]
+    baseline = result["baseline_2030"]
+    model = result["metadata"]
+    lines = [
+        "### Economic Lab · bounded assumption sensitivity (USA, 2030)",
+        "",
+        "**Preset:** " + plan["scenario"] +
+        " · **model evaluations:** " + str(model["model_evaluations"]) +
+        " · **upstream commit:** `" + model["source_commit"] + "`",
+        "",
+        "**Pre-computation plan SHA-256:** `" + envelope["plan_sha256"] + "`",
+        "",
+        "**Method:** vary one parameter at a time over a window spanning " +
+        f'{plan["range_fraction"] * 100:.1f}%' +
+        " of its declared allowable range. Shift the window within bounds if the preset is at an edge. All other parameters remain at the named preset.",
+        "",
+        "This is **not** a ranking of real-world causal importance, probabilities, elasticities or plausible economic uncertainty.",
+        "",
+        "**Unmodified preset baseline:** " +
+        ", ".join(f"{label}: {baseline[key]:.3f}%" for key, label in METRICS),
+        "",
+        "| Assumption | Type | Preset | Low → high | " +
+        " | ".join(label + " (pp)" for key, label in METRICS) + " |",
+        "|---|---|---:|---|"+ "---:|" * len(METRICS),
+    ]
+    for row in result["measurements"]:
+        lines.append(
+            f'| `{row["parameter"]}` | {row["group"]} | ' +
+            f'{row["baseline_value"]:.5f} | {row["low"]:.5f} → {row["high"]:.5f} | ' +
+            " | ".join(f'{row["high_minus_low_pp"][key]:+.3f}'
+                       for key, _ in METRICS) + " |"
+        )
+    lines.extend([
+        "",
+        "**Largest absolute responses per outcome (top 3; same numerical window rule):**",
+    ])
+    for metric, title in METRICS:
+        winners = result["rankings"][metric][:3]
+        lines.append(
+            "- **" + title + "**: " +
+            ", ".join(
+                "`" + item["parameter"] + "` " +
+                f'{item["signed_change_pp"]:+.3f} pp'
+                for item in winners
+            )
+        )
+    lines.extend(["", "**Limitations:**"])
+    lines.extend("- " + caveat for caveat in result["limitations"])
+    lines.append(
+        "This public, owner-requested calculation ran on GitHub-hosted Linux. "
+        "No Mac runtime, private data, Docker, new MCP, or LLM provider is involved."
+    )
+    return "\n".join(lines)
+
+
 def report_from_issue_body(text):
     if not isinstance(text, str) or not 0 < len(text.encode("utf-8")) <= MAX_ISSUE_BYTES:
         raise ValueError("Issue body must contain at most 4096 bytes of JSON")
@@ -139,6 +199,8 @@ def report_from_issue_body(text):
         request = json.loads(text)
     except json.JSONDecodeError:
         raise ValueError("Issue body is not JSON") from None
+    if isinstance(request, dict) and "analysis" in request:
+        return format_sensitivity_report(run_sensitivity(request))
     if isinstance(request, dict) and "research" in request:
         return format_research_report(run_research(request))
     return format_report(run_experiment(request))
