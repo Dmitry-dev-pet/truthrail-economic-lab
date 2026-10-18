@@ -39,6 +39,7 @@ jobs:
           export FC_PEND_EXIT=1
           export QTWEBENGINE_DISABLE_SANDBOX=1
           export LIBGL_ALWAYS_SOFTWARE=1
+          trap 'echo FREECAD_DIAGNOSTICS; cat output/render-report.json 2>/dev/null || true; ls -lah output/ output/frames 2>/dev/null | head -20 || true' EXIT
           xvfb-run -a -s '-screen 0 1280x800x24' timeout 420s \
             ./squashfs-root/AppRun "$PWD/experiments/physical_pendulum/RenderPhysicalPendulums.FCMacro" | tee freecad-video.log
           grep -q '"status": "passed"' freecad-video.log
