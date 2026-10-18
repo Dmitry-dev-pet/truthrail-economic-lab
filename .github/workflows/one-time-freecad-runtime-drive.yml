@@ -1,0 +1,103 @@
+name: One-time official FreeCAD AppImage Drive handoff
+
+on:
+  push:
+    branches:
+      - experiment/chat-freecad-portable-20261018
+    paths:
+      - .github/workflows/one-time-freecad-runtime-drive.yml
+
+permissions:
+  contents: read
+
+jobs:
+  freecad-runtime-stage:
+    if: ${{ github.event.head_commit.message == 'one-time: stage FreeCAD AppImage for Drive' }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - name: Download pinned official release and stage 24MB chunks
+        shell: bash
+        run: |
+          set -euo pipefail
+          NAME='FreeCAD_1.1.4-Linux-x86_64-py311.AppImage'
+          curl --fail --location --retry 4 --retry-delay 3 --connect-timeout 30 \
+            --output "$NAME" "https://github.com/FreeCAD/FreeCAD/releases/download/1.1.4/$NAME"
+          printf '%s  %s\n' f6dc6ba676e5ac96a565ebc8d657232f94c6158e85b4352141bd1a46f6b43434 "$NAME" | sha256sum --check -
+          python3 - <<'PY'
+          import hashlib, json
+          from pathlib import Path
+          name='FreeCAD_1.1.4-Linux-x86_64-py311.AppImage'
+          expect='f6dc6ba676e5ac96a565ebc8d657232f94c6158e85b4352141bd1a46f6b43434'
+          base=Path('upload')
+          records=[]
+          total=0
+          with Path(name).open('rb') as file:
+              for i in range(99):
+                  blob=file.read(24_000_000)
+                  if not blob:
+                      break
+                  group=i//8
+                  dest=base/f'group-{group:02d}'/f'{name}.part-{i:02d}'
+                  dest.parent.mkdir(parents=True,exist_ok=True)
+                  dest.write_bytes(blob)
+                  records.append(dict(index=i,name=dest.name,size_bytes=len(blob),sha256=hashlib.sha256(blob).hexdigest(),file_id=None))
+                  total+=len(blob)
+                  print(f'CHUNK {i:02d}: {len(blob)} bytes {records[-1]["sha256"]}',flush=True)
+              if file.read(1):
+                  raise RuntimeError('Too many chunks')
+          assert len(records)>=30 and len(records)<=40, len(records)
+          assert len({i//8 for i in range(len(records))})==5
+          assert total==Path(name).stat().st_size
+          plan=dict(schema_version='alfred-runtime-bundle-v1',status='pending_upload_and_readback',
+                    software='FreeCAD',version='1.1.4',platform='linux-x86_64',
+                    archive_name=name,archive_size_bytes=total,sha256=expect,
+                    chunk_size_bytes=24_000_000,
+                    drive=dict(parent_folder_id='145V2hg51rAVTpGwjSgC3sPs5uQeMtgjJ',
+                               parent_folder_url='https://drive.google.com/drive/folders/145V2hg51rAVTpGwjSgC3sPs5uQeMtgjJ',
+                               visibility='private'),
+                    parts=records)
+          (base/'group-00'/'freecad-1.1.4.transfer-plan.json').write_text(json.dumps(plan,indent=2)+'\n')
+          print('STAGED_FREECAD_PINNED',len(records),total,flush=True)
+          PY
+          rm -f "$NAME"
+      - name: Handoff group 00
+        uses: actions/upload-artifact@v4
+        with:
+          name: freecad-1.1.4-drive-group-00
+          path: upload/group-00/
+          retention-days: 1
+          compression-level: 0
+          if-no-files-found: error
+      - name: Handoff group 01
+        uses: actions/upload-artifact@v4
+        with:
+          name: freecad-1.1.4-drive-group-01
+          path: upload/group-01/
+          retention-days: 1
+          compression-level: 0
+          if-no-files-found: error
+      - name: Handoff group 02
+        uses: actions/upload-artifact@v4
+        with:
+          name: freecad-1.1.4-drive-group-02
+          path: upload/group-02/
+          retention-days: 1
+          compression-level: 0
+          if-no-files-found: error
+      - name: Handoff group 03
+        uses: actions/upload-artifact@v4
+        with:
+          name: freecad-1.1.4-drive-group-03
+          path: upload/group-03/
+          retention-days: 1
+          compression-level: 0
+          if-no-files-found: error
+      - name: Handoff group 04
+        uses: actions/upload-artifact@v4
+        with:
+          name: freecad-1.1.4-drive-group-04
+          path: upload/group-04/
+          retention-days: 1
+          compression-level: 0
+          if-no-files-found: error
