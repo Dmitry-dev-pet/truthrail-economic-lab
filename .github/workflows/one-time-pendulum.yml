@@ -17,7 +17,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Install minimal virtual-display dependencies
-        run: sudo apt-get update -qq && sudo apt-get install -y -qq xvfb xauth
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq xvfb xauth openbox
       - name: Download and verify FreeCAD official AppImage (runner only)
         shell: bash
         run: |
@@ -42,6 +42,18 @@ jobs:
           test -s output/pendulum_frames.csv
           unzip -t output/PhysicalPendulum.FCStd
           du -h output/*
+      - name: Verify GUI timer animation and capture a real FreeCAD screenshot
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PENDULUM_OUTPUT_DIR="$PWD/output"
+          export PENDULUM_SCRIPT_DIR="$PWD/experiments/physical_pendulum"
+          export QTWEBENGINE_DISABLE_SANDBOX=1
+          export LIBGL_ALWAYS_SOFTWARE=1
+          xvfb-run -a -s '-screen 0 1280x960x24' sh -c 'openbox >/tmp/openbox.log 2>&1 & timeout 75s ./squashfs-root/AppRun freecad "$PENDULUM_SCRIPT_DIR/GUI_smoke.FCMacro"' | tee gui-run.log
+          grep -q FREECAD_GUI_ANIMATION_VERIFIED gui-run.log
+          test -s output/GUI_VERIFIED.txt
+          test -s output/FreeCAD-pendulum-screenshot.png
       - name: Upload ONLY small native model and animation data (one day)
         uses: actions/upload-artifact@v4
         with:
