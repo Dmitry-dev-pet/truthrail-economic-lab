@@ -1,0 +1,178 @@
+# -*- coding: utf-8 -*-
+"""Two physical pendulums, rendered frame by frame by the native FreeCAD GUI.
+
+FreeCAD 1.1.4 AppImage GUI:
+  FC_PEND_OUTPUT=/absolute/output FC_PEND_EXIT=1 \
+    xvfb-run -a /path/to/AppRun /absolute/RenderPhysicalPendulums.FCMacro
+
+Ideal uniform rods; small-angle linearized motion (12 degrees), no friction.
+The image pixels are generated with FreeCAD's 3D viewport saveImage().
+"""
+from pathlib import Path
+import csv
+import hashlib
+import json
+import math
+import os
+import time
+import traceback
+
+import FreeCAD as App
+import FreeCADGui as Gui
+import Part
+from PySide import QtWidgets
+from pivy import coin
+
+OUT = Path(os.environ.get("FC_PEND_OUTPUT", "./render")).resolve()
+OUT.mkdir(parents=True, exist_ok=True)
+FRAMES = OUT / "frames"
+FRAMES.mkdir(exist_ok=True)
+EXIT = os.environ.get("FC_PEND_EXIT", "0") == "1"
+WIDTH, HEIGHT = 1024, 640
+FPS, DURATION = 18, 8.0
+COUNT = int(FPS * DURATION)
+L_MM, MASS_KG, GRAV = 600.0, 0.5, 9.81
+AMPLITUDE = 12.0
+OPT_MM = L_MM * (0.5 - 1.0 / math.sqrt(12.0))
+summary = {"status": "starting", "renderer": "FreeCAD native GUI saveImage",
+           "version": ".".join(App.Version()[:3]),
+           "width": WIDTH, "height": HEIGHT, "fps": FPS,
+           "duration_seconds": DURATION, "frames": COUNT,
+           "amplitude_degrees": AMPLITUDE}
+
+
+def calc_period(pivot_from_top_mm):
+    L = L_MM / 1000.0
+    d = L / 2.0 - pivot_from_top_mm / 1000.0
+    if d <= 0: raise ValueError("pivot at or below centre of mass")
+    inertia_per_mass = L * L / 12.0 + d * d
+    return 2.0 * math.pi * math.sqrt(inertia_per_mass / (GRAV * d))
+
+
+def events():
+    QtWidgets.QApplication.processEvents()
+
+
+def feature(doc, name, shape, colour):
+    obj = doc.addObject("Part::Feature", name)
+    obj.Shape = shape
+    if not obj.Shape.isValid():
+        raise RuntimeError("Invalid solid " + name)
+    vp = obj.ViewObject
+    vp.Visibility = True
+    vp.ShapeColor = colour
+    vp.LineColor = (0.09, 0.12, 0.17)
+    vp.DisplayMode = "Flat Lines"
+    vp.LineWidth = 1.0
+    vp.Deviation = 0.10
+    return obj
+
+
+try:
+    assert abs(OPT_MM - 126.794919243) < .001
+    T_END = calc_period(0.0)
+    T_OPT = calc_period(OPT_MM)
+    assert abs(T_END - 1.268748) < .00001
+    assert abs(T_OPT - 1.180703) < .00001
+    assert T_OPT < T_END
+    summary["pivots_from_end_mm"] = [0.0, OPT_MM]
+    summary["periods_s"] = [T_END, T_OPT]
+    summary["improvement_percent"] = 100 * (T_END - T_OPT) / T_END
+
+    doc = App.newDocument("PhysicalPendulumMinimum")
+    # The beam sits BEHIND the rod plane; this is a schematic teaching model.
+    feature(doc, "RearSupportBeam",
+            Part.makeBox(590, 18, 15, App.Vector(-295, 34, 24)),
+            (.37, .43, .51))
+    rods = []
+    params = [("RodEnd", -205, 0.0, (.19, .57, .82)),
+              ("RodOptimal", 205, OPT_MM, (.98, .57, .22))]
+    for name, x, pivot, tint in params:
+        blank = Part.makeBox(32, 12, L_MM, App.Vector(-16, -6, pivot - L_MM))
+        bore = Part.makeCylinder(4.1, 14,
+                                 App.Vector(0, -7, 0), App.Vector(0, 1, 0))
+        rod = feature(doc, name, blank.cut(bore), tint)
+        rod.addProperty("App::PropertyLength", "RodLength", "Physics")
+        rod.RodLength = L_MM
+        rod.addProperty("App::PropertyLength", "PivotFromEnd", "Physics")
+        rod.PivotFromEnd = pivot
+        rod.addProperty("App::PropertyFloat", "SmallAnglePeriod", "Physics")
+        rod.SmallAnglePeriod = calc_period(pivot)
+        rod.addProperty("App::PropertyAngle", "InitialAmplitude", "Physics")
+        rod.InitialAmplitude = AMPLITUDE
+        rod.Placement = App.Placement(App.Vector(x, 0, 0),
+                                     App.Rotation(App.Vector(0, 1, 0), AMPLITUDE))
+        rods.append((rod, x, calc_period(pivot)))
+        feature(doc, name + "Axle", Part.makeCylinder(3.8, 52,
+                App.Vector(x, -20, 0), App.Vector(0, 1, 0)), (.77, .82, .86))
+        feature(doc, name + "FrontCap", Part.makeCylinder(10, 3,
+                App.Vector(x, -22, 0), App.Vector(0, 1, 0)), (.45, .51, .58))
+    doc.recompute()
+    model = OUT / "PhysicalPendulumMinimum.FCStd"
+    doc.saveAs(str(model))
+    before = hashlib.sha256(model.read_bytes()).hexdigest()
+    summary["model_sha256"] = before
+
+    Gui.activateWorkbench("PartWorkbench")
+    window = Gui.getMainWindow()
+    window.showMaximized()
+    for _ in range(12):
+        events()
+        time.sleep(.025)
+    view = Gui.activeDocument().activeView()
+    view.setCameraType("Orthographic")
+    view.viewFront()
+    view.fitAll()
+    for _ in range(7): events()
+    camera = view.getCameraNode()
+    if not hasattr(camera, "height"):
+        raise RuntimeError("Orthographic FreeCAD camera unavailable")
+    eye = (0., -1650., -225.)
+    target = (0., 0., -225.)
+    camera.position.setValue(*eye)
+    camera.pointAt(coin.SbVec3f(0., 1650., 0.), coin.SbVec3f(0., 0., 1.))
+    camera.height.setValue(825.)
+    camera.focalDistance.setValue(1650.)
+    camera.nearDistance.setValue(1.)
+    camera.farDistance.setValue(4000.)
+
+    data = []
+    seconds_start = time.monotonic()
+    for i in range(COUNT):
+        t = i / FPS
+        angles = []
+        for rod, x, period in rods:
+            angle = AMPLITUDE * math.cos(2 * math.pi * t / period)
+            rod.Placement = App.Placement(App.Vector(x, 0, 0),
+                    App.Rotation(App.Vector(0, 1, 0), angle))
+            angles.append(angle)
+        events()
+        path = FRAMES / ("frame_%04d.png" % i)
+        view.saveImage(str(path), WIDTH, HEIGHT, "Current")
+        if not path.exists() or path.stat().st_size < 4500:
+            raise RuntimeError("Missing/empty FreeCAD screenshot at frame %d" % i)
+        data.append([i, round(t, 6), round(angles[0], 7), round(angles[1], 7)])
+        if i % 24 == 0:
+            print("FREECAD_PENDULUM_FRAME %d/%d %.2f s %d bytes" %
+                (i + 1, COUNT, t, path.stat().st_size), flush=True)
+    with (OUT / "motion.csv").open("w", newline="", encoding="utf-8") as f:
+        writer = csv.writer(f)
+        writer.writerow(["frame", "time_s", "angle_end_deg", "angle_optimal_deg"])
+        writer.writerows(data)
+
+    if hashlib.sha256(model.read_bytes()).hexdigest() != before:
+        raise RuntimeError("Source FCStd changed during rendering")
+    # Static roots remain fixed; animated angles follow the exact samples.
+    assert data[0][2] == AMPLITUDE and data[0][3] == AMPLITUDE
+    assert abs(data[1][2] - data[1][3]) > 0.001
+    summary["render_wall_seconds"] = round(time.monotonic() - seconds_start, 2)
+    summary["status"] = "passed"
+except BaseException:
+    summary["status"] = "failed"
+    summary["traceback"] = traceback.format_exc()
+finally:
+    (OUT / "render-report.json").write_text(json.dumps(summary, ensure_ascii=False, indent=2))
+    print("FREECAD_PENDULUM_RESULT",
+          json.dumps(summary, ensure_ascii=False), flush=True)
+    if EXIT:
+        os._exit(0 if summary["status"] == "passed" else 1)
