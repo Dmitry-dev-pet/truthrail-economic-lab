@@ -1,0 +1,44 @@
+name: Chat FreeCAD portable transfer
+
+on:
+  push:
+    branches:
+      - experiment/chat-freecad-portable-20261018
+    paths:
+      - .github/workflows/chat-freecad-portable.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  package:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - name: Download and verify official FreeCAD 1.1.4 Linux x86_64
+        shell: bash
+        run: |
+          set -euo pipefail
+          filename="FreeCAD_1.1.4-Linux-x86_64-py311.AppImage"
+          url="https://github.com/FreeCAD/FreeCAD/releases/download/1.1.4/$filename"
+          curl --fail --location --retry 4 --retry-delay 3 --connect-timeout 30 \
+            --output "$filename" "$url"
+          printf '%s  %s\n' \
+            f6dc6ba676e5ac96a565ebc8d657232f94c6158e85b4352141bd1a46f6b43434 \
+            "$filename" | sha256sum --check --
+          printf '%s  %s\n' \
+            f6dc6ba676e5ac96a565ebc8d657232f94c6158e85b4352141bd1a46f6b43434 \
+            "$filename" > SHA256SUMS
+          file "$filename"
+          ls -lh "$filename"
+      - name: Upload one-day FreeCAD binary handoff
+        uses: actions/upload-artifact@v4
+        with:
+          name: chat-freecad-1.1.4-linux-x64
+          path: |
+            FreeCAD_1.1.4-Linux-x86_64-py311.AppImage
+            SHA256SUMS
+          compression-level: 0
+          retention-days: 1
+          if-no-files-found: error
