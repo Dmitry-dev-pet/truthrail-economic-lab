@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      - name: Delete exactly four previously consumed transfer artifacts
+      - name: Delete all six consumed CAD transfer artifacts
         shell: bash
         env:
           GH_TOKEN: ${{ github.token }}
