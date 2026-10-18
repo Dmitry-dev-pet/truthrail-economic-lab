@@ -1,4 +1,4 @@
-name: Chat FreeCAD portable transfer
+name: Chat FreeCAD portable transfer (chunked)
 
 on:
   push:
@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 25
     steps:
-      - name: Download and verify official FreeCAD 1.1.4 Linux x86_64
+      - name: Download, verify, and split official FreeCAD 1.1.4
         shell: bash
         run: |
           set -euo pipefail
@@ -26,19 +26,29 @@ jobs:
             --output "$filename" "$url"
           printf '%s  %s\n' \
             f6dc6ba676e5ac96a565ebc8d657232f94c6158e85b4352141bd1a46f6b43434 \
-            "$filename" | sha256sum --check --
-          printf '%s  %s\n' \
-            f6dc6ba676e5ac96a565ebc8d657232f94c6158e85b4352141bd1a46f6b43434 \
             "$filename" > SHA256SUMS
-          file "$filename"
-          ls -lh "$filename"
-      - name: Upload one-day FreeCAD binary handoff
+          sha256sum --check SHA256SUMS
+          split -b 420000000 -d -a 2 "$filename" "$filename.part-"
+          sha256sum "$filename.part-"* > SHA256PARTS
+          test "$(find . -maxdepth 1 -name "$filename.part-*" | wc -l)" -eq 2
+          cat "$filename.part-00" "$filename.part-01" | sha256sum
+          ls -lh "$filename.part-"*
+      - name: Upload verified chunk 00 (with manifests)
         uses: actions/upload-artifact@v4
         with:
-          name: chat-freecad-1.1.4-linux-x64
+          name: chat-freecad-1.1.4-part-00
           path: |
-            FreeCAD_1.1.4-Linux-x86_64-py311.AppImage
+            FreeCAD_1.1.4-Linux-x86_64-py311.AppImage.part-00
             SHA256SUMS
+            SHA256PARTS
+          compression-level: 0
+          retention-days: 1
+          if-no-files-found: error
+      - name: Upload verified chunk 01
+        uses: actions/upload-artifact@v4
+        with:
+          name: chat-freecad-1.1.4-part-01
+          path: FreeCAD_1.1.4-Linux-x86_64-py311.AppImage.part-01
           compression-level: 0
           retention-days: 1
           if-no-files-found: error
