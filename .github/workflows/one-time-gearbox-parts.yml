@@ -1,0 +1,50 @@
+name: One-time open CAD parts handoff
+
+on:
+  push:
+    branches:
+      - experiment/chat-freecad-portable-20261018
+    paths:
+      - .github/workflows/one-time-gearbox-parts.yml
+
+permissions:
+  contents: read
+
+jobs:
+  download-parts:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Fetch individually selected licensed STEP models
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p downloaded
+          curl --fail --location --retry 3 --connect-timeout 20 \
+            -H 'Accept: application/octet-stream' \
+            --output downloaded/spur-m2-z20.step \
+            'https://www.innerscene.com/api/library/module-2-20-tooth-involute-spur-gear-01cc5a6e/download'
+          curl --fail --location --retry 3 --connect-timeout 20 \
+            -H 'Accept: application/octet-stream' \
+            --output downloaded/spur-m2-z40.step \
+            'https://www.innerscene.com/api/library/module-2-40-tooth-involute-spur-gear-499004ac/download'
+          curl --fail --location --retry 3 --connect-timeout 20 \
+            --output downloaded/6201-2RS_Ball_Bearing.step \
+            'https://raw.githubusercontent.com/FreeCAD/FreeCAD-library/master/Mechanical%20Parts/Bearings/Ball%20Bearings/6201-2RS_Ball_Bearing.step'
+          curl --fail --location --retry 3 --connect-timeout 20 \
+            --output downloaded/ISO4762_M6x12.step \
+            'https://raw.githubusercontent.com/FreeCAD/FreeCAD-library/master/Mechanical%20Parts/Fasteners/Bolts%20%26%20Screws/Metric/ISO4762_Hex_Socket_Head_Cap_Screw_M6x12.step'
+          for p in downloaded/*.step; do
+            test "$(wc -c < "$p")" -gt 20000
+            grep -E -q 'ISO-10303-21|HEADER;' "$p" || { echo "Not a STEP file: $p"; exit 1; }
+          done
+          sha256sum downloaded/*.step > downloaded/SHA256SUMS
+          cat downloaded/SHA256SUMS
+      - name: Upload one-day source parts artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: gearbox-source-parts-20261018
+          path: downloaded/
+          compression-level: 0
+          retention-days: 1
+          if-no-files-found: error
