@@ -20,7 +20,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
-          for id in 12120069280 12120109491 12120940112 12120962896 12121454434; do
+          for id in 12120069280 12120109491 12120940112 12120962896 12121454434 12132657107; do
             echo "Removing consumed artifact $id"
             if gh api "/repos/${GITHUB_REPOSITORY}/actions/artifacts/${id}" >/dev/null 2>&1; then
               gh api --method DELETE "/repos/${GITHUB_REPOSITORY}/actions/artifacts/${id}"
