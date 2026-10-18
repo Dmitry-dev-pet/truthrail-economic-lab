@@ -1,0 +1,44 @@
+{
+  "research_date": "2026-10-18",
+  "status": "Two separate post-hoc robustness/falsification designs selected after observing the originally preregistered nine-path experiment; not independent blind confirmation",
+  "source_model_sha": "d4703b6ae0d19dca08fbde11a25c218fa4c7b7a6",
+  "core_scenario": "Original substantial; original monthly labor, wage, matching, capital and ideas equations unchanged",
+  "scope": "Only change the exogenous time-shape of m(t) and d(t) between 2026.5 and 2030. All exogenous technology paths identical in 2024-2026.5 and at 2030; never rewrite source.",
+  "control_1": {
+    "id": "same_2024_and_anchor_history",
+    "date_selected": "2026-10-18 after primary result",
+    "method": "Define s=(t-2026.5)/3.5; for 2026.5<t<2030 replace original logistic m(t),d(t) by evaluating both at t_eff=2026.5+3.5*(s+alpha*s*(1-s)); outside this period use original m,d exactly. a(t), psi,rho,mu,theta_H identical.",
+    "alpha_values": [
+      -0.75,
+      0,
+      0.75
+    ],
+    "hypothesis": "frontloaded alpha=+0.75 gives lower 2030 AI-sensitive unemployment than late alpha=-0.75, >0.05 percentage-point difference",
+    "limitation": "Changes endpoint derivatives, so differences may reflect current 2030 adoption velocity as well as history",
+    "local_plan_sha256": "44f320ebbdddf7820fcc0ac90916080102e8f8db13f3164f9c822453be6f9630"
+  },
+  "control_2": {
+    "id": "same_2024_and_anchor_history_and_endpoint_slopes",
+    "date_selected": "2026-10-18 after result of control_1",
+    "method": "Let s=(t-2026.5)/3.5; for 2026.5<t<2030 replace original m(t),d(t) with values at t_eff=2026.5+3.5*(s+alpha*s^2*(1-s)^2). At both s=0,1, dt_eff/dt=1 for all alpha. Before 2026.5 and at and after 2030, use original path. a and remaining assumptions unchanged.",
+    "alpha_values": [
+      -2.5,
+      0,
+      2.5
+    ],
+    "hypothesis": "frontloaded alpha=+2.5 yields 2030 cognitive unemployment at least 0.05 pp below alpha=-2.5 despite equal endpoint levels AND slopes",
+    "derivative_check": "1+alpha*2*s*(1-s)*(1-2*s) remains >0 over s in [0,1]",
+    "limitation": "Time-warp is a controlled alternative exogenous adoption path, not the original paper's Equation (8) logistic trajectory",
+    "local_plan_sha256": "c759c38603adf283a74fc3a39c16106668834d3ead910f0123822ece127ee173"
+  },
+  "max_additional_simulations": 6,
+  "tests": [
+    "same m,d,a and initial employment stocks at 2024 and 2026.5",
+    "identical m,d,a at 2030",
+    "original source substantial reappears at alpha zero",
+    "same endpoint m,d slope only in control_2",
+    "all finite economic values",
+    "report front/late contrasts with units"
+  ],
+  "disclaimer": "All results concern conditional U.S. model dynamics. Not a policy lever, adoption forecast, or inference about firms' actual hiring reactions."
+}

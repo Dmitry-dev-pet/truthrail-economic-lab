@@ -1,0 +1,63 @@
+{
+  "research_id": "2026-10-18-independent-question-001",
+  "authoring": "Self-selected by ChatGPT from inspection of monthly transition and logistic-path equations; hypothesis and outcome criteria documented before simulations",
+  "question": "Can the 2030 economy differ substantially when AI task-reach/diffusion trajectories differ, despite identical 2030 levels and all other parameters?",
+  "source": {
+    "economic_lab_snapshot": "e020a4573bd8ad4ede933d05435b92869ca0ee2d",
+    "independent_model_sha": "d4703b6ae0d19dca08fbde11a25c218fa4c7b7a6"
+  },
+  "original_scenario": "substantial",
+  "vary_only": {
+    "m_anchor": [
+      0.07,
+      0.14,
+      0.21
+    ],
+    "d_anchor": [
+      0.05,
+      0.1,
+      0.2
+    ]
+  },
+  "preserve": {
+    "m_2030": 0.3,
+    "d_2030": 0.4,
+    "a_anchor": 0.35,
+    "g_a": 0.028,
+    "psi": 0.75,
+    "rho": 0.25,
+    "mu": 0.08,
+    "theta_H": 0.25,
+    "Fixed": "unchanged"
+  },
+  "primary_contrast": {
+    "frontloaded": {
+      "m_anchor": 0.21,
+      "d_anchor": 0.2
+    },
+    "backloaded": {
+      "m_anchor": 0.07,
+      "d_anchor": 0.05
+    }
+  },
+  "primary_hypothesis": "Front-loaded AI adoption leaves lower AI-sensitive unemployment in 2030 because hiring/mobility have more time to adjust; require difference >0.05 percentage points to be substantive",
+  "secondary_hypothesis": "Earlier AI adoption yields larger cumulative ideas gains and GDP above the no-AI baseline by 2030, require >0.05 percentage points",
+  "predeclared_metrics": [
+    "2030 GDP % above no AI",
+    "2030 labor share %",
+    "2030 total and cognitive unemployment %",
+    "2030 average wage % above no AI",
+    "2030 ideas stock % above no AI",
+    "2026.5–2030 mean cognitive unemployment %",
+    "positive excess cognitive unemployment pp-years",
+    "2024/2026.5/2028/2029/2030 path snapshots",
+    "hiring flow and frictionless target diagnostics"
+  ],
+  "test": "9 original pinned source-model evaluations only, 3x3; all nine terminal m/d/a must be equal to numerical tolerance 1e-10; separately compare frictionless and realized employment for mechanism",
+  "limitations": [
+    "Changing anchor values also changes model-implied 2024 and 2025 logistic tails; not a clean post-2026 timing treatment",
+    "This is a conditional mathematical scenario comparison, not an estimated real-world adoption path",
+    "No alternate mathematical equations, changed production model, Portugal simulation, agent loop, or infrastructure change"
+  ],
+  "source_hash_local_full_plan_sha256": "e9c8a5bc5c085356537aedd8159dfb7ba3d5498e166a4600539b7b4111a67cd2"
+}
