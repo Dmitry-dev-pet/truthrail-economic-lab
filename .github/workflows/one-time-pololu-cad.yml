@@ -1,0 +1,41 @@
+name: One-time Pololu 37D official CAD download
+
+on:
+  push:
+    branches:
+      - experiment/chat-freecad-portable-20261018
+    paths:
+      - .github/workflows/one-time-pololu-cad.yml
+
+permissions:
+  contents: read
+
+jobs:
+  pololu-official-step:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - name: Retrieve OEM 37D STEP library
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p pololu-cad
+          curl --fail --location --retry 4 --retry-delay 2 --connect-timeout 30 \
+            -o pololu-cad/37d-gearmotor-3d-models.zip \
+            'https://www.pololu.com/file/0J1868/37d-gearmotor-3d-models.zip'
+          test "$(wc -c < pololu-cad/37d-gearmotor-3d-models.zip)" -gt 100000
+          unzip -t pololu-cad/37d-gearmotor-3d-models.zip
+          unzip -l pololu-cad/37d-gearmotor-3d-models.zip | head -80
+          sha256sum pololu-cad/37d-gearmotor-3d-models.zip > pololu-cad/SHA256SUMS
+          printf '%s\n' 'OEM: https://www.pololu.com/product/4692/resources' \
+            'CAD bundle: https://www.pololu.com/file/0J1868/37d-gearmotor-3d-models.zip' \
+            'Retrieved by one-time GitHub Actions; exact binary checksum in SHA256SUMS' \
+            > pololu-cad/SOURCE.txt
+      - name: One-day artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: pololu-37d-encoder-official-step
+          path: pololu-cad/
+          retention-days: 1
+          compression-level: 0
+          if-no-files-found: error
