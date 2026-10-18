@@ -1,0 +1,1177 @@
+{
+  "title": "BLS service industry 2022–2025 official published-archive recent annual productivity/output/hours changes",
+  "created_utc": "2026-10-18",
+  "scope": "Selected BLS detailed service-providing industries with exact 2017-NAICS single-code mapping published in all four reports; leaf-only to avoid overlapping parent and children",
+  "vintage_caveat": "Each year uses the corresponding year's publication issued the following year, not harmonized or revised-as-of-one-date annual index series. Changes to source estimates between vintages and changing industry coverage may introduce artifacts. 2023 release has erratum affecting only its tables 2 and 3; only table 1 used.",
+  "source_urls": {
+    "2022": "https://www.bls.gov/news.release/archives/prin2_06292023.htm",
+    "2023": "https://www.bls.gov/news.release/archives/prin2_06272024.htm",
+    "2024": "https://www.bls.gov/news.release/archives/prin2_06262025.htm",
+    "2025": "https://www.bls.gov/news.release/prin2.htm"
+  },
+  "year_row_counts": {
+    "2022": 42,
+    "2023": 42,
+    "2024": 44,
+    "2025": 42
+  },
+  "selected_naics": [
+    "2211",
+    "2212",
+    "2213",
+    "481",
+    "482111",
+    "48411",
+    "48412",
+    "4842",
+    "4911",
+    "492",
+    "4931",
+    "51111",
+    "51112",
+    "5112",
+    "5151",
+    "5152",
+    "517311",
+    "517312",
+    "52211",
+    "53212",
+    "54133",
+    "5615",
+    "6215",
+    "7131",
+    "7132",
+    "722511",
+    "8111",
+    "8123"
+  ],
+  "excluded_from_this_subset": "Parent aggregates overlapping their published child categories, missing any-year codes, multi-code combined NAICS labels, and censored/malformed entries",
+  "variables": {
+    "real_output_pct": "BLS published real sectoral output percentage change from prior calendar year; not directly final sales demand or GDP",
+    "total_hours_pct": "BLS published total annual hours worked by all persons percentage change",
+    "labor_productivity_pct": "BLS published real output per hour growth; derived identity, not an independently identified driver of output",
+    "employment_thousands": "BLS covered industry's employment level in thousands for given year"
+  },
+  "rows": [
+    {
+      "year": 2022,
+      "naics": "2211",
+      "industry": "Power generation and supply",
+      "employment_thousands": 384.3,
+      "real_output_pct": 3,
+      "total_hours_pct": 1.4,
+      "labor_productivity_pct": 1.6,
+      "unit_labor_cost_pct": 2.4
+    },
+    {
+      "year": 2023,
+      "naics": "2211",
+      "industry": "Power generation and supply",
+      "employment_thousands": 401.3,
+      "real_output_pct": -3.1,
+      "total_hours_pct": 1.9,
+      "labor_productivity_pct": -4.9,
+      "unit_labor_cost_pct": 11.9
+    },
+    {
+      "year": 2024,
+      "naics": "2211",
+      "industry": "Power generation and supply",
+      "employment_thousands": 413.1,
+      "real_output_pct": 0.4,
+      "total_hours_pct": 2.5,
+      "labor_productivity_pct": -2.1,
+      "unit_labor_cost_pct": 7
+    },
+    {
+      "year": 2025,
+      "naics": "2211",
+      "industry": "Power generation and supply",
+      "employment_thousands": 420.6,
+      "real_output_pct": 4.9,
+      "total_hours_pct": 1.4,
+      "labor_productivity_pct": 3.5,
+      "unit_labor_cost_pct": 2.1
+    },
+    {
+      "year": 2022,
+      "naics": "2212",
+      "industry": "Natural gas distribution",
+      "employment_thousands": 112.8,
+      "real_output_pct": 5.5,
+      "total_hours_pct": 1.7,
+      "labor_productivity_pct": 3.8,
+      "unit_labor_cost_pct": 1.9
+    },
+    {
+      "year": 2023,
+      "naics": "2212",
+      "industry": "Natural gas distribution",
+      "employment_thousands": 113.8,
+      "real_output_pct": 22.2,
+      "total_hours_pct": -0.5,
+      "labor_productivity_pct": 22.9,
+      "unit_labor_cost_pct": -12.5
+    },
+    {
+      "year": 2024,
+      "naics": "2212",
+      "industry": "Natural gas distribution",
+      "employment_thousands": 116.1,
+      "real_output_pct": 6.6,
+      "total_hours_pct": 2.6,
+      "labor_productivity_pct": 3.9,
+      "unit_labor_cost_pct": -1.7
+    },
+    {
+      "year": 2025,
+      "naics": "2212",
+      "industry": "Natural gas distribution",
+      "employment_thousands": 118,
+      "real_output_pct": -3.7,
+      "total_hours_pct": 0.4,
+      "labor_productivity_pct": -4,
+      "unit_labor_cost_pct": 9.3
+    },
+    {
+      "year": 2022,
+      "naics": "2213",
+      "industry": "Water, sewage and other systems",
+      "employment_thousands": 56.5,
+      "real_output_pct": -2.6,
+      "total_hours_pct": 2,
+      "labor_productivity_pct": -4.5,
+      "unit_labor_cost_pct": 14.3
+    },
+    {
+      "year": 2023,
+      "naics": "2213",
+      "industry": "Water, sewage and other systems",
+      "employment_thousands": 60.3,
+      "real_output_pct": 5,
+      "total_hours_pct": -1.3,
+      "labor_productivity_pct": 6.4,
+      "unit_labor_cost_pct": 3.7
+    },
+    {
+      "year": 2024,
+      "naics": "2213",
+      "industry": "Water, sewage and other systems",
+      "employment_thousands": 62.1,
+      "real_output_pct": 4.8,
+      "total_hours_pct": 7.1,
+      "labor_productivity_pct": -2.2,
+      "unit_labor_cost_pct": 5.2
+    },
+    {
+      "year": 2025,
+      "naics": "2213",
+      "industry": "Water, sewage and other systems",
+      "employment_thousands": 62.8,
+      "real_output_pct": 2.4,
+      "total_hours_pct": 4.5,
+      "labor_productivity_pct": -2.1,
+      "unit_labor_cost_pct": 7.6
+    },
+    {
+      "year": 2022,
+      "naics": "481",
+      "industry": "Air transportation",
+      "employment_thousands": 502.7,
+      "real_output_pct": 33.3,
+      "total_hours_pct": 17.1,
+      "labor_productivity_pct": 13.9,
+      "unit_labor_cost_pct": -9.2
+    },
+    {
+      "year": 2023,
+      "naics": "481",
+      "industry": "Air transportation",
+      "employment_thousands": 546.4,
+      "real_output_pct": 12.4,
+      "total_hours_pct": 15.2,
+      "labor_productivity_pct": -2.4,
+      "unit_labor_cost_pct": 7.1
+    },
+    {
+      "year": 2024,
+      "naics": "481",
+      "industry": "Air transportation",
+      "employment_thousands": 563.2,
+      "real_output_pct": 4.5,
+      "total_hours_pct": 4.6,
+      "labor_productivity_pct": -0.1,
+      "unit_labor_cost_pct": 4.7
+    },
+    {
+      "year": 2025,
+      "naics": "481",
+      "industry": "Air transportation",
+      "employment_thousands": 573,
+      "real_output_pct": 0.4,
+      "total_hours_pct": 5.7,
+      "labor_productivity_pct": -5,
+      "unit_labor_cost_pct": 6.5
+    },
+    {
+      "year": 2022,
+      "naics": "482111",
+      "industry": "Line-haul railroads",
+      "employment_thousands": 134.6,
+      "real_output_pct": -0.3,
+      "total_hours_pct": 8.6,
+      "labor_productivity_pct": -8.2,
+      "unit_labor_cost_pct": 10.6
+    },
+    {
+      "year": 2023,
+      "naics": "482111",
+      "industry": "Line-haul railroads",
+      "employment_thousands": 142.8,
+      "real_output_pct": 1,
+      "total_hours_pct": 4.7,
+      "labor_productivity_pct": -3.5,
+      "unit_labor_cost_pct": 14.7
+    },
+    {
+      "year": 2024,
+      "naics": "482111",
+      "industry": "Line-haul railroads",
+      "employment_thousands": 143.9,
+      "real_output_pct": 1.6,
+      "total_hours_pct": -3.2,
+      "labor_productivity_pct": 5,
+      "unit_labor_cost_pct": 2.2
+    },
+    {
+      "year": 2025,
+      "naics": "482111",
+      "industry": "Line-haul railroads",
+      "employment_thousands": 136.8,
+      "real_output_pct": 2.3,
+      "total_hours_pct": -8,
+      "labor_productivity_pct": 11.3,
+      "unit_labor_cost_pct": -4.4
+    },
+    {
+      "year": 2022,
+      "naics": "48411",
+      "industry": "General freight trucking, local",
+      "employment_thousands": 377.8,
+      "real_output_pct": 2.4,
+      "total_hours_pct": 4.5,
+      "labor_productivity_pct": -2,
+      "unit_labor_cost_pct": 11.2
+    },
+    {
+      "year": 2023,
+      "naics": "48411",
+      "industry": "General freight trucking, local",
+      "employment_thousands": 364.9,
+      "real_output_pct": -8.9,
+      "total_hours_pct": -5.5,
+      "labor_productivity_pct": -3.7,
+      "unit_labor_cost_pct": 10.9
+    },
+    {
+      "year": 2024,
+      "naics": "48411",
+      "industry": "General freight trucking, local",
+      "employment_thousands": 356.1,
+      "real_output_pct": 0.3,
+      "total_hours_pct": -2.8,
+      "labor_productivity_pct": 3.3,
+      "unit_labor_cost_pct": -0.5
+    },
+    {
+      "year": 2025,
+      "naics": "48411",
+      "industry": "General freight trucking, local",
+      "employment_thousands": 352.1,
+      "real_output_pct": 3.7,
+      "total_hours_pct": -0.3,
+      "labor_productivity_pct": 4,
+      "unit_labor_cost_pct": -0.4
+    },
+    {
+      "year": 2022,
+      "naics": "48412",
+      "industry": "General freight trucking, long-distance",
+      "employment_thousands": 973.8,
+      "real_output_pct": 0,
+      "total_hours_pct": 1.7,
+      "labor_productivity_pct": -1.7,
+      "unit_labor_cost_pct": 14.7
+    },
+    {
+      "year": 2023,
+      "naics": "48412",
+      "industry": "General freight trucking, long-distance",
+      "employment_thousands": 935.1,
+      "real_output_pct": -4.4,
+      "total_hours_pct": -4.8,
+      "labor_productivity_pct": 0.4,
+      "unit_labor_cost_pct": 4.3
+    },
+    {
+      "year": 2024,
+      "naics": "48412",
+      "industry": "General freight trucking, long-distance",
+      "employment_thousands": 896.9,
+      "real_output_pct": 2.1,
+      "total_hours_pct": -4.5,
+      "labor_productivity_pct": 6.9,
+      "unit_labor_cost_pct": -4.5
+    },
+    {
+      "year": 2025,
+      "naics": "48412",
+      "industry": "General freight trucking, long-distance",
+      "employment_thousands": 884.2,
+      "real_output_pct": -0.3,
+      "total_hours_pct": 1.8,
+      "labor_productivity_pct": -2,
+      "unit_labor_cost_pct": 1.2
+    },
+    {
+      "year": 2022,
+      "naics": "4842",
+      "industry": "Specialized freight trucking",
+      "employment_thousands": 483.2,
+      "real_output_pct": 0.7,
+      "total_hours_pct": -0.9,
+      "labor_productivity_pct": 1.5,
+      "unit_labor_cost_pct": 12.1
+    },
+    {
+      "year": 2023,
+      "naics": "4842",
+      "industry": "Specialized freight trucking",
+      "employment_thousands": 480.9,
+      "real_output_pct": -1.3,
+      "total_hours_pct": 1.3,
+      "labor_productivity_pct": -2.6,
+      "unit_labor_cost_pct": 5
+    },
+    {
+      "year": 2024,
+      "naics": "4842",
+      "industry": "Specialized freight trucking",
+      "employment_thousands": 474.3,
+      "real_output_pct": 1,
+      "total_hours_pct": -0.4,
+      "labor_productivity_pct": 1.5,
+      "unit_labor_cost_pct": 0.1
+    },
+    {
+      "year": 2025,
+      "naics": "4842",
+      "industry": "Specialized freight trucking",
+      "employment_thousands": 465.2,
+      "real_output_pct": -1.8,
+      "total_hours_pct": 1.2,
+      "labor_productivity_pct": -3,
+      "unit_labor_cost_pct": 4.1
+    },
+    {
+      "year": 2022,
+      "naics": "4911",
+      "industry": "Postal service",
+      "employment_thousands": 604.9,
+      "real_output_pct": -6.2,
+      "total_hours_pct": -0.8,
+      "labor_productivity_pct": -5.4,
+      "unit_labor_cost_pct": -0.7
+    },
+    {
+      "year": 2023,
+      "naics": "4911",
+      "industry": "Postal service",
+      "employment_thousands": 603.3,
+      "real_output_pct": -7.9,
+      "total_hours_pct": -2.3,
+      "labor_productivity_pct": -5.7,
+      "unit_labor_cost_pct": 17.1
+    },
+    {
+      "year": 2024,
+      "naics": "4911",
+      "industry": "Postal service",
+      "employment_thousands": 606.6,
+      "real_output_pct": -6.8,
+      "total_hours_pct": -0.6,
+      "labor_productivity_pct": -6.2,
+      "unit_labor_cost_pct": 15.7
+    },
+    {
+      "year": 2025,
+      "naics": "4911",
+      "industry": "Postal service",
+      "employment_thousands": 597.8,
+      "real_output_pct": -7.6,
+      "total_hours_pct": -1,
+      "labor_productivity_pct": -6.7,
+      "unit_labor_cost_pct": 9.6
+    },
+    {
+      "year": 2022,
+      "naics": "492",
+      "industry": "Couriers and messengers",
+      "employment_thousands": 1312.5,
+      "real_output_pct": -3.4,
+      "total_hours_pct": 0.6,
+      "labor_productivity_pct": -3.9,
+      "unit_labor_cost_pct": 8.7
+    },
+    {
+      "year": 2023,
+      "naics": "492",
+      "industry": "Couriers and messengers",
+      "employment_thousands": 1283.5,
+      "real_output_pct": -10.4,
+      "total_hours_pct": -3.6,
+      "labor_productivity_pct": -7.1,
+      "unit_labor_cost_pct": 17.9
+    },
+    {
+      "year": 2024,
+      "naics": "492",
+      "industry": "Couriers and messengers",
+      "employment_thousands": 1336.9,
+      "real_output_pct": -4.9,
+      "total_hours_pct": 0.8,
+      "labor_productivity_pct": -5.7,
+      "unit_labor_cost_pct": 13.4
+    },
+    {
+      "year": 2025,
+      "naics": "492",
+      "industry": "Couriers and messengers",
+      "employment_thousands": 1311.6,
+      "real_output_pct": -6.5,
+      "total_hours_pct": 2.2,
+      "labor_productivity_pct": -8.5,
+      "unit_labor_cost_pct": 12.2
+    },
+    {
+      "year": 2022,
+      "naics": "4931",
+      "industry": "Warehousing and storage",
+      "employment_thousands": 1944.5,
+      "real_output_pct": 1.8,
+      "total_hours_pct": 12.6,
+      "labor_productivity_pct": -9.6,
+      "unit_labor_cost_pct": 19.9
+    },
+    {
+      "year": 2023,
+      "naics": "4931",
+      "industry": "Warehousing and storage",
+      "employment_thousands": 1822,
+      "real_output_pct": -8,
+      "total_hours_pct": -4.1,
+      "labor_productivity_pct": -4,
+      "unit_labor_cost_pct": 12.3
+    },
+    {
+      "year": 2024,
+      "naics": "4931",
+      "industry": "Warehousing and storage",
+      "employment_thousands": 1861.8,
+      "real_output_pct": -0.2,
+      "total_hours_pct": 0.4,
+      "labor_productivity_pct": -0.6,
+      "unit_labor_cost_pct": 9
+    },
+    {
+      "year": 2025,
+      "naics": "4931",
+      "industry": "Warehousing and storage",
+      "employment_thousands": 1885.9,
+      "real_output_pct": 1.8,
+      "total_hours_pct": 0.4,
+      "labor_productivity_pct": 1.4,
+      "unit_labor_cost_pct": 0.6
+    },
+    {
+      "year": 2022,
+      "naics": "51111",
+      "industry": "Newspaper publishers",
+      "employment_thousands": 103.5,
+      "real_output_pct": -1.5,
+      "total_hours_pct": -7.7,
+      "labor_productivity_pct": 6.7,
+      "unit_labor_cost_pct": -8.1
+    },
+    {
+      "year": 2023,
+      "naics": "51111",
+      "industry": "Newspaper publishers",
+      "employment_thousands": 97.4,
+      "real_output_pct": -0.7,
+      "total_hours_pct": -7.6,
+      "labor_productivity_pct": 7.4,
+      "unit_labor_cost_pct": -5
+    },
+    {
+      "year": 2024,
+      "naics": "51111",
+      "industry": "Newspaper publishers",
+      "employment_thousands": 89.9,
+      "real_output_pct": -4.1,
+      "total_hours_pct": -7.5,
+      "labor_productivity_pct": 3.6,
+      "unit_labor_cost_pct": 16.2
+    },
+    {
+      "year": 2025,
+      "naics": "51111",
+      "industry": "Newspaper publishers",
+      "employment_thousands": 82.2,
+      "real_output_pct": -5.6,
+      "total_hours_pct": -9.6,
+      "labor_productivity_pct": 4.4,
+      "unit_labor_cost_pct": 9
+    },
+    {
+      "year": 2022,
+      "naics": "51112",
+      "industry": "Periodical publishers",
+      "employment_thousands": 75.1,
+      "real_output_pct": -1.6,
+      "total_hours_pct": -1.1,
+      "labor_productivity_pct": -0.5,
+      "unit_labor_cost_pct": -4.2
+    },
+    {
+      "year": 2023,
+      "naics": "51112",
+      "industry": "Periodical publishers",
+      "employment_thousands": 70.8,
+      "real_output_pct": -1.6,
+      "total_hours_pct": -7.7,
+      "labor_productivity_pct": 6.6,
+      "unit_labor_cost_pct": 1.5
+    },
+    {
+      "year": 2024,
+      "naics": "51112",
+      "industry": "Periodical publishers",
+      "employment_thousands": 69,
+      "real_output_pct": -0.5,
+      "total_hours_pct": -2.6,
+      "labor_productivity_pct": 2.2,
+      "unit_labor_cost_pct": 15.3
+    },
+    {
+      "year": 2025,
+      "naics": "51112",
+      "industry": "Periodical publishers",
+      "employment_thousands": 65,
+      "real_output_pct": -1.9,
+      "total_hours_pct": -2.2,
+      "labor_productivity_pct": 0.2,
+      "unit_labor_cost_pct": 11.3
+    },
+    {
+      "year": 2022,
+      "naics": "5112",
+      "industry": "Software publishers",
+      "employment_thousands": 636.3,
+      "real_output_pct": 14.7,
+      "total_hours_pct": 14.2,
+      "labor_productivity_pct": 0.4,
+      "unit_labor_cost_pct": -6.1
+    },
+    {
+      "year": 2023,
+      "naics": "5112",
+      "industry": "Software publishers",
+      "employment_thousands": 658.4,
+      "real_output_pct": 5,
+      "total_hours_pct": 4.7,
+      "labor_productivity_pct": 0.3,
+      "unit_labor_cost_pct": 3.3
+    },
+    {
+      "year": 2024,
+      "naics": "5112",
+      "industry": "Software publishers",
+      "employment_thousands": 647.6,
+      "real_output_pct": 3.8,
+      "total_hours_pct": 0,
+      "labor_productivity_pct": 3.8,
+      "unit_labor_cost_pct": 2.1
+    },
+    {
+      "year": 2025,
+      "naics": "5112",
+      "industry": "Software publishers",
+      "employment_thousands": 655,
+      "real_output_pct": 12.1,
+      "total_hours_pct": -0.7,
+      "labor_productivity_pct": 12.9,
+      "unit_labor_cost_pct": -0.9
+    },
+    {
+      "year": 2022,
+      "naics": "5151",
+      "industry": "Radio and television broadcasting",
+      "employment_thousands": 192.4,
+      "real_output_pct": -0.2,
+      "total_hours_pct": 0.2,
+      "labor_productivity_pct": -0.4,
+      "unit_labor_cost_pct": -6.7
+    },
+    {
+      "year": 2023,
+      "naics": "5151",
+      "industry": "Radio and television broadcasting",
+      "employment_thousands": 193.6,
+      "real_output_pct": 1.1,
+      "total_hours_pct": -0.5,
+      "labor_productivity_pct": 1.6,
+      "unit_labor_cost_pct": 2.9
+    },
+    {
+      "year": 2024,
+      "naics": "5151",
+      "industry": "Radio and television broadcasting",
+      "employment_thousands": 190.2,
+      "real_output_pct": 1.9,
+      "total_hours_pct": -1.9,
+      "labor_productivity_pct": 3.9,
+      "unit_labor_cost_pct": 16.5
+    },
+    {
+      "year": 2025,
+      "naics": "5151",
+      "industry": "Radio and television broadcasting",
+      "employment_thousands": 190.2,
+      "real_output_pct": 7.3,
+      "total_hours_pct": 1.4,
+      "labor_productivity_pct": 5.8,
+      "unit_labor_cost_pct": 5.5
+    },
+    {
+      "year": 2022,
+      "naics": "5152",
+      "industry": "Cable and other subscription programming",
+      "employment_thousands": 48.2,
+      "real_output_pct": -1.1,
+      "total_hours_pct": 0.8,
+      "labor_productivity_pct": -1.9,
+      "unit_labor_cost_pct": -1.9
+    },
+    {
+      "year": 2023,
+      "naics": "5152",
+      "industry": "Cable and other subscription programming",
+      "employment_thousands": 46.9,
+      "real_output_pct": 8.9,
+      "total_hours_pct": -3.1,
+      "labor_productivity_pct": 12.4,
+      "unit_labor_cost_pct": -8.2
+    },
+    {
+      "year": 2024,
+      "naics": "5152",
+      "industry": "Cable and other subscription programming",
+      "employment_thousands": 46.4,
+      "real_output_pct": 5.7,
+      "total_hours_pct": -1.7,
+      "labor_productivity_pct": 7.5,
+      "unit_labor_cost_pct": 13
+    },
+    {
+      "year": 2025,
+      "naics": "5152",
+      "industry": "Cable and other subscription programming",
+      "employment_thousands": 52.1,
+      "real_output_pct": 11.2,
+      "total_hours_pct": 12.3,
+      "labor_productivity_pct": -1,
+      "unit_labor_cost_pct": 12.1
+    },
+    {
+      "year": 2022,
+      "naics": "517311",
+      "industry": "Wired telecommunications carriers",
+      "employment_thousands": 483.8,
+      "real_output_pct": -3.4,
+      "total_hours_pct": -3.5,
+      "labor_productivity_pct": 0.1,
+      "unit_labor_cost_pct": 5.4
+    },
+    {
+      "year": 2023,
+      "naics": "517311",
+      "industry": "Wired telecommunications carriers",
+      "employment_thousands": 474.1,
+      "real_output_pct": -7.6,
+      "total_hours_pct": -3.5,
+      "labor_productivity_pct": -4.3,
+      "unit_labor_cost_pct": 9.7
+    },
+    {
+      "year": 2024,
+      "naics": "517311",
+      "industry": "Wired telecommunications carriers",
+      "employment_thousands": 455.1,
+      "real_output_pct": -6.4,
+      "total_hours_pct": -0.6,
+      "labor_productivity_pct": -5.9,
+      "unit_labor_cost_pct": 5.8
+    },
+    {
+      "year": 2025,
+      "naics": "517311",
+      "industry": "Wired telecommunications carriers",
+      "employment_thousands": 439.9,
+      "real_output_pct": -8.3,
+      "total_hours_pct": 2.8,
+      "labor_productivity_pct": -10.8,
+      "unit_labor_cost_pct": 10.6
+    },
+    {
+      "year": 2022,
+      "naics": "517312",
+      "industry": "Wireless telecommunications carriers",
+      "employment_thousands": 94.9,
+      "real_output_pct": 3.8,
+      "total_hours_pct": -4.2,
+      "labor_productivity_pct": 8.4,
+      "unit_labor_cost_pct": -8.8
+    },
+    {
+      "year": 2023,
+      "naics": "517312",
+      "industry": "Wireless telecommunications carriers",
+      "employment_thousands": 90.9,
+      "real_output_pct": -2,
+      "total_hours_pct": -3.9,
+      "labor_productivity_pct": 2.1,
+      "unit_labor_cost_pct": 9.1
+    },
+    {
+      "year": 2024,
+      "naics": "517312",
+      "industry": "Wireless telecommunications carriers",
+      "employment_thousands": 85.3,
+      "real_output_pct": 0.9,
+      "total_hours_pct": -1.1,
+      "labor_productivity_pct": 2.1,
+      "unit_labor_cost_pct": -5.3
+    },
+    {
+      "year": 2025,
+      "naics": "517312",
+      "industry": "Wireless telecommunications carriers",
+      "employment_thousands": 80.6,
+      "real_output_pct": 4.1,
+      "total_hours_pct": -4.3,
+      "labor_productivity_pct": 8.8,
+      "unit_labor_cost_pct": -4
+    },
+    {
+      "year": 2022,
+      "naics": "52211",
+      "industry": "Commercial banking",
+      "employment_thousands": 1367.5,
+      "real_output_pct": 0.4,
+      "total_hours_pct": -1.8,
+      "labor_productivity_pct": 2.2,
+      "unit_labor_cost_pct": 3.7
+    },
+    {
+      "year": 2023,
+      "naics": "52211",
+      "industry": "Commercial banking",
+      "employment_thousands": 1392.7,
+      "real_output_pct": 6.6,
+      "total_hours_pct": 0.8,
+      "labor_productivity_pct": 5.8,
+      "unit_labor_cost_pct": -0.9
+    },
+    {
+      "year": 2024,
+      "naics": "52211",
+      "industry": "Commercial banking",
+      "employment_thousands": 1376.7,
+      "real_output_pct": 0.4,
+      "total_hours_pct": -1.4,
+      "labor_productivity_pct": 1.8,
+      "unit_labor_cost_pct": 1.4
+    },
+    {
+      "year": 2025,
+      "naics": "52211",
+      "industry": "Commercial banking",
+      "employment_thousands": 1372.8,
+      "real_output_pct": 2.9,
+      "total_hours_pct": -0.3,
+      "labor_productivity_pct": 3.2,
+      "unit_labor_cost_pct": 1.7
+    },
+    {
+      "year": 2022,
+      "naics": "53212",
+      "industry": "Truck, trailer, and RV rental and leasing",
+      "employment_thousands": 92,
+      "real_output_pct": 2,
+      "total_hours_pct": -1.3,
+      "labor_productivity_pct": 3.4,
+      "unit_labor_cost_pct": 9.5
+    },
+    {
+      "year": 2023,
+      "naics": "53212",
+      "industry": "Truck, trailer, and RV rental and leasing",
+      "employment_thousands": 98.7,
+      "real_output_pct": -0.2,
+      "total_hours_pct": -0.4,
+      "labor_productivity_pct": 0.2,
+      "unit_labor_cost_pct": 9.8
+    },
+    {
+      "year": 2024,
+      "naics": "53212",
+      "industry": "Truck, trailer, and RV rental and leasing",
+      "employment_thousands": 95.3,
+      "real_output_pct": -0.7,
+      "total_hours_pct": -6.6,
+      "labor_productivity_pct": 6.3,
+      "unit_labor_cost_pct": 1
+    },
+    {
+      "year": 2025,
+      "naics": "53212",
+      "industry": "Truck, trailer, and RV rental and leasing",
+      "employment_thousands": 99.2,
+      "real_output_pct": -3,
+      "total_hours_pct": 0.4,
+      "labor_productivity_pct": -3.3,
+      "unit_labor_cost_pct": 3.6
+    },
+    {
+      "year": 2022,
+      "naics": "54133",
+      "industry": "Engineering services",
+      "employment_thousands": 1119.8,
+      "real_output_pct": 8.3,
+      "total_hours_pct": 5.2,
+      "labor_productivity_pct": 2.9,
+      "unit_labor_cost_pct": 2.8
+    },
+    {
+      "year": 2023,
+      "naics": "54133",
+      "industry": "Engineering services",
+      "employment_thousands": 1163.5,
+      "real_output_pct": 4.1,
+      "total_hours_pct": 3.8,
+      "labor_productivity_pct": 0.3,
+      "unit_labor_cost_pct": 4.7
+    },
+    {
+      "year": 2024,
+      "naics": "54133",
+      "industry": "Engineering services",
+      "employment_thousands": 1205.2,
+      "real_output_pct": 7.1,
+      "total_hours_pct": 3.1,
+      "labor_productivity_pct": 4,
+      "unit_labor_cost_pct": 1
+    },
+    {
+      "year": 2025,
+      "naics": "54133",
+      "industry": "Engineering services",
+      "employment_thousands": 1232.7,
+      "real_output_pct": 2.6,
+      "total_hours_pct": 2.8,
+      "labor_productivity_pct": -0.2,
+      "unit_labor_cost_pct": 4.3
+    },
+    {
+      "year": 2022,
+      "naics": "5615",
+      "industry": "Travel arrangement and reservation services",
+      "employment_thousands": 200.5,
+      "real_output_pct": 42.9,
+      "total_hours_pct": 23.7,
+      "labor_productivity_pct": 15.5,
+      "unit_labor_cost_pct": 7.6
+    },
+    {
+      "year": 2023,
+      "naics": "5615",
+      "industry": "Travel arrangement and reservation services",
+      "employment_thousands": 233.2,
+      "real_output_pct": 13.6,
+      "total_hours_pct": 19.3,
+      "labor_productivity_pct": -4.8,
+      "unit_labor_cost_pct": 13.7
+    },
+    {
+      "year": 2024,
+      "naics": "5615",
+      "industry": "Travel arrangement and reservation services",
+      "employment_thousands": 234.4,
+      "real_output_pct": 3.1,
+      "total_hours_pct": -5.6,
+      "labor_productivity_pct": 9.1,
+      "unit_labor_cost_pct": -7.7
+    },
+    {
+      "year": 2025,
+      "naics": "5615",
+      "industry": "Travel arrangement and reservation services",
+      "employment_thousands": 227.9,
+      "real_output_pct": 6.3,
+      "total_hours_pct": -1.1,
+      "labor_productivity_pct": 7.4,
+      "unit_labor_cost_pct": -3.3
+    },
+    {
+      "year": 2022,
+      "naics": "6215",
+      "industry": "Medical and diagnostic laboratories",
+      "employment_thousands": 337,
+      "real_output_pct": -5.1,
+      "total_hours_pct": 1.8,
+      "labor_productivity_pct": -6.8,
+      "unit_labor_cost_pct": 6.7
+    },
+    {
+      "year": 2023,
+      "naics": "6215",
+      "industry": "Medical and diagnostic laboratories",
+      "employment_thousands": 339.6,
+      "real_output_pct": -0.2,
+      "total_hours_pct": -1.4,
+      "labor_productivity_pct": 1.2,
+      "unit_labor_cost_pct": 1.8
+    },
+    {
+      "year": 2024,
+      "naics": "6215",
+      "industry": "Medical and diagnostic laboratories",
+      "employment_thousands": 325.1,
+      "real_output_pct": 5,
+      "total_hours_pct": -3.1,
+      "labor_productivity_pct": 8.4,
+      "unit_labor_cost_pct": -1.7
+    },
+    {
+      "year": 2025,
+      "naics": "6215",
+      "industry": "Medical and diagnostic laboratories",
+      "employment_thousands": 326,
+      "real_output_pct": 3,
+      "total_hours_pct": 0.8,
+      "labor_productivity_pct": 2.1,
+      "unit_labor_cost_pct": 0.9
+    },
+    {
+      "year": 2022,
+      "naics": "7131",
+      "industry": "Amusement parks and arcades",
+      "employment_thousands": 207.4,
+      "real_output_pct": 27,
+      "total_hours_pct": 9.2,
+      "labor_productivity_pct": 16.3,
+      "unit_labor_cost_pct": 10.5
+    },
+    {
+      "year": 2023,
+      "naics": "7131",
+      "industry": "Amusement parks and arcades",
+      "employment_thousands": 225.7,
+      "real_output_pct": 0.4,
+      "total_hours_pct": 8.2,
+      "labor_productivity_pct": -7.2,
+      "unit_labor_cost_pct": 10.4
+    },
+    {
+      "year": 2024,
+      "naics": "7131",
+      "industry": "Amusement parks and arcades",
+      "employment_thousands": 236.2,
+      "real_output_pct": -3.2,
+      "total_hours_pct": 7,
+      "labor_productivity_pct": -9.6,
+      "unit_labor_cost_pct": 9.6
+    },
+    {
+      "year": 2025,
+      "naics": "7131",
+      "industry": "Amusement parks and arcades",
+      "employment_thousands": 243.1,
+      "real_output_pct": 1.6,
+      "total_hours_pct": 4,
+      "labor_productivity_pct": -2.3,
+      "unit_labor_cost_pct": 5.5
+    },
+    {
+      "year": 2022,
+      "naics": "7132",
+      "industry": "Gambling industries",
+      "employment_thousands": 113.8,
+      "real_output_pct": 2.4,
+      "total_hours_pct": 4.5,
+      "labor_productivity_pct": -2,
+      "unit_labor_cost_pct": 33.1
+    },
+    {
+      "year": 2023,
+      "naics": "7132",
+      "industry": "Gambling industries",
+      "employment_thousands": 127,
+      "real_output_pct": 13.3,
+      "total_hours_pct": 5.7,
+      "labor_productivity_pct": 7.2,
+      "unit_labor_cost_pct": 1.7
+    },
+    {
+      "year": 2024,
+      "naics": "7132",
+      "industry": "Gambling industries",
+      "employment_thousands": 133.2,
+      "real_output_pct": 3.5,
+      "total_hours_pct": 1.5,
+      "labor_productivity_pct": 2,
+      "unit_labor_cost_pct": 7
+    },
+    {
+      "year": 2025,
+      "naics": "7132",
+      "industry": "Gambling industries",
+      "employment_thousands": 141.4,
+      "real_output_pct": 11.2,
+      "total_hours_pct": 8.3,
+      "labor_productivity_pct": 2.7,
+      "unit_labor_cost_pct": 0.4
+    },
+    {
+      "year": 2022,
+      "naics": "722511",
+      "industry": "Full-service restaurants",
+      "employment_thousands": 5217.1,
+      "real_output_pct": 7.6,
+      "total_hours_pct": 9.9,
+      "labor_productivity_pct": -2.1,
+      "unit_labor_cost_pct": 15.2
+    },
+    {
+      "year": 2023,
+      "naics": "722511",
+      "industry": "Full-service restaurants",
+      "employment_thousands": 5383.2,
+      "real_output_pct": 4.3,
+      "total_hours_pct": 3.4,
+      "labor_productivity_pct": 0.9,
+      "unit_labor_cost_pct": 4
+    },
+    {
+      "year": 2024,
+      "naics": "722511",
+      "industry": "Full-service restaurants",
+      "employment_thousands": 5410,
+      "real_output_pct": 2.7,
+      "total_hours_pct": -0.8,
+      "labor_productivity_pct": 3.5,
+      "unit_labor_cost_pct": 0.3
+    },
+    {
+      "year": 2025,
+      "naics": "722511",
+      "industry": "Full-service restaurants",
+      "employment_thousands": 5421,
+      "real_output_pct": 3.9,
+      "total_hours_pct": -0.6,
+      "labor_productivity_pct": 4.5,
+      "unit_labor_cost_pct": -1.4
+    },
+    {
+      "year": 2022,
+      "naics": "8111",
+      "industry": "Automotive repair and maintenance",
+      "employment_thousands": 1256.4,
+      "real_output_pct": 2.6,
+      "total_hours_pct": 6.9,
+      "labor_productivity_pct": -4,
+      "unit_labor_cost_pct": 14.5
+    },
+    {
+      "year": 2023,
+      "naics": "8111",
+      "industry": "Automotive repair and maintenance",
+      "employment_thousands": 1247.1,
+      "real_output_pct": -5.2,
+      "total_hours_pct": -1.3,
+      "labor_productivity_pct": -4,
+      "unit_labor_cost_pct": 10.4
+    },
+    {
+      "year": 2024,
+      "naics": "8111",
+      "industry": "Automotive repair and maintenance",
+      "employment_thousands": 1282.3,
+      "real_output_pct": -4.3,
+      "total_hours_pct": 1.9,
+      "labor_productivity_pct": -6.1,
+      "unit_labor_cost_pct": 10.8
+    },
+    {
+      "year": 2025,
+      "naics": "8111",
+      "industry": "Automotive repair and maintenance",
+      "employment_thousands": 1298.8,
+      "real_output_pct": 3.3,
+      "total_hours_pct": 2.5,
+      "labor_productivity_pct": 0.8,
+      "unit_labor_cost_pct": 1.5
+    },
+    {
+      "year": 2022,
+      "naics": "8123",
+      "industry": "Drycleaning and laundry services",
+      "employment_thousands": 268.4,
+      "real_output_pct": -3,
+      "total_hours_pct": 12.3,
+      "labor_productivity_pct": -13.6,
+      "unit_labor_cost_pct": 22.6
+    },
+    {
+      "year": 2023,
+      "naics": "8123",
+      "industry": "Drycleaning and laundry services",
+      "employment_thousands": 285,
+      "real_output_pct": 2.5,
+      "total_hours_pct": 4.2,
+      "labor_productivity_pct": -1.6,
+      "unit_labor_cost_pct": 7.2
+    },
+    {
+      "year": 2024,
+      "naics": "8123",
+      "industry": "Drycleaning and laundry services",
+      "employment_thousands": 272.6,
+      "real_output_pct": 0.5,
+      "total_hours_pct": 0.2,
+      "labor_productivity_pct": 0.3,
+      "unit_labor_cost_pct": 2.2
+    },
+    {
+      "year": 2025,
+      "naics": "8123",
+      "industry": "Drycleaning and laundry services",
+      "employment_thousands": 275.1,
+      "real_output_pct": -2.5,
+      "total_hours_pct": -0.6,
+      "labor_productivity_pct": -1.9,
+      "unit_labor_cost_pct": 6.6
+    }
+  ]
+}

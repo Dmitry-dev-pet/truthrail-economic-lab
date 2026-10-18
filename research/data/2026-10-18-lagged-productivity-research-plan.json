@@ -1,0 +1,63 @@
+{
+  "research_date": "2026-10-18",
+  "title": "Lagged productivity and next-year real output in BLS detailed U.S. service industries",
+  "status": "frozen prior to estimation",
+  "scope": "28 non-overlapping 2017 NAICS detailed industry codes, 2022–2025 archival table 1 snapshots",
+  "data_path": "research/data/2026-10-18-bls-service-output-hours-2022-25.json",
+  "question": "Does preceding-year output-per-hour growth help predict next-year real output growth, beyond the preceding year's real output growth alone?",
+  "primary_outcome": "Annual percent change in real sectoral output for industry i year t",
+  "primary_metric": "Holdout RMSE in percentage points, 2025, across all 28 industries",
+  "training_years": [
+    2023,
+    2024
+  ],
+  "heldout_year": 2025,
+  "input_features": {
+    "q_lag": "Previous-year BLS real_output_pct",
+    "a_lag": "Previous-year BLS labor_productivity_pct (real output per hour); measured/derived, not an exogenous technology shock",
+    "h_lag": "Previous-year BLS total_hours_pct"
+  },
+  "models": [
+    {
+      "name": "persistence",
+      "formula": "qhat_t = q_(t-1)",
+      "fit": false
+    },
+    {
+      "name": "M0",
+      "formula": "qhat_t = intercept + beta*q_(t-1)",
+      "fit": true
+    },
+    {
+      "name": "M1",
+      "formula": "qhat_t = intercept + beta*q_(t-1) + gamma*a_(t-1)",
+      "fit": true
+    }
+  ],
+  "secondary_analysis": {
+    "labor_productivity_forecast": "ahat_t = intercept + phi*a_(t-1), fit only 2023/2024",
+    "hours_forecast_identity": "hhat_t = 100*((1+qhat_t/100)/(1+ahat_t/100)-1), using only predicted qhat and ahat; compare observed BLS total_hours_pct of 2025",
+    "benchmark": "Simple hours growth persistence hhat_t = h_(t-1)",
+    "purpose": "Evaluate actual labor-hours prediction, not validate the identity q=a*h (which is tautological)."
+  },
+  "uncertainty": "Block-resample detailed industries, fixed fitted predictions, 2000 draws, deterministic seed 20261018; descriptive only, not an independent-population causal confidence interval",
+  "acceptance": {
+    "individual_results_reported": true,
+    "no_claim_if_no_holdout_improvement": true,
+    "train_rows": 56,
+    "holdout_rows": 28,
+    "no_2025_feature_data": true,
+    "no_ai_causality_claims": true,
+    "no_rho_recalibration": true
+  },
+  "limitations": [
+    "2022-2025 tables are as-published different vintages, which may not be consistent revised timeseries.",
+    "2023 archived news release has corrections to table 2 and 3, only table 1 used.",
+    "Each preceding-year table was published mid-next-year; this is not a real-time January 1 forecast.",
+    "Four annual observations per 28 industries cannot robustly infer an AI structural break or separate business cycles.",
+    "No AI adoption metric at the same 2017 NAICS detail and annual frequency before 2025; none enters the regression.",
+    "Different industry sizes and shared macro shocks; estimates not population weighted.",
+    "Real output is production, not independently measured final customer demand; productivity is output/hours by construction.",
+    "Historical percent changes are rounded; the hours forecast is calculated from forecast q and a, not contemporaneous observed q and a."
+  ]
+}
