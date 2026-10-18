@@ -1,0 +1,51 @@
+name: One-time pendulum native FreeCAD verification
+
+on:
+  push:
+    branches:
+      - experiment/chat-freecad-portable-20261018
+    paths:
+      - .github/workflows/one-time-pendulum.yml
+
+permissions:
+  contents: read
+
+jobs:
+  pendulum:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install minimal virtual-display dependencies
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq xvfb xauth
+      - name: Download and verify FreeCAD official AppImage (runner only)
+        shell: bash
+        run: |
+          set -euo pipefail
+          name=FreeCAD_1.1.4-Linux-x86_64-py311.AppImage
+          curl --fail --location --retry 3 --retry-delay 3 --connect-timeout 30 \
+            --output "$name" "https://github.com/FreeCAD/FreeCAD/releases/download/1.1.4/$name"
+          printf '%s  %s\n' f6dc6ba676e5ac96a565ebc8d657232f94c6158e85b4352141bd1a46f6b43434 "$name" | sha256sum -c -
+          chmod +x "$name"
+          "./$name" --appimage-extract > /dev/null
+          test -x squashfs-root/AppRun
+      - name: Build in real FreeCADCmd and verify by reopening
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p output
+          export PENDULUM_OUTPUT_DIR="$PWD/output"
+          export QTWEBENGINE_DISABLE_SANDBOX=1
+          xvfb-run -a timeout 150s ./squashfs-root/AppRun freecadcmd "$PWD/experiments/physical_pendulum/build_in_freecad.py" | tee freecad-run.log
+          grep -q FREECAD_NATIVE_VERIFIED freecad-run.log
+          test -s output/PhysicalPendulum.FCStd
+          test -s output/pendulum_frames.csv
+          unzip -t output/PhysicalPendulum.FCStd
+          du -h output/*
+      - name: Upload ONLY small native model and animation data (one day)
+        uses: actions/upload-artifact@v4
+        with:
+          name: freecad-physical-pendulum-small
+          path: output/
+          retention-days: 1
+          if-no-files-found: error
