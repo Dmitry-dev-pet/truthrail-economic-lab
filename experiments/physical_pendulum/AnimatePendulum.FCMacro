@@ -1,0 +1,44 @@
+# -*- coding: utf-8 -*-
+"""Animate the rod in an open PhysicalPendulum.FCStd using simple physics."""
+import math
+import time
+import FreeCAD as App
+import FreeCADGui as Gui
+from PySide import QtCore
+if App.ActiveDocument is None or App.ActiveDocument.getObject("Rod") is None:
+    raise RuntimeError("Open PhysicalPendulum.FCStd first")
+rod = App.ActiveDocument.getObject("Rod")
+length_m = float(rod.RodLength) / 1000.0
+pivot_from_top_m = float(rod.PivotFromTop) / 1000.0
+d = length_m / 2.0 - pivot_from_top_m
+if d <= 0:
+    raise ValueError("The pivot must lie above the rod centre of mass")
+frequency = math.sqrt(9.81 * d / (length_m**2 / 12.0 + d*d))
+amplitude_deg = float(rod.Amplitude)
+main_window = Gui.getMainWindow()
+previous = getattr(main_window, "_pendulum_animator", None)
+if previous is not None:
+    previous.stop()
+class PendulumAnimator:
+    def __init__(self):
+        self.started_at = time.monotonic()
+        self.timer = QtCore.QTimer(main_window)
+        self.timer.setInterval(33)
+        self.timer.timeout.connect(self.frame)
+    def frame(self):
+        elapsed = time.monotonic() - self.started_at
+        if elapsed >= 9.0:
+            self.stop()
+            return
+        angle_deg = amplitude_deg * math.cos(frequency * elapsed)
+        rod.Placement = App.Placement(App.Vector(0, 0, 0), App.Rotation(App.Vector(0, 1, 0), angle_deg))
+    def start(self):
+        self.frame()
+        self.timer.start()
+    def stop(self):
+        self.timer.stop()
+main_window._pendulum_animator = PendulumAnimator()
+Gui.activeDocument().activeView().viewFront()
+Gui.activeDocument().activeView().fitAll()
+main_window._pendulum_animator.start()
+App.Console.PrintMessage("Physical pendulum is animating, T = %.4f s\n" % (2*math.pi/frequency))
