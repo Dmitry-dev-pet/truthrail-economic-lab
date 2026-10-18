@@ -1,0 +1,37 @@
+# -*- coding: utf-8 -*-
+"""Run pendulum GUI macro in a virtual display and verify rod actually moves."""
+import os
+import traceback
+from pathlib import Path
+import FreeCAD as App
+import FreeCADGui as Gui
+from PySide import QtCore
+out = Path(os.environ["PENDULUM_OUTPUT_DIR"])
+model = out / "PhysicalPendulum.FCStd"
+App.openDocument(str(model))
+Gui.activeDocument().activeView().viewFront()
+Gui.activeDocument().activeView().fitAll()
+App.ActiveDocument.getObject("Rod").ViewObject.ShapeColor = (0.94, 0.56, 0.20)
+App.ActiveDocument.getObject("Axle").ViewObject.ShapeColor = (0.39, 0.45, 0.55)
+for name in ["WasherFront", "WasherBack"]:
+    App.ActiveDocument.getObject(name).ViewObject.ShapeColor = (0.59, 0.65, 0.73)
+rod = App.ActiveDocument.getObject("Rod")
+initial = rod.Placement.Rotation.Angle
+macro_path = Path(os.environ["PENDULUM_SCRIPT_DIR"]) / "AnimatePendulum.FCMacro"
+exec(compile(macro_path.read_text(encoding="utf-8"), str(macro_path), "exec"), globals(), globals())
+def finish():
+    try:
+        actual = rod.Placement.Rotation.Angle
+        if abs(actual - initial) < 0.015:
+            raise AssertionError("Rod angle did not change: initial=%.4f current=%.4f" % (initial, actual))
+        Gui.activeDocument().activeView().saveImage(str(out / "FreeCAD-pendulum-screenshot.png"), 1100, 840, "Current")
+        rod.Placement = App.Placement(App.Vector(0, 0, 0), App.Rotation(App.Vector(0, 1, 0), 10.0))
+        App.ActiveDocument.save()
+        (out / "GUI_VERIFIED.txt").write_text("FreeCAD GUI animation passed; starting angle rad %.5f; current angle rad %.5f\n" % (initial, actual))
+        print("FREECAD_GUI_ANIMATION_VERIFIED", initial, actual)
+        QtCore.QCoreApplication.instance().quit()
+    except Exception:
+        traceback.print_exc()
+        (out / "GUI_FAILED.txt").write_text(traceback.format_exc())
+        QtCore.QCoreApplication.instance().exit(2)
+QtCore.QTimer.singleShot(700, finish)
