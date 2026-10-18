@@ -1,4 +1,4 @@
-name: Chat Blender portable transfer
+name: Chat Blender portable transfer (CAD render handoff)
 
 on:
   push:
