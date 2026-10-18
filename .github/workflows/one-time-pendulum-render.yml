@@ -1,0 +1,88 @@
+name: One-time physical pendulum FreeCAD viewport video
+
+on:
+  push:
+    branches:
+      - experiment/chat-freecad-portable-20261018
+    paths:
+      - .github/workflows/one-time-pendulum-render.yml
+
+permissions:
+  contents: read
+
+jobs:
+  native-render:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install minimal virtual-display dependencies
+        shell: bash
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq xvfb xauth openbox
+      - name: Download official verified FreeCAD 1.1.4 for temporary runner
+        shell: bash
+        run: |
+          set -euo pipefail
+          name=FreeCAD_1.1.4-Linux-x86_64-py311.AppImage
+          curl --fail --location --retry 3 --retry-delay 3 --connect-timeout 30 \
+            --output "$name" "https://github.com/FreeCAD/FreeCAD/releases/download/1.1.4/$name"
+          printf '%s  %s\n' f6dc6ba676e5ac96a565ebc8d657232f94c6158e85b4352141bd1a46f6b43434 "$name" | sha256sum -c -
+          chmod +x "$name"
+          "./$name" --appimage-extract > /dev/null
+          test -x squashfs-root/AppRun
+      - name: Render frames in native FreeCAD GUI
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p output
+          export FC_PEND_OUTPUT="$PWD/output"
+          export FC_PEND_EXIT=1
+          export QTWEBENGINE_DISABLE_SANDBOX=1
+          export LIBGL_ALWAYS_SOFTWARE=1
+          xvfb-run -a -s '-screen 0 1280x800x24' timeout 420s \
+            ./squashfs-root/AppRun "$PWD/experiments/physical_pendulum/RenderPhysicalPendulums.FCMacro" | tee freecad-video.log
+          grep -q '"status": "passed"' freecad-video.log
+          test "$(find output/frames -name 'frame_*.png' | wc -l)" -eq 144
+          test -s output/PhysicalPendulumMinimum.FCStd
+          unzip -t output/PhysicalPendulumMinimum.FCStd
+          python3 - <<'PY'
+          import json, pathlib, csv
+          p=pathlib.Path('output')
+          r=json.loads((p/'render-report.json').read_text())
+          assert r['status']=='passed',r
+          assert r['frames']==144,r
+          assert abs(r['improvement_percent']-6.939514)<.01,r
+          with (p/'motion.csv').open() as f: assert sum(1 for _ in f)==145
+          print('REAL_FREECAD_VIEWPORT_FRAMES_VERIFIED',r)
+          PY
+      - name: Encode MP4 and preserve three source screenshots
+        shell: bash
+        run: |
+          set -euo pipefail
+          ffmpeg -hide_banner -loglevel error -y \
+            -framerate 18 -i output/frames/frame_%04d.png \
+            -c:v libx264 -preset medium -crf 19 -pix_fmt yuv420p \
+            -movflags +faststart output/PhysicalPendulum_FreeCAD.mp4
+          cp output/frames/frame_0000.png output/FreeCAD_frame_0.png
+          cp output/frames/frame_0054.png output/FreeCAD_frame_54.png
+          cp output/frames/frame_0110.png output/FreeCAD_frame_110.png
+          rm -rf output/frames
+          python3 - <<'PY'
+          import json,subprocess,pathlib
+          p=pathlib.Path('output/PhysicalPendulum_FreeCAD.mp4')
+          v=json.loads(subprocess.check_output(['ffprobe','-v','quiet','-show_entries','stream=nb_frames,width,height,r_frame_rate:format=duration','-of','json',str(p)]))
+          assert v['streams'][0]['width']==1024
+          assert v['streams'][0]['height']==640
+          assert int(v['streams'][0]['nb_frames'])==144
+          assert abs(float(v['format']['duration'])-8.0)<0.05
+          assert p.stat().st_size>30000
+          print('NATIVE_FREECAD_VIDEO_VERIFIED',p.stat().st_size,'bytes')
+          PY
+      - name: Publish small results only (no FreeCAD binary, short retention)
+        uses: actions/upload-artifact@v4
+        with:
+          name: physical-pendulum-native-freecad-video
+          path: output/
+          compression-level: 6
+          retention-days: 1
+          if-no-files-found: error
